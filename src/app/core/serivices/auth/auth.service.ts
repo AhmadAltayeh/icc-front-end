@@ -37,7 +37,6 @@ export abstract class AuthService {
       .post<AuthModel.ILoginResponse>('user/auth/login', credentials)
       .pipe(
         tap((response) => {
-          console.log(response)
           this._tokenManager.setTokens(response.token.split(' ')[1]);
           this._state.next(this.authenticated);
           return of(response);
