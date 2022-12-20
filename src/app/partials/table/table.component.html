@@ -1,0 +1,49 @@
+<nz-table
+  #dynamicTable
+  nzShowSizeChanger
+  [nzScroll]="{ y: '500px' }"
+  [nzData]="listOfData"
+  [nzTableLayout]="'auto'"
+  [nzPaginationPosition]="'bottom'"
+  [nzFrontPagination]="false"
+  [nzPageSize]="pageSize"
+  [nzPageSizeOptions]="[5, 10, 20]"
+  [nzTitle]="titleRef"
+  [nzSize]="'middle'"
+  [nzLoading]="loading"
+  [nzTotal]="allRecords"
+  [nzPageIndex]="1"
+  [nzShowTotal]="size"
+  (nzCurrentPageDataChange)="currentPageDataChange($event)"
+  (nzQueryParams)="onQueryParamsChange($event)"
+>
+  <ng-template #size let-total="$implicit">
+    <p>Total Items {{total}}</p>
+  </ng-template>
+
+  <ng-template #titleRef >
+    <h4>{{title}}</h4>
+    <ng-content #filter></ng-content>
+  </ng-template>
+  <thead>
+  <tr>
+    <ng-container *ngFor="let column of displayColumns">
+      <th
+        class="text-white {{column.class}}"
+        [ngStyle]="{width: column.width}">
+        {{ column.title }}
+      </th>
+    </ng-container>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let data of listOfData">
+    <tr>
+      <ng-container *ngFor="let column of displayColumns">
+        <td [width]="column.width" [ngStyle]="{width: column.width}"
+            [nzEllipsis]="true">{{ $any(data)?.[column.key] }}</td>
+      </ng-container>
+    </tr>
+  </ng-container>
+  </tbody>
+</nz-table>
