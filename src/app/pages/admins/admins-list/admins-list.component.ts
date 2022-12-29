@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {AdminService} from "../../../core/serivices/admin/admin.service";
-import {Column, FetchProvider} from "../../../partials/table/table.component";
-import {PaginationQuery} from "../../../core/models";
-import {SearchFilterComponent} from "../../../partials/search-filter/search-filter.component";
-import {AdminFormComponent} from "../admin-form/admin-form.component";
-import {FormGroup} from "@angular/forms";
-import {NzDrawerRef} from "ng-zorro-antd/drawer";
-import {AdminViewComponent} from '../admin-view/admin-view.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AdminService } from "../../../core/serivices/admin/admin.service";
+import { Column, FetchProvider } from "../../../partials/table/table.component";
+import { PaginationQuery } from "../../../core/models";
+import { SearchFilterComponent } from "../../../partials/search-filter/search-filter.component";
+import { AdminFormComponent } from "../admin-form/admin-form.component";
+import { FormGroup } from "@angular/forms";
+import { NzDrawerRef } from "ng-zorro-antd/drawer";
+import { AdminViewComponent } from '../admin-view/admin-view.component';
 
 @Component({
   selector: 'app-admins-list',
@@ -14,12 +14,14 @@ import {AdminViewComponent} from '../admin-view/admin-view.component';
   styleUrls: ['./admins-list.component.scss']
 })
 export class AdminsListComponent {
-  @ViewChild(SearchFilterComponent, {static: true}) private _searchFilterComponent!: SearchFilterComponent
+  @ViewChild(SearchFilterComponent, { static: true }) private _searchFilterComponent!: SearchFilterComponent
   @ViewChild(AdminFormComponent) public _adminFormComponent!: AdminFormComponent
   @ViewChild(AdminViewComponent) public _adminViewComponent!: AdminViewComponent
   @ViewChild('drawer') public drawer!: NzDrawerRef
   loading = false
   rowData: any
+  create = false
+  view = false
 
   constructor(public _adminService: AdminService) {
   }
@@ -75,43 +77,74 @@ export class AdminsListComponent {
     }
   }
 
-  submitForm() {
-    const form = this._adminFormComponent.form
-    if (form.valid) {
-      this.loading = true
-      form.disable()
-      this._adminService.createAdmin(form.value).subscribe({
-        next: () => {
-          this.loading = false
-          this.drawer.close()
-        },
-        error: () => {
-          form.enable()
-          this.loading = false
-        }
-      })
-    } 
+  submitForm(type: string) {
+    let form: FormGroup;
+    if (type == "create") {
+      form = this._adminFormComponent.form;
+      if (form.valid) {
+        this.loading = true
+        form.disable()
+        this._adminService.createAdmin(form.value).subscribe({
+          next: () => {
+            this.loading = false
+            this.drawer.close()
+            this.create = false
+          },
+          error: () => {
+            form.enable()
+            this.loading = false
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
+    }
     else {
-      this.validateForm(form);
+      form = this._adminViewComponent.form;
+      if (form.valid) {
+        this.loading = true
+        form.disable()
+        this._adminService.updateAdmin(this.rowData.id, form.value).subscribe({
+          next: () => {
+            this.loading = false
+            this.drawer.close()
+            this.create = false
+          },
+          error: () => {
+            form.enable()
+            this.loading = false
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
     }
   }
-  public clickEvent(data: any){    
+
+  public clickEvent(data: any) {
+    this.view = true;
     this.rowData = data;
     this.drawer.open();
-}
-  formClick=false
-  viewClick=false
-  public onClick(name: string, data?:any){
-    if(name == "form"){
-      this.formClick=true;
-      this.drawer.open();
-    }
-    else{
-      this.rowData = data;
-      this.viewClick=true
-      this.drawer.open();
-    }
-
   }
-  
+
+  public clickCreateForm() {
+    this.create = true;
+    this.drawer.open();
+  }
+
+  getCreateFlag(): boolean {
+    return this.create;
+  }
+
+  getViewFlag(): boolean {
+    return this.view;
+  }
+
+  closeDrawer() {
+    this.create = false
+    this.view = false
+    this.drawer.close()
+  }
 }
