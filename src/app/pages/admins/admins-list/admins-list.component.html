@@ -1,7 +1,7 @@
 <div class="button-container">
-  <button nz-button nzType="primary" (click)="drawer.open()">Create Admin</button>
+  <button nz-button nzType="primary" (click)="onClick('form')">Create Admin</button>
 </div>
-<app-table #table title="Admins List" [displayColumns]="displayColumns" [fetchProvider]="fetchProvider">
+<app-table #table title="Admins List" (clickAction)="onClick('view', $event)" [displayColumns]="displayColumns" [fetchProvider]="fetchProvider">
   <app-search-filter (filter)="table.refresh()"></app-search-filter>
 </app-table>
 
@@ -13,9 +13,18 @@
   nzTitle="Create Admin"
   (nzOnClose)="drawer.close()"
 >
-  <div *nzDrawerContent>
-    <app-admin-form></app-admin-form>
+  <div *ngIf="[formClick]">
+    <div *nzDrawerContent>
+      <app-admin-form></app-admin-form>
+    </div>
   </div>
+  <div *ngIf="[viewClick]">
+    <div *nzDrawerContent>
+      <app-view-form [rowData] = "rowData"></app-view-form>
+    </div>
+  </div>
+
+  
 </nz-drawer>
 
 <ng-template #footerTpl>

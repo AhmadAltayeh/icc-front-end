@@ -18,9 +18,28 @@ export class AdminService {
     return this.httpClient.get<PaginationResult<any>>(`admin/admins?${query.asString()}`, {context})
   }
 
+  getRoles(): Observable<any> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<any>(`admin/admins/roles`, {context})
+  }
+
+  searchAdmins(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`admin/admins/search?${query.asString()}`, {context})
+  }
+
   createAdmin(createAdmin: AdminModel.Admin) {
     const context = new HttpContext()
     context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
     return this.httpClient.post(`admin/admins`, createAdmin, {context})
+  }
+
+  getOneAdmin(id: number): Observable<any> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    console.log(this.httpClient.get<any>(`admin/admins/${id}`, {context}));
+    return this.httpClient.get<any>(`admin/admins/${id}`, {context})
   }
 }

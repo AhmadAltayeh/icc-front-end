@@ -7,6 +7,8 @@ import {SearchFilterModule} from "../../../partials/search-filter/search-filter.
 import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {AdminFormModule} from "../admin-form/admin-form.module";
+import {AdminViewModule} from "../admin-view/admin-view.module";
+
 
 const routes: Routes = [
   {
@@ -21,9 +23,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     TableModule,
     SearchFilterModule,
-    NzDrawerModule,
+    NzDrawerModule,   
     NzButtonModule,
-    AdminFormModule
+    AdminFormModule,
+    AdminViewModule
   ]
 })
 export class AdminsListModule {

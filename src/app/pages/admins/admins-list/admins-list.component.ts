@@ -6,6 +6,7 @@ import {SearchFilterComponent} from "../../../partials/search-filter/search-filt
 import {AdminFormComponent} from "../admin-form/admin-form.component";
 import {FormGroup} from "@angular/forms";
 import {NzDrawerRef} from "ng-zorro-antd/drawer";
+import {AdminViewComponent} from '../admin-view/admin-view.component';
 
 @Component({
   selector: 'app-admins-list',
@@ -15,8 +16,10 @@ import {NzDrawerRef} from "ng-zorro-antd/drawer";
 export class AdminsListComponent {
   @ViewChild(SearchFilterComponent, {static: true}) private _searchFilterComponent!: SearchFilterComponent
   @ViewChild(AdminFormComponent) public _adminFormComponent!: AdminFormComponent
+  @ViewChild(AdminViewComponent) public _adminViewComponent!: AdminViewComponent
   @ViewChild('drawer') public drawer!: NzDrawerRef
   loading = false
+  rowData: any
 
   constructor(public _adminService: AdminService) {
   }
@@ -24,10 +27,10 @@ export class AdminsListComponent {
   fetchProvider: FetchProvider<any> = (query: PaginationQuery) => {
     const search = this._searchFilterComponent.getFilters()
     if (search) {
-      query.addParams('search', search)
+      query.addParams('keyword', search)
+      return this._adminService.searchAdmins(query);
     }
     return this._adminService.getAdmins(query);
-
   }
 
   displayColumns = [
@@ -87,9 +90,28 @@ export class AdminsListComponent {
           this.loading = false
         }
       })
-    } else {
+    } 
+    else {
       this.validateForm(form);
     }
   }
+  public clickEvent(data: any){    
+    this.rowData = data;
+    this.drawer.open();
+}
+  formClick=false
+  viewClick=false
+  public onClick(name: string, data?:any){
+    if(name == "form"){
+      this.formClick=true;
+      this.drawer.open();
+    }
+    else{
+      this.rowData = data;
+      this.viewClick=true
+      this.drawer.open();
+    }
 
+  }
+  
 }

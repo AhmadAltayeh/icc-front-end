@@ -6,6 +6,8 @@ import {NzRadioModule} from "ng-zorro-antd/radio";
 import {NzSwitchModule} from "ng-zorro-antd/switch";
 import {NzTableModule} from "ng-zorro-antd/table";
 import {NzDividerModule} from "ng-zorro-antd/divider";
+import {NzDrawerModule} from "ng-zorro-antd/drawer";
+import { AdminViewModule } from 'src/app/pages/admins/admin-view/admin-view.module';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {NzDividerModule} from "ng-zorro-antd/divider";
     NzRadioModule,
     NzSwitchModule,
     NzTableModule,
-    NzDividerModule
+    NzDividerModule,
+    NzDrawerModule,
+    AdminViewModule
   ]
 })
 export class TableModule {

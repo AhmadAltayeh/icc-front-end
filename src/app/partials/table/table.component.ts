@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input,Output,EventEmitter, OnInit,ViewChild} from '@angular/core';
 import {Observable} from "rxjs";
 import {PaginationQuery, PaginationResult} from "../../core/models";
 import {NzTableQueryParams} from "ng-zorro-antd/table";
@@ -28,6 +28,7 @@ export class TableComponent implements OnInit {
   @Input() title!: string;
   @Input() public displayColumns: Column[] = [];
   @Input() public fetchProvider!: FetchProvider<Data>;
+  @Output() clickAction = new EventEmitter<any>();
   allRecords!: number
   listOfData: readonly Data[] = [];
   displayData: readonly IColumnOptions[] = [];
@@ -37,11 +38,16 @@ export class TableComponent implements OnInit {
   currentPageDataChange($event: readonly Data[]): void {
     this.listOfData = $event;
   }
-
   constructor() {
   }
 
   ngOnInit(): void {
+  }
+
+  clickedData?:any
+  onClick(curr:any){
+    this.clickedData=curr;      
+    this.clickAction.emit(curr);
   }
 
   loadDataFromServer(query: PaginationQuery): void {

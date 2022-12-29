@@ -7,5 +7,6 @@ export namespace AdminModel {
     facebookUrl: string;
     address: string;
     iban: string;
+    roleId: number;
   }
 }

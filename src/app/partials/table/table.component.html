@@ -21,6 +21,18 @@
     <p>Total Items {{total}}</p>
   </ng-template>
 
+  <nz-drawer
+  #drawer
+  [nzBodyStyle]="{ overflow: 'auto' }"
+  [nzWidth]="620"
+  nzTitle="Create Admin"
+  (nzOnClose)="drawer.close()"
+>
+  <div *nzDrawerContent>
+    <app-view-form></app-view-form>
+  </div>
+</nz-drawer>
+
   <ng-template #titleRef >
     <h4>{{title}}</h4>
     <ng-content #filter></ng-content>
@@ -38,10 +50,11 @@
   </thead>
   <tbody>
   <ng-container *ngFor="let data of listOfData">
-    <tr>
+    <tr (click)="onClick(data)">
       <ng-container *ngFor="let column of displayColumns">
         <td [width]="column.width" [ngStyle]="{width: column.width}"
-            [nzEllipsis]="true">{{ $any(data)?.[column.key] }}</td>
+            [nzEllipsis]="true">{{ $any(data)?.[column.key] }}
+        </td>
       </ng-container>
     </tr>
   </ng-container>
