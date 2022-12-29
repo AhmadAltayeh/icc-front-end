@@ -45,7 +45,7 @@
     </nz-header>
     <nz-content>
       <div class="inner-content">
-        <nz-breadcrumb class="breadcrub" [nzAutoGenerate]="true"></nz-breadcrumb>
+        <a class="breadcrub" (click)="reload()">Home</a>
         <nz-divider></nz-divider>
         <router-outlet></router-outlet>
       </div>
