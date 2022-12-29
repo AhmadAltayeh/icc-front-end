@@ -20,6 +20,8 @@ export class AdminsListComponent {
   @ViewChild('drawer') public drawer!: NzDrawerRef
   loading = false
   rowData: any
+  create = false
+  view = false
 
   constructor(public _adminService: AdminService) {
   }
@@ -84,10 +86,12 @@ export class AdminsListComponent {
         next: () => {
           this.loading = false
           this.drawer.close()
+          this.create = false
         },
         error: () => {
           form.enable()
           this.loading = false
+          this.create = false
         }
       })
     } 
@@ -95,23 +99,33 @@ export class AdminsListComponent {
       this.validateForm(form);
     }
   }
-  public clickEvent(data: any){    
+
+  public clickEvent(data: any){  
+    this.view = true;  
     this.rowData = data;
     this.drawer.open();
 }
-  formClick=false
-  viewClick=false
-  public onClick(name: string, data?:any){
-    if(name == "form"){
-      this.formClick=true;
-      this.drawer.open();
-    }
-    else{
-      this.rowData = data;
-      this.viewClick=true
-      this.drawer.open();
-    }
 
+public clickCreateForm(){  
+  this.create = true;  
+  this.drawer.open();
+}
+
+  getCreateFlag(): boolean{
+    console.log(this.create);
+    
+   return this.create;
   }
-  
+
+  getViewFlag(): boolean{
+    console.log(this.view);
+
+    return this.view;
+   }
+
+   closeDrawer(){
+    this.create = false
+    this.view = false
+    this.drawer.close()
+   }
 }
