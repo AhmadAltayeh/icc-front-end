@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {AdminService} from "../../../core/serivices/admin/admin.service";
-import {Column, FetchProvider} from "../../../partials/table/table.component";
-import {PaginationQuery} from "../../../core/models";
-import {SearchFilterComponent} from "../../../partials/search-filter/search-filter.component";
-import {AdminFormComponent} from "../admin-form/admin-form.component";
-import {FormGroup} from "@angular/forms";
-import {NzDrawerRef} from "ng-zorro-antd/drawer";
-import {AdminViewComponent} from '../admin-view/admin-view.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AdminService } from "../../../core/serivices/admin/admin.service";
+import { Column, FetchProvider } from "../../../partials/table/table.component";
+import { PaginationQuery } from "../../../core/models";
+import { SearchFilterComponent } from "../../../partials/search-filter/search-filter.component";
+import { AdminFormComponent } from "../admin-form/admin-form.component";
+import { FormGroup } from "@angular/forms";
+import { NzDrawerRef } from "ng-zorro-antd/drawer";
+import { AdminViewComponent } from '../admin-view/admin-view.component';
 
 @Component({
   selector: 'app-admins-list',
@@ -14,7 +14,7 @@ import {AdminViewComponent} from '../admin-view/admin-view.component';
   styleUrls: ['./admins-list.component.scss']
 })
 export class AdminsListComponent {
-  @ViewChild(SearchFilterComponent, {static: true}) private _searchFilterComponent!: SearchFilterComponent
+  @ViewChild(SearchFilterComponent, { static: true }) private _searchFilterComponent!: SearchFilterComponent
   @ViewChild(AdminFormComponent) public _adminFormComponent!: AdminFormComponent
   @ViewChild(AdminViewComponent) public _adminViewComponent!: AdminViewComponent
   @ViewChild('drawer') public drawer!: NzDrawerRef
@@ -77,55 +77,74 @@ export class AdminsListComponent {
     }
   }
 
-  submitForm() {
-    const form = this._adminFormComponent.form
-    if (form.valid) {
-      this.loading = true
-      form.disable()
-      this._adminService.createAdmin(form.value).subscribe({
-        next: () => {
-          this.loading = false
-          this.drawer.close()
-          this.create = false
-        },
-        error: () => {
-          form.enable()
-          this.loading = false
-          this.create = false
-        }
-      })
-    } 
+  submitForm(type: string) {
+    let form: FormGroup;
+    if (type == "create") {
+      form = this._adminFormComponent.form;
+      if (form.valid) {
+        this.loading = true
+        form.disable()
+        this._adminService.createAdmin(form.value).subscribe({
+          next: () => {
+            this.loading = false
+            this.drawer.close()
+            this.create = false
+          },
+          error: () => {
+            form.enable()
+            this.loading = false
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
+    }
     else {
-      this.validateForm(form);
+      form = this._adminViewComponent.form;
+      if (form.valid) {
+        this.loading = true
+        form.disable()
+        this._adminService.updateAdmin(this.rowData.id, form.value).subscribe({
+          next: () => {
+            this.loading = false
+            this.drawer.close()
+            this.create = false
+          },
+          error: () => {
+            form.enable()
+            this.loading = false
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
     }
   }
 
-  public clickEvent(data: any){  
-    this.view = true;  
+  public clickEvent(data: any) {
+    this.view = true;
     this.rowData = data;
     this.drawer.open();
-}
-
-public clickCreateForm(){  
-  this.create = true;  
-  this.drawer.open();
-}
-
-  getCreateFlag(): boolean{
-    console.log(this.create);
-    
-   return this.create;
   }
 
-  getViewFlag(): boolean{
-    console.log(this.view);
+  public clickCreateForm() {
+    this.create = true;
+    this.drawer.open();
+  }
 
+  getCreateFlag(): boolean {
+    return this.create;
+  }
+
+  getViewFlag(): boolean {
     return this.view;
-   }
+  }
 
-   closeDrawer(){
+  closeDrawer() {
     this.create = false
     this.view = false
     this.drawer.close()
-   }
+  }
 }

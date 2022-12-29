@@ -36,6 +36,12 @@ export class AdminService {
     return this.httpClient.post(`admin/admins`, createAdmin, {context})
   }
 
+  updateAdmin(id: number, updateAdmin: AdminModel.Admin) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+    return this.httpClient.put(`admin/admins/${id}`, updateAdmin, {context})
+  }
+
   getOneAdmin(id: number): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
