@@ -14,6 +14,11 @@ const routes: Routes = [
         data: {breadcrumb: 'Admins'},
       },
       {
+        path: 'instructors',
+        loadChildren: () => import('../pages/instructors/instructors.module').then(m => m.InstructorsModule),
+        data: {breadcrumb: 'Instructors'},
+      },
+      {
         path: 'courses',
         loadChildren: () => import('../pages/courses/courses.module').then(m => m.CoursesModule),
         data: {breadcrumb: 'Courses'},

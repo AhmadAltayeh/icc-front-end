@@ -42,4 +42,60 @@ export class AdminService {
     console.log(this.httpClient.get<any>(`admin/admins/${id}`, {context}));
     return this.httpClient.get<any>(`admin/admins/${id}`, {context})
   }
+
+//*               *******************Admin dashboard student******************                 *
+    getStudents(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`admin/students?${query.asString()}`, {context})
+  }
+    getOneStudent(id: number): Observable<any> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
+    return this.httpClient.get<any>(`admin/students/${id}`, {context})
+  }
+  searchStudents(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`admin/students/search?${query.asString()}`, {context})
+  }
+
+
+  //*               *******************Admin dashboard Course******************                 *
+  getCourses(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`admin/courses?${query.asString()}`, {context})
+  }
+  getOneCourse(id: number): Observable<any> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
+    return this.httpClient.get<any>(`admin/courses/${id}`, {context})
+  }
+  searchCourses(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`admin/courses/search?${query.asString()}`, {context})
+  }
+
+  //*               *******************Admin dashboard Instructor******************                 *
+  getInstructors(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`admin/instructors?${query.asString()}`, {context})
+  }
+  getOneInstructor(id: number): Observable<any> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
+    return this.httpClient.get<any>(`admin/instructors/${id}`, {context})
+  }
+  searchInstructors(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`admin/instructors/search?${query.asString()}`, {context})
+  }
+
 }

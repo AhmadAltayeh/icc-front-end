@@ -10,6 +10,7 @@ export class LayoutComponent implements OnInit {
 
   menuItems = [
     {path: 'admins', name: 'Admins'},
+    {path: 'instructors', name: 'Instructors'},
     {path: 'students', name: 'Students'},
     {path: 'courses', name:'Courses'}
   ]
