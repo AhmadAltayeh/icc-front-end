@@ -21,7 +21,7 @@ export class AdminService {
   getRoles(): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<any>(`admin/admins/roles`, {context})
+    return this.httpClient.get<any>(`admin/admins/roles/admin`, {context})
   }
 
   searchAdmins(query: PaginationQuery): Observable<PaginationResult<any>> {

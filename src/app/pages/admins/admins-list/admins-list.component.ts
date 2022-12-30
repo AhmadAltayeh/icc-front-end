@@ -58,10 +58,6 @@ export class AdminsListComponent {
       title: 'Email',
     }),
     new Column({
-      key: 'phoneNumber',
-      title: 'Phone Number',
-    }),
-    new Column({
       key: 'isActive',
       title: 'Is Active',
     })

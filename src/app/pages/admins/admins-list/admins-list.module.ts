@@ -10,7 +10,6 @@ import {AdminFormModule} from "../admin-form/admin-form.module";
 import {AdminViewModule} from "../admin-view/admin-view.module";
 import {MatTabsModule} from '@angular/material/tabs';
 
-
 const routes: Routes = [
   {
     path: '', component: AdminsListComponent
