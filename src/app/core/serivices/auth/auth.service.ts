@@ -4,9 +4,10 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {AuthModel} from '../../models';
 import {TokenManager} from './token-manager';
-import {Injectable, Optional} from "@angular/core";
-
+import {Injectable, Optional, Output} from "@angular/core";
+let res:any
 @Injectable({providedIn: 'root'})
+//@Output(res)
 
 export abstract class AuthService {
 
@@ -39,6 +40,9 @@ export abstract class AuthService {
         tap((response) => {
           this._tokenManager.setTokens(response.token.split(' ')[1]);
           this._state.next(this.authenticated);
+          res=response
+          console.log(res);
+          
           return of(response);
         }));
   }

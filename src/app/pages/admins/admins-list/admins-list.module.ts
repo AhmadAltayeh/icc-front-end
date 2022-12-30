@@ -8,6 +8,7 @@ import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {AdminFormModule} from "../admin-form/admin-form.module";
 import {AdminViewModule} from "../admin-view/admin-view.module";
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
     NzDrawerModule,   
     NzButtonModule,
     AdminFormModule,
-    AdminViewModule
+    AdminViewModule,
+    MatTabsModule
   ]
 })
 export class AdminsListModule {
