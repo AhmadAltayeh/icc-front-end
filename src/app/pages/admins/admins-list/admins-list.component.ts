@@ -134,14 +134,6 @@ export class AdminsListComponent {
     this.drawer.open();
   }
 
-  getCreateFlag(): boolean {
-    return this.create;
-  }
-
-  getViewFlag(): boolean {
-    return this.view;
-  }
-
   closeDrawer() {
     this.create = false
     this.view = false

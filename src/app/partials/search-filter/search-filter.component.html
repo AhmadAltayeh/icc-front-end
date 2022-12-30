@@ -1,15 +1,5 @@
-<nz-input-group
-  class="filter-field"
-  nzSearch
-  nzSize="large"
-  [nzAddOnAfter]="suffixButton"
->
-  <input
-    type="text"
-    [(ngModel)]="search"
-    nz-input
-    placeholder="input search text"
-  />
+<nz-input-group class="filter-field" nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+  <input  (input)="filter.emit($event)" type="text" [(ngModel)]="search" nz-input placeholder="input search text"/>
 </nz-input-group>
 <ng-template #suffixButton>
   <button
