@@ -42,6 +42,12 @@ export class AdminService {
     return this.httpClient.put(`admin/admins/${id}`, updateAdmin, {context})
   }
 
+  updateAdminPassword(resetPassword: AdminModel.ResetPassword) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+    return this.httpClient.patch(`admin/admins/reset-password`, resetPassword, {context})
+  }
+
   getOneAdmin(id: number): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)

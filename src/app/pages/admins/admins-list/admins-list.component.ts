@@ -22,6 +22,7 @@ export class AdminsListComponent {
   rowData: any
   create = false
   view = false
+  tabSelected: number = 0;
 
   constructor(public _adminService: AdminService) {
   }
@@ -73,14 +74,37 @@ export class AdminsListComponent {
     }
   }
 
-  submitForm(type: string) {
+  submitCreateForm() {
     let form: FormGroup;
-    if (type == "create") {
-      form = this._adminFormComponent.form;
+    form = this._adminFormComponent.form;
+    if (form.valid) {
+      this.loading = true
+      form.disable()
+      this._adminService.createAdmin(form.value).subscribe({
+        next: () => {
+          this.loading = false
+          this.drawer.close()
+          this.create = false
+        },
+        error: () => {
+          form.enable()
+          this.loading = false
+        }
+      })
+    }
+    else {
+      this.validateForm(form);
+    }
+  }
+
+  submitUpdateForm() {
+    let form: FormGroup;
+    if (this.tabSelected == 0) {
+      form = this._adminViewComponent.detailsForm;
       if (form.valid) {
         this.loading = true
         form.disable()
-        this._adminService.createAdmin(form.value).subscribe({
+        this._adminService.updateAdmin(this.rowData.id, form.value).subscribe({
           next: () => {
             this.loading = false
             this.drawer.close()
@@ -95,13 +119,18 @@ export class AdminsListComponent {
       else {
         this.validateForm(form);
       }
-    }
-    else {
-      form = this._adminViewComponent.form;
+    } else if (this.tabSelected == 1) {
+      console.log(this.tabSelected);
+      
+      form = this._adminViewComponent.passwordForm;
       if (form.valid) {
         this.loading = true
         form.disable()
-        this._adminService.updateAdmin(this.rowData.id, form.value).subscribe({
+        let obj = {
+          id:this.rowData.id,
+          ...form.value
+        }
+        this._adminService.updateAdminPassword(obj).subscribe({
           next: () => {
             this.loading = false
             this.drawer.close()
@@ -134,5 +163,9 @@ export class AdminsListComponent {
     this.create = false
     this.view = false
     this.drawer.close()
+  }
+
+  tabSwitched(index: number) {
+    this.tabSelected = index;    
   }
 }
