@@ -77,6 +77,7 @@ export class TableComponent implements OnInit {
   refresh() {
     this.loadDataFromServer(new PaginationQuery(0, this.pageSize))
   }
+
 }
 
 export class Column {

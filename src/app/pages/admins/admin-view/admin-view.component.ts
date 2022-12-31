@@ -1,14 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { NzDrawerRef } from 'ng-zorro-antd/drawer';
 import {AdminService} from 'src/app/core/serivices';
 import { Column } from 'src/app/partials/table/table.component';
-
+import { TableComponent } from 'src/app/partials/table/table.component';
 @Component({
   selector: 'app-view-form',
   templateUrl: './admin-view.component.html',
   styleUrls: ['./admin-view.component.scss']
 })
 export class AdminViewComponent implements OnInit {
+  @ViewChild('drawer') public drawer!: NzDrawerRef
   @Input() rowData: any = '';
   roleName: string = '';
   @Output() tabChanged = new EventEmitter<number>;
@@ -67,5 +69,13 @@ passwordForm: FormGroup;
 
   tabChange(args: any[]): void {
     this.tabChanged.emit(args[0].index);
+  }
+  t: TableComponent = new TableComponent;
+  Delete(){
+    this._adminService.deleteOneAdmin(this.rowData.id).subscribe((json)=>{
+      console.log(json)
+    })
+  window.location.reload();
+    
   }
 }

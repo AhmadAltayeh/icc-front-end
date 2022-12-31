@@ -3,6 +3,7 @@
     Create Admin
   </button>
 </div>
+
 <app-table #table title="Admins List" (clickAction)="clickEvent($event)" [displayColumns]="displayColumns"
   [fetchProvider]="fetchProvider">
   <app-search-filter (filter)="table.refresh()"></app-search-filter>
@@ -10,6 +11,7 @@
 
 <nz-drawer #drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzWidth]="620" [nzFooter]="footerTpl" nzTitle="Admin"
   (nzOnClose)="closeDrawer()">
+ 
   <div>
     <div *nzDrawerContent>
       <app-admin-form *ngIf="create"></app-admin-form>
@@ -32,9 +34,11 @@
     <button nz-button style="margin-right: 8px" (click)="closeDrawer()">
       Cancel
     </button>
+
     <button nz-button nzType="primary" (click)="submitUpdateForm()" (filter)="table.refresh()" [nzLoading]="loading">
       <span nz-icon nzType="save"></span>
       Save
     </button>
+
   </div>
 </ng-template>

@@ -43,7 +43,7 @@ export class TeardownInterceptor implements HttpInterceptor {
           if (event instanceof HttpErrorResponse) {
             switch (event.status) {
               case 403:
-                this._authService.logout().subscribe();
+                this._authService.logout();
                 return throwError(() => event);
               case 500:
                 this.message.warning('Internal server error. Please try again later.', {

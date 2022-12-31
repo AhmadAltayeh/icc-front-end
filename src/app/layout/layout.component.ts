@@ -26,7 +26,7 @@ export class LayoutComponent implements OnInit {
   }
 
   logout() {
-    this._authService.logout().subscribe()
+    this._authService.logout();
   }
 
   reload(){
