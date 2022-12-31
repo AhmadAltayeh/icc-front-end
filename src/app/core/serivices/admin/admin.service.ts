@@ -65,6 +65,13 @@ export class AdminService {
     console.log(this.httpClient.get<any>(`admin/admins/${id}`, {context}));
     return this.httpClient.get<any>(`admin/admins/${id}`, {context})
   }
+  deleteOneAdmin(id:number):Observable<any>{
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    console.log(this.httpClient.get<any>(`admin/admins/${id}`, {context}));
+    return this.httpClient.delete<any>(`admin/admins/${id}`, {context})
+    
+  }
 
 //*               *******************Admin dashboard student******************                 *
     getStudents(query: PaginationQuery): Observable<PaginationResult<any>> {

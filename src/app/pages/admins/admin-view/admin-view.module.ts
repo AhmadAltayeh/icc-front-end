@@ -8,6 +8,7 @@ import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {ReactiveFormsModule} from "@angular/forms";
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
     NzDatePickerModule,
     NzDrawerModule,
     ReactiveFormsModule,
-    NzTabsModule
+    NzTabsModule,
+    NzButtonModule
   ]
 })
 export class AdminViewModule {
