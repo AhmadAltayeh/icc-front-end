@@ -128,9 +128,11 @@
           <nz-form-item>
             <nz-form-control nzHasFeedback [nzErrorTip]="newPasswordNameErrorTpl">
               <nz-input-group>
-                <input nzSize="large" formControlName="newPassword" type="text" nz-input />
+                <input nzSize="large" formControlName="newPassword" type="password" placeholder="Enter Passowrd" nz-input/>
                 <ng-template #newPasswordNameErrorTpl let-control>
                   <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+                  <ng-container *ngIf="control.hasError('minlength') || control.hasError('pattern')">Password Should be minimum 8 characters with 1 capital letter</ng-container>
+
                 </ng-template>
               </nz-input-group>
             </nz-form-control>
@@ -146,9 +148,10 @@
           <nz-form-item>
             <nz-form-control nzHasFeedback [nzErrorTip]="confirmPasswordNameErrorTpl">
               <nz-input-group>
-                <input nzSize="large" formControlName="confirmPassword" type="text" nz-input />
+                <input nzSize="large" formControlName="confirmPassword" type="password" placeholder="Confirm Passowrd"  nz-input />
                 <ng-template #confirmPasswordNameErrorTpl let-control>
                   <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+                  <ng-container *ngIf="control.hasError('minlength') || control.hasError('pattern')">Password Should be minimum 8 characters with 1 capital letter</ng-container>
                 </ng-template>
               </nz-input-group>
             </nz-form-control>

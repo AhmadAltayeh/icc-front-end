@@ -26,8 +26,8 @@ passwordForm: FormGroup;
     roleId:['', [Validators.required]]
   })
   this.passwordForm = this._fb.group({
-    newPassword: ['', [Validators.required]],
-    confirmPassword: ['', [Validators.required]]
+    newPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Z]).{8,20}$')]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Z]).{8,20}$')]]
   })
   }
 
