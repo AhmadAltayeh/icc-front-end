@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   titleAlert: string = 'This field is required';
 
   form: FormGroup
+  passwordForm:FormGroup
   constructor(private _fb: FormBuilder,private _adminService:AdminService,private router:Router) {
     
   this.form = this._fb.group({
@@ -29,6 +30,11 @@ export class ProfileComponent implements OnInit {
     iban: ['', [Validators.required]],
     roleId:['', [Validators.required]]
   })
+  this.passwordForm = this._fb.group({
+    oldPassword:['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Z]).{8,20}$')]],
+    newPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Z]).{8,20}$')]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern('(?=.*[A-Z]).{8,20}$')]]
+  })
   }
   displayColumns : Column[] = [];
   data:any
@@ -39,8 +45,6 @@ export class ProfileComponent implements OnInit {
       this.fillAdminDetails()
 
   })
-    
-   
     this._adminService.getRoles().subscribe((json)=>{
       json.data.forEach((element: any) => {
         this.displayColumns.push(
@@ -53,6 +57,7 @@ export class ProfileComponent implements OnInit {
   }
   
   public fillAdminDetails(){
+      console.log(this.tabSelected);
       
       this.form.setValue({
         firstName: this.data.firstName,
@@ -75,13 +80,17 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
-  onClickTabOne(){
-    this.tabSelected=0
-  }
-  onClickTabTwo(){
-    this.tabSelected=1
-  }
+  // onClickTabOne(){
+  //   this.tabSelected=0
+  // }
+  // onClickTabTwo(args: any[]){
+  //   this.tabSelected=args[0].index
+  //     console.log(this.tabSelected);
+
+  // }
   submitUpdateForm() {
+    console.log(this.tabSelected);
+    
     let form: FormGroup;
     if (this.tabSelected == 0) {
       form = this.form;
@@ -97,9 +106,8 @@ export class ProfileComponent implements OnInit {
         this.validateForm(form);
       }
     } else if (this.tabSelected == 1) {
-      console.log(this.tabSelected);
       
-      form = this.form;
+      form = this.passwordForm;
       if (form.valid) {
         form.disable()
         let obj = {

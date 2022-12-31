@@ -15,4 +15,10 @@ export namespace AdminModel {
     newPassword: string;
     confirmPassword: string;
   }
+  export interface changePassword {
+    id: number;
+    oldPassword:string;
+    newPassword: string;
+    confirmPassword: string;
+  }
 }

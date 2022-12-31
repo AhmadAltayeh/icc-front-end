@@ -48,7 +48,12 @@ export class AdminService {
     return this.httpClient.put(`admin/admins/${id}`, updateAdmin, {context})
   }
 
-  updateAdminPassword(resetPassword: AdminModel.ResetPassword) {
+  updateAdminPassword(changePassword: AdminModel.changePassword) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+    return this.httpClient.patch(`admin/admins/update-password`, changePassword, {context})
+  }
+ restAdminPassword(resetPassword: AdminModel.ResetPassword) {
     const context = new HttpContext()
     context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
     return this.httpClient.patch(`admin/admins/reset-password`, resetPassword, {context})

@@ -8,8 +8,7 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatTabsModule} from '@angular/material/tabs';
-
+import { NzTabsModule  } from 'ng-zorro-antd/tabs';
 const routes: Routes = [
   {path: '', component: ProfileComponent}
 ];
@@ -20,7 +19,7 @@ const routes: Routes = [
     CommonModule,
     RouterLinkWithHref,
     RouterModule.forChild(routes),
-    ReactiveFormsModule,NzDrawerModule,NzDatePickerModule,NzSelectModule,NzInputModule,NzFormModule,MatTabsModule
+    ReactiveFormsModule,NzDrawerModule,NzDatePickerModule,NzSelectModule,NzInputModule,NzFormModule,NzTabsModule
   ]
 })
 export class ProfileModule {
