@@ -1,13 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../core/serivices";
-
+import {Component, OnInit,EventEmitter} from '@angular/core';
+import {AuthService,AdminService,} from "../core/serivices";
+import { Output } from '@angular/core';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-
+  @Output() profileData = new EventEmitter<any>();
+  
   menuItems = [
     {path: 'admins', name: 'Admins'},
     {path: 'instructors', name: 'Instructors'},
@@ -18,7 +19,7 @@ export class LayoutComponent implements OnInit {
   dropDownItems=[
     {path:'profile',name:'Profile'}
   ]
-  constructor(private _authService: AuthService) {
+  constructor(private _authService: AuthService,private _adminService: AdminService) {
   }
 
   ngOnInit(): void {
@@ -31,5 +32,14 @@ export class LayoutComponent implements OnInit {
   reload(){
     window.location.reload();
   }
+  data:any
+  onClick(){
+    
+    this._adminService.getAdminProfile().subscribe(data=>{
+      
+      this.data=data.data
+      this.profileData.emit(this.data)
+    });
+}
 
 }

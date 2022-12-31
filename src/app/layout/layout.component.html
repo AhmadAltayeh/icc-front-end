@@ -53,8 +53,10 @@
         </nz-button-group>
         <nz-dropdown-menu #menu2="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-menu-item [routerLink]="dropDownItems[0].path">
-              {{ dropDownItems[0].name }}
+            <li nz-menu-item>
+              <mat-button [routerLink]="[dropDownItems[0].path]"
+                >{{ dropDownItems[0].name }}
+              </mat-button>
             </li>
             <li nz-menu-item nzMatchRouter (click)="logout()">logout</li>
           </ul>

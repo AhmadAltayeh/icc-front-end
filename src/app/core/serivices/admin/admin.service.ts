@@ -17,6 +17,12 @@ export class AdminService {
     context.set(FULL_RESPONSE, true)
     return this.httpClient.get<PaginationResult<any>>(`admin/admins?${query.asString()}`, {context})
   }
+  getAdminProfile():Observable<any>{
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE,true)
+    return this.httpClient.get<any>(`admin/admins/profile`, {context})
+
+  }
 
   getRoles(): Observable<any> {
     const context = new HttpContext()
