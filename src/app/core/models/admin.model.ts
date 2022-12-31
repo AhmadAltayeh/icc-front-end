@@ -9,4 +9,10 @@ export namespace AdminModel {
     iban: string;
     roleId: number;
   }
+
+  export interface ResetPassword {
+    id: number;
+    newPassword: string;
+    confirmPassword: string;
+  }
 }

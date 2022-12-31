@@ -27,7 +27,7 @@ export class AdminService {
   getRoles(): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<any>(`admin/admins/roles`, {context})
+    return this.httpClient.get<any>(`admin/admins/roles/admin`, {context})
   }
 
   searchAdmins(query: PaginationQuery): Observable<PaginationResult<any>> {
@@ -46,6 +46,12 @@ export class AdminService {
     const context = new HttpContext()
     context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
     return this.httpClient.put(`admin/admins/${id}`, updateAdmin, {context})
+  }
+
+  updateAdminPassword(resetPassword: AdminModel.ResetPassword) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+    return this.httpClient.patch(`admin/admins/reset-password`, resetPassword, {context})
   }
 
   getOneAdmin(id: number): Observable<any> {
