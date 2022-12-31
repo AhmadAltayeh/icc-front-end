@@ -49,7 +49,6 @@ export class ProfileComponent implements OnInit {
           })
         )});    
       }); 
-      this.setChangeValidate()
   }
   
   public fillAdminDetails(){
@@ -67,17 +66,5 @@ export class ProfileComponent implements OnInit {
       this.roleName = this.data.role.title;
     };
   
-setChangeValidate() {
-    this.form.get('validate')?.valueChanges.subscribe(
-      (validate) => {
-        if (validate == '1') {
-          this.form.get('firstName')?.setValidators([Validators.required, Validators.minLength(3)]);
-          this.titleAlert = "You need to specify at least 3 characters";
-        } else {
-          this.form.get('firstName')?.setValidators(Validators.required);
-        }
-        this.form.get('firstName')?.updateValueAndValidity();
-      }
-    )
-  }
+
 }
