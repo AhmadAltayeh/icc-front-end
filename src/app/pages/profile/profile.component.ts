@@ -5,13 +5,14 @@ import { FormGroup } from '@angular/forms';
 import {AdminService} from 'src/app/core/serivices';
 import { Column } from 'src/app/partials/table/table.component';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  tabSelected:number=0
+
   roleName: string = '';
   titleAlert: string = 'This field is required';
 
@@ -65,6 +66,56 @@ export class ProfileComponent implements OnInit {
       })
       this.roleName = this.data.role.title;
     };
-  
+    validateForm(form: FormGroup): void {
+    for (const key in form.controls) {
+      if (form.controls.hasOwnProperty(key)) {
+        form.controls[key].markAsTouched();
+        form.controls[key].markAsDirty();
+        form.controls[key].updateValueAndValidity();
+      }
+    }
+  }
+  onClickTabOne(){
+    this.tabSelected=0
+  }
+  onClickTabTwo(){
+    this.tabSelected=1
+  }
+  submitUpdateForm() {
+    let form: FormGroup;
+    if (this.tabSelected == 0) {
+      form = this.form;
+      if (form.valid) {
+        form.disable()
+        this._adminService.updateAdmin(this.data.id, form.value).subscribe({
+          error: () => {
+            form.enable()
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
+    } else if (this.tabSelected == 1) {
+      console.log(this.tabSelected);
+      
+      form = this.form;
+      if (form.valid) {
+        form.disable()
+        let obj = {
+          id:this.data.id,
+          ...form.value
+        }
+        this._adminService.updateAdminPassword(obj).subscribe({
+          error: () => {
+            form.enable()
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
+    }
+  }
 
 }
