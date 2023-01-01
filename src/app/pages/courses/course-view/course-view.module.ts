@@ -3,11 +3,12 @@ import {CommonModule} from '@angular/common';
 import {CourseViewComponent} from './course-view.component';
 import {NzFormModule} from "ng-zorro-antd/form";
 import {NzInputModule} from "ng-zorro-antd/input";
-import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzSelectModule, NzSelectSearchComponent,NzSelectSizeType} from "ng-zorro-antd/select";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {ReactiveFormsModule} from "@angular/forms";
-
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 
 @NgModule({
   declarations: [CourseViewComponent],
@@ -21,7 +22,10 @@ import {ReactiveFormsModule} from "@angular/forms";
     NzSelectModule,
     NzDatePickerModule,
     NzDrawerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzTabsModule,
+    NzTimePickerModule,
+    
   ]
 })
 export class CourseViewModule {

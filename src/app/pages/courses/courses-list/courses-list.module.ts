@@ -8,6 +8,7 @@ import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {CourseFormModule} from "../course-form/course-form.module";
 import {CourseViewModule} from "../course-view/course-view.module";
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
     NzDrawerModule,   
     NzButtonModule,
     CourseFormModule,
-    CourseViewModule
+    CourseViewModule,
+    NzTabsModule
   ]
 })
 export class CoursesListModule {

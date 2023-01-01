@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { AdminService } from 'src/app/core/serivices';
 import {Column, FetchProvider} from "../../../partials/table/table.component";

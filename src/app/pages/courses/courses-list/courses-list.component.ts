@@ -20,6 +20,9 @@ export class CoursesListComponent {
   @ViewChild('drawer') public drawer!: NzDrawerRef
   loading = false
   rowData: any
+  create = false
+  view = false
+  tabSelected: number = 0;
 
   constructor(public _adminService: AdminService) {
   }
@@ -79,15 +82,17 @@ export class CoursesListComponent {
     }
   }
 
-  submitForm() {
-    const form = this._courseFormComponent.form
+  submitCreateForm() {
+    let form:FormGroup;
+     form = this._courseFormComponent.form
     if (form.valid) {
       this.loading = true
       form.disable()
-      this._adminService.createAdmin(form.value).subscribe({
+      this._adminService.createCourse(form.value).subscribe({
         next: () => {
           this.loading = false
           this.drawer.close()
+          this.create=false;
         },
         error: () => {
           form.enable()
@@ -99,23 +104,54 @@ export class CoursesListComponent {
       this.validateForm(form);
     }
   }
-  public clickEvent(data: any){    
+  submitUpdateForm() {
+    let form: FormGroup;
+    if (this.tabSelected == 0) {
+      form = this._courseViewComponent.detailsForm;
+      form.value.year=form.value.year+"-1-1"
+      if (form.valid) {
+        this.loading = true
+        form.disable()
+        this._adminService.updateCourse(this.rowData.id, form.value).subscribe({
+          next: () => {
+            this.loading = false  
+            this.drawer.close()
+            this.create = false
+          },
+          error: () => {
+            console.log(form.value)
+            form.enable()
+            this.loading = false
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
+    } 
+      
+      
+  }
+
+  
+  public clickEvent(data: any) {
+    this.view = true;
     this.rowData = data;
     this.drawer.open();
-}
-  formClick=false
-  viewClick=false
-  public onClick(name: string, data?:any){
-    if(name == "form"){
-      this.formClick=true;
-      this.drawer.open();
-    }
-    else{
-      this.rowData = data;
-      this.viewClick=true
-      this.drawer.open();
-    }
-
   }
-  
+
+  public clickCreateForm() {
+    this.create = true;
+    this.drawer.open();
+  }
+
+  closeDrawer() {
+    this.create = false
+    this.view = false
+    this.drawer.close()
+  }
+
+  tabSwitched(index: number) {
+    this.tabSelected = index;    
+  }
 }

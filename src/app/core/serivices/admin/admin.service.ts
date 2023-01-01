@@ -4,6 +4,7 @@ import {PaginationQuery, PaginationResult} from "../../models";
 import {Observable} from "rxjs";
 import {AdminModel} from "../../models/admin.model";
 import {FULL_RESPONSE, SNACKBAR_OPTIONS} from "../../interceptors/teardown/http-context";
+import { CourseModel } from '../../models/course.model';
 
 @Injectable({
   providedIn: 'root'
@@ -93,6 +94,11 @@ export class AdminService {
 
 
   //*               *******************Admin dashboard Course******************                 *
+  createCourse(createcourse: CourseModel.Course) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+    return this.httpClient.post(`admin/courses`, createcourse, {context})
+  }
   getCourses(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
@@ -109,7 +115,11 @@ export class AdminService {
     context.set(FULL_RESPONSE, true)
     return this.httpClient.get<PaginationResult<any>>(`admin/courses/search?${query.asString()}`, {context})
   }
-
+  updateCourse(id: number, updatecourse: CourseModel.Course) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+    return this.httpClient.put(`admin/courses/${id}`, updatecourse, {context})
+  }
   //*               *******************Admin dashboard Instructor******************                 *
   getInstructors(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
