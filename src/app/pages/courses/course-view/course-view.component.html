@@ -20,7 +20,7 @@
         >
           <input
             nzSize="large"
-            formControlName="courseName"
+            formControlName="name"
             nz-input
             style="text-align: center"
           />
@@ -357,3 +357,53 @@
       </nz-form-item>
     </div>
   </div>
+  <div nz-row [nzGutter]="8">
+    <div nz-col nzSpan="24">
+      <div>
+        <span>Teams Link</span>
+      </div>
+      <nz-form-item>
+        <nz-form-control
+          nzHasFeedback
+          [nzErrorTip]="teamsLinkErrorTpl"
+        >
+          <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
+            <input
+              nzSize="large"
+              formControlName="teamsLink"
+              type="text"
+              nz-input
+            />
+            <ng-template #teamsLinkErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')"
+                >This field is required</ng-container
+              >
+            </ng-template>
+          </nz-input-group>
+          
+        </nz-form-control>
+
+      </nz-form-item>
+    </div>
+  </div>
+  <nz-form-item>
+  <nz-form-control>
+    <div class="button-container">
+      <button nz-button  nzType="primary" nzDanger (click)="Delete()">
+        Delete Course
+      </button>
+  
+    </div>
+  </nz-form-control>
+</nz-form-item>
+  </form>
+  </nz-tab>
+  
+
+  
+  <nz-tab nzTitle="Students">
+    
+  </nz-tab>
+  <nz-tab nzTitle="Instructors">
+  </nz-tab>
+</nz-tabset>

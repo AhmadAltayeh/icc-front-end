@@ -24,7 +24,7 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
     NzDrawerModule,
     ReactiveFormsModule,
     NzTabsModule,
-    NzTimePickerModule,
+    NzTimePickerModule
     
   ]
 })

@@ -15,7 +15,6 @@ export class CourseViewComponent implements OnInit {
   @Input() rowData: any = '';
   @Output() tabChanged = new EventEmitter<number>;
 detailsForm: FormGroup;
- lDate=Date();
   DAYS = ['SUNDAY', 'MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
   ALLDAYS:string[] = ['SUNDAY', 'MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
   sem:string[]=['1st','2nd'];
@@ -84,12 +83,12 @@ detailsForm: FormGroup;
   tabChange(args: any[]): void {
     this.tabChanged.emit(args[0].index);
   }
-  // t: TableComponent = new TableComponent;
-  // Delete(){
-  //   this._adminService.deleteOneAdmin(this.rowData.id).subscribe((json)=>{
-  //     console.log(json)
-  //   })
-  // window.location.reload();
+  t: TableComponent = new TableComponent;
+  Delete(){
+    this._adminService.deleteOneCourse(this.rowData.id).subscribe((json)=>{
+      console.log(json)
+    })
+  window.location.reload();
     
-  // }
+  }
 }

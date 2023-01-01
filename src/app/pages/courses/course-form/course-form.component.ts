@@ -11,16 +11,31 @@ import {Column, FetchProvider} from "../../../partials/table/table.component";
 })
 export class CourseFormComponent implements OnInit {
 form: FormGroup
+DAYS = ['SUNDAY', 'MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+ALLDAYS:string[] = ['SUNDAY', 'MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
+sem:string[]=['1st','2nd'];
+bo:boolean[]=[true,false];
+
   constructor(private _fb: FormBuilder, public _adminService:AdminService) {
   this.form = this._fb.group({
-    firstName: ['', [Validators.required]],
-    lastName: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    phoneNumber: ['', [Validators.required]],
-    facebookUrl: ['', [Validators.required]],
-    address: ['', [Validators.required]],
-    iban: ['', [Validators.required]],
-    roleId: ['', [Validators.required]]
+    name: ['', [Validators.nullValidator]],
+    description: ['', [Validators.required]],
+    startDate: ['', [Validators.required]],
+    endDate: ['', [Validators.required]],
+    lectureTime: ['', [Validators.required]],
+    daysOfWeek: ['', [Validators.required]],
+    maxParticipants: ['', [Validators.required]],
+    category: ['', [Validators.required]],
+    isOnline: ['', [Validators.required]],
+    isFree: ['', [Validators.required]],
+    price: ['', [Validators.required]],
+    classroom: ['', [Validators.required]],
+    year: ['', [Validators.required]],
+    semester: ['', [Validators.required]],
+    teamsLink: ['', [Validators.required]],
+    lastRegDay: ['', [Validators.required]],
+    isPreRecorded:['', [Validators.required]],
+    duration:[''],
   })
   }
 
@@ -28,14 +43,6 @@ form: FormGroup
 
   ngOnInit(): void {
 
-    this._adminService.getRoles().subscribe((json)=>{
-      json.data.forEach((element: any) => {
-        this.displayColumns.push(
-          new Column({
-            key: element.id,
-            title: element.name
-          })
-        )});    
-      }); 
+
 }
 }

@@ -1,20 +1,20 @@
 <div class="button-container">
   <button nz-button nzType="primary" (click)="clickCreateForm()">
-    Create Admin
+    Create Course
   </button>
 </div>
 
-<app-table #table title="Admins List" (clickAction)="clickEvent($event)" [displayColumns]="displayColumns"
+<app-table #table title="Course List" (clickAction)="clickEvent($event)" [displayColumns]="displayColumns"
   [fetchProvider]="fetchProvider">
   <app-search-filter (filter)="table.refresh()"></app-search-filter>
 </app-table>
 
-<nz-drawer #drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzWidth]="620" [nzFooter]="footerTpl" nzTitle="Admin"
+<nz-drawer #drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzWidth]="620" [nzFooter]="footerTpl" nzTitle="Course"
   (nzOnClose)="closeDrawer()">
  
   <div>
     <div *nzDrawerContent>
-      <app-view-form *ngIf="create"></app-view-form>
+      <app-course-form *ngIf="create"></app-course-form>
       <app-view-form *ngIf="view" [rowData]="rowData" (tabChanged)="tabSwitched($event)"></app-view-form>
     </div>
   </div>

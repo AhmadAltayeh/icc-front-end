@@ -85,14 +85,23 @@ export class CoursesListComponent {
   submitCreateForm() {
     let form:FormGroup;
      form = this._courseFormComponent.form
+     form.value.year=form.value.year+"-01-01";
+    form.value.duration=1;
+     console.log(form.value)
+
+
     if (form.valid) {
       this.loading = true
       form.disable()
+      console.log(form.value)
+      form.value.year=form.value.year+"-01-01";
+      form.value.duration=1;
       this._adminService.createCourse(form.value).subscribe({
         next: () => {
           this.loading = false
           this.drawer.close()
           this.create=false;
+          
         },
         error: () => {
           form.enable()
@@ -101,6 +110,7 @@ export class CoursesListComponent {
       })
     } 
     else {
+      console.log("in else validate")
       this.validateForm(form);
     }
   }
@@ -108,7 +118,7 @@ export class CoursesListComponent {
     let form: FormGroup;
     if (this.tabSelected == 0) {
       form = this._courseViewComponent.detailsForm;
-      form.value.year=form.value.year+"-1-1"
+      form.value.duration=0;
       if (form.valid) {
         this.loading = true
         form.disable()

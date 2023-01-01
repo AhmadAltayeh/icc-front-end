@@ -4,11 +4,8 @@ import {PaginationQuery, PaginationResult} from "../../models";
 import {Observable} from "rxjs";
 import {AdminModel} from "../../models/admin.model";
 import {FULL_RESPONSE, SNACKBAR_OPTIONS} from "../../interceptors/teardown/http-context";
-<<<<<<< HEAD
 import { CourseModel } from '../../models/course.model';
-=======
 import { StudentModel } from '../../models/student.model';
->>>>>>> 6abd477b130258145b1dae9ef11a6f9a7636503d
 
 @Injectable({
   providedIn: 'root'
@@ -145,6 +142,12 @@ export class AdminService {
     const context = new HttpContext()
     context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
     return this.httpClient.put(`admin/courses/${id}`, updatecourse, {context})
+  }
+  deleteOneCourse(id:number):Observable<any>{
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.delete<any>(`admin/courses/${id}`, {context})
+    
   }
   //*               *******************Admin dashboard Instructor******************                 *
   getInstructors(query: PaginationQuery): Observable<PaginationResult<any>> {
