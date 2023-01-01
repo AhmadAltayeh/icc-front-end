@@ -390,9 +390,67 @@
   
 
   
-  <nz-tab nzTitle="Students">
-    
-  </nz-tab>
   <nz-tab nzTitle="Instructors">
+    <nz-input-group nzSize="large" [nzAddOnAfter]="suffixButton">
+      <input
+        #id
+        name="searchBar"
+        type="text"
+        nz-input
+        placeholder="input Instructor ID you want to add"
+        (input)="getInstructorId($event)"
+      />
+      <ng-template #suffixButton>
+        <button
+          nz-button
+          nzType="primary"
+          
+          nzSize="large"
+          (click)="addInstructorToCourse()"
+        >
+          Add
+        </button>
+      </ng-template>
+    </nz-input-group>
+
+    <app-table
+      #table
+      title="Avaliable Instructors"
+      [displayColumns]="displayInstructors"
+      [fetchProvider]="fetchProviderIN"
+    >
+    </app-table>
+  </nz-tab>
+
+  <nz-tab nzTitle="Students">
+    <nz-input-group nzSize="large" [nzAddOnAfter]="stud">
+      <input
+        #id
+        name="studentId"
+        type="text"
+        nz-input
+        placeholder="input Student ID you want to add"
+        (input)="getStudentId($event)"
+      />
+      <ng-template #stud>
+        <button
+          nz-button
+          nzType="primary"
+          
+          nzSize="large"
+          (click)="addStudentToCourse()"
+        >
+          Add
+        </button>
+      </ng-template>
+    </nz-input-group>
+
+    <app-table
+      #table
+      title="Students"
+      [displayColumns]="displayStudents"
+      [fetchProvider]="fetchProviderST"
+    >
+    </app-table>
   </nz-tab>
 </nz-tabset>

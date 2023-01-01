@@ -2,8 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
 import { NzSelectSizeType } from 'ng-zorro-antd/select';
+import { PaginationQuery } from 'src/app/core/models';
 import {AdminService} from 'src/app/core/serivices';
-import { Column, TableComponent } from 'src/app/partials/table/table.component';
+import { Column, FetchProvider, TableComponent } from 'src/app/partials/table/table.component';
 @Component({
   selector: 'app-view-form',
   templateUrl: './course-view.component.html',
@@ -14,6 +15,8 @@ export class CourseViewComponent implements OnInit {
   @ViewChild('drawer') public drawer!: NzDrawerRef
   @Input() rowData: any = '';
   @Output() tabChanged = new EventEmitter<number>;
+instructorId:any;
+studentId:any;
 detailsForm: FormGroup;
   DAYS = ['SUNDAY', 'MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
   ALLDAYS:string[] = ['SUNDAY', 'MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
@@ -49,8 +52,61 @@ detailsForm: FormGroup;
 
     
   }
+  fetchProviderIN: FetchProvider<any> = (query: PaginationQuery) => {
+    
+    return this._adminService.getInstructors(query);
+  }
+  fetchProviderST: FetchProvider<any> = (query: PaginationQuery) => {
+    
+    return this._adminService.getStudents(query);
+  }
+  getInstructorId(event:any){
+    this.instructorId=event.target.value;
+  }
+  addInstructorToCourse(){
+    this._adminService.addInstructorToCourse({instructorId:this.instructorId,courseId:this.rowData.id}).subscribe();
+  }
+  getStudentId(event:any){
+    this.studentId=event.target.value;
+  }
+  addStudentToCourse(){
+    console.log("asd");
+    
+    this._adminService.addStudentToCourse({studentId:this.studentId,courseId:this.rowData.id}).subscribe();
+  }
 
   displayColumns : Column[] = [];
+  displayInstructors = [
+    new Column({
+      key: 'id',
+      title: 'ID',
+    }),
+    new Column({
+      key:'firstName',
+      title: 'Instructor Name',
+    
+    }),
+    new Column({
+      key:'lastName',
+      title:'',
+      
+    }),
+   
+    
+    
+  ];
+  displayStudents = [
+    new Column({
+      key: 'id',
+      title: 'ID',
+    }),
+    new Column({
+      key:'userName',
+      title: 'User Name',
+    
+    }),
+    
+  ];
 
   public fillCourseDetails(id:number){
     this._adminService.getOneCourse(this.rowData.id).subscribe((json)=>{

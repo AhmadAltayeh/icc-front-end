@@ -139,6 +139,11 @@ export class AdminService {
     context.set(FULL_RESPONSE, true)
     return this.httpClient.patch(`admin/courses/student?`, studentCourse,{context})
   }
+  removeCourseFromInstructor(instructorCourse:CourseModel.InstructorCourse){
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.patch(`admin/courses/instructor?`, instructorCourse,{context})
+  }
   getOneCourse(id: number): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
@@ -161,6 +166,17 @@ export class AdminService {
     return this.httpClient.delete<any>(`admin/courses/${id}`, {context})
     
   }
+  addInstructorToCourse(instructorCourse:InstructorModel.InstructorCourse) {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.post(`admin/courses/instructor`, instructorCourse,{context})
+  }
+  addStudentToCourse(studentCourse:CourseModel.StudentCourse) {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.post(`admin/courses/student`, studentCourse,{context})
+  }
+  
   //*               *******************Admin dashboard Instructor******************                 *
 
   createInstructor(createInstructor: InstructorModel.Instructor) {

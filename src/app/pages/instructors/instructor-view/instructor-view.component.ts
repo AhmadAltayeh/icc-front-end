@@ -66,7 +66,13 @@ export class InstructorViewComponent implements OnInit {
       title: 'End Date',
     })
   ];
-
+  courseId:any
+  getCourseId(event:any){
+    this.courseId=event;
+  }
+  removeCourseFromInstructor(){
+    this._adminService.removeCourseFromInstructor({instructorId:this.rowData.id,courseId:this.courseId}).subscribe()
+  }
 
   public fillInstructorDetails(id: number) {    
     this._adminService.getOneInstructor(this.rowData.id).subscribe((json) => {

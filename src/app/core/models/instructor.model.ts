@@ -18,4 +18,8 @@ export namespace InstructorModel {
     newPassword: string;
     confirmPassword: string;
   }
+  export interface InstructorCourse{
+    courseId:number;
+    instructorId:number;
+  }
 }
