@@ -5,11 +5,9 @@ const routes: Routes = [
   {
     path: '',
     children: [
-      //{path: '', redirectTo: 'list', pathMatch: "full"},
       {
         path: '',
         loadChildren: () => import('./instructors-list/instructors-list.module').then(m => m.InstructorsListModule)
-        //data: {breadcrumb: 'List'}
       }
     ]
   }

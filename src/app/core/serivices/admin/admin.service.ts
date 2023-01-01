@@ -6,6 +6,7 @@ import {AdminModel} from "../../models/admin.model";
 import {FULL_RESPONSE, SNACKBAR_OPTIONS} from "../../interceptors/teardown/http-context";
 import { CourseModel } from '../../models/course.model';
 import { StudentModel } from '../../models/student.model';
+import { InstructorModel } from '../../models/instructor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,66 +18,65 @@ export class AdminService {
   getAdmins(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<PaginationResult<any>>(`admin/admins?${query.asString()}`, {context})
+    return this.httpClient.get<PaginationResult<any>>(`admin/admins?${query.asString()}`, { context })
   }
-  getAdminProfile():Observable<any>{
+  getAdminProfile(): Observable<any> {
     const context = new HttpContext()
-    context.set(FULL_RESPONSE,true)
-    return this.httpClient.get<any>(`admin/admins/profile`, {context})
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<any>(`admin/admins/profile`, { context })
 
   }
 
   getRoles(): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<any>(`admin/admins/roles/admin`, {context})
+    return this.httpClient.get<any>(`admin/admins/roles/admin`, { context })
   }
 
   searchAdmins(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<PaginationResult<any>>(`admin/admins/search?${query.asString()}`, {context})
+    return this.httpClient.get<PaginationResult<any>>(`admin/admins/search?${query.asString()}`, { context })
   }
 
   createAdmin(createAdmin: AdminModel.Admin) {
     const context = new HttpContext()
-    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
-    return this.httpClient.post(`admin/admins`, createAdmin, {context})
+    context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
+    return this.httpClient.post(`admin/admins`, createAdmin, { context })
   }
 
   updateAdmin(id: number, updateAdmin: AdminModel.Admin) {
     const context = new HttpContext()
-    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
-    return this.httpClient.put(`admin/admins/${id}`, updateAdmin, {context})
+    context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
+    return this.httpClient.put(`admin/admins/${id}`, updateAdmin, { context })
   }
 
   updateAdminPassword(changePassword: AdminModel.changePassword) {
     const context = new HttpContext()
-    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
-    return this.httpClient.patch(`admin/admins/update-password`, changePassword, {context})
+    context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
+    return this.httpClient.patch(`admin/admins/update-password`, changePassword, { context })
   }
- restAdminPassword(resetPassword: AdminModel.ResetPassword) {
+  restAdminPassword(resetPassword: AdminModel.ResetPassword) {
     const context = new HttpContext()
-    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
-    return this.httpClient.patch(`admin/admins/reset-password`, resetPassword, {context})
+    context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
+    return this.httpClient.patch(`admin/admins/reset-password`, resetPassword, { context })
   }
 
   getOneAdmin(id: number): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    console.log(this.httpClient.get<any>(`admin/admins/${id}`, {context}));
-    return this.httpClient.get<any>(`admin/admins/${id}`, {context})
+    console.log(this.httpClient.get<any>(`admin/admins/${id}`, { context }));
+    return this.httpClient.get<any>(`admin/admins/${id}`, { context })
   }
-  deleteOneAdmin(id:number):Observable<any>{
+  deleteOneAdmin(id: number): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    console.log(this.httpClient.get<any>(`admin/admins/${id}`, {context}));
-    return this.httpClient.delete<any>(`admin/admins/${id}`, {context})
-    
+    console.log(this.httpClient.get<any>(`admin/admins/${id}`, { context }));
+    return this.httpClient.delete<any>(`admin/admins/${id}`, { context })
   }
 
-//*               *******************Admin dashboard student******************                 *
-    getStudents(query: PaginationQuery): Observable<PaginationResult<any>> {
+  //*               *******************Admin dashboard student******************                 *
+  getStudents(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
     return this.httpClient.get<PaginationResult<any>>(`admin/students?${query.asString()}`, {context})
@@ -132,29 +132,23 @@ export class AdminService {
   getCourses(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<PaginationResult<any>>(`admin/courses?${query.asString()}`, {context})
+    return this.httpClient.get<PaginationResult<any>>(`admin/courses?${query.asString()}`, { context })
   }
   removeCourseFromStudent(studentCourse:CourseModel.StudentCourse) {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
     return this.httpClient.patch(`admin/courses/student?`, studentCourse,{context})
   }
-  // removeCourseFromStudent(studentCourse:CourseModel.StudentCourse):Observable<any>{
-  //   const context = new HttpContext()
-  //   context.set(FULL_RESPONSE, true)
-  //   return this.httpClient.delete<any>(`admin/courses/student`, studentCourse, {context})
-
-  // }
   getOneCourse(id: number): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
     //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
-    return this.httpClient.get<any>(`admin/courses/${id}`, {context})
+    return this.httpClient.get<any>(`admin/courses/${id}`, { context })
   }
   searchCourses(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<PaginationResult<any>>(`admin/courses/search?${query.asString()}`, {context})
+    return this.httpClient.get<PaginationResult<any>>(`admin/courses/search?${query.asString()}`, { context })
   }
   updateCourse(id: number, updatecourse: CourseModel.Course) {
     const context = new HttpContext()
@@ -162,21 +156,52 @@ export class AdminService {
     return this.httpClient.put(`admin/courses/${id}`, updatecourse, {context})
   }
   //*               *******************Admin dashboard Instructor******************                 *
+
+  createInstructor(createInstructor: InstructorModel.Instructor) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
+    return this.httpClient.post(`admin/instructors`, createInstructor, { context })
+  }
+
   getInstructors(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<PaginationResult<any>>(`admin/instructors?${query.asString()}`, {context})
+    return this.httpClient.get<PaginationResult<any>>(`admin/instructors?${query.asString()}`, { context })
   }
+
   getOneInstructor(id: number): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
-    return this.httpClient.get<any>(`admin/instructors/${id}`, {context})
+    return this.httpClient.get<any>(`admin/instructors/${id}`, { context })
   }
+
   searchInstructors(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<PaginationResult<any>>(`admin/instructors/search?${query.asString()}`, {context})
+    return this.httpClient.get<PaginationResult<any>>(`admin/instructors/search?${query.asString()}`, { context })
   }
 
+  updateInstructor(id: number, updateInstructor: InstructorModel.Instructor) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
+    return this.httpClient.put(`admin/instructors/${id}`, updateInstructor, { context })
+  }
+
+  resetInstructorPassword(resetPassword: InstructorModel.ResetPassword) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
+    return this.httpClient.patch(`admin/instructors/reset-password`, resetPassword, { context })
+  }
+
+  deleteOneInstructor(id:number):Observable<any>{
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.delete<any>(`admin/instructors/${id}`, {context})
+  }
+
+  getInstructorCourses(query: PaginationQuery, id: number): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`admin/instructors/courses/${id}`, { context })
+  }
 }
