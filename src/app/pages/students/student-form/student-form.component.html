@@ -83,16 +83,23 @@
             >
           </ng-template>
         </nz-form-control>
-        <nz-form-control nzHasFeedback [nzErrorTip]="ibanNameErrorTpl">
-          <input
-            nzSize="large"
-            formControlName="iban"
+      </nz-form-item>
+    </div>
+  </div>
+
+  <div nz-row [nzGutter]="8">
+    <div nz-col nzSpan="24">
+      <nz-form-item>
+        <nz-form-control nzHasFeedback [nzErrorTip]="dateOfBirthErrorTpl">
+          <nz-date-picker
+            class="pickerC"
+            [(ngModel)]="date"
+            formControlName="dateOfBirth"
             nz-input
-            type="number"
-            placeholder="please enter your IBAN"
-            style="text-align: center"
-          />
-          <ng-template #ibanNameErrorTpl let-control>
+            nzSize="large"
+            (ngModelChange)="onChange($event)"
+          ></nz-date-picker>
+          <ng-template #dateOfBirthErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')"
               >This field is required</ng-container
             >
@@ -101,7 +108,6 @@
       </nz-form-item>
     </div>
   </div>
-
   <div nz-row [nzGutter]="8">
     <div nz-col nzSpan="24">
       <nz-form-item>
@@ -120,49 +126,6 @@
               >
             </ng-template>
           </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-
-  <div nz-row [nzGutter]="8">
-    <div nz-col nzSpan="24">
-      <nz-form-item>
-        <nz-form-control nzHasFeedback [nzErrorTip]="addressErrorTpl">
-          <textarea
-            nzSize="large"
-            formControlName="address"
-            nz-input
-            placeholder="please enter address description"
-            [nzAutosize]="{ minRows: 4, maxRows: 4 }"
-          ></textarea>
-          <ng-template #addressErrorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')"
-              >This field is required</ng-container
-            >
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
-    </div>
-  </div>
-
-  <div nz-row [nzGutter]="8">
-    <div nz-col nzSpan="8">
-      <nz-form-item>
-        <nz-form-control>
-          <nz-select
-            nzPlaceHolder="Role"
-            formControlName="roleId"
-            style="text-align: center"
-          >
-            <ng-container *ngFor="let field of displayColumns">
-              <nz-option
-                [nzValue]="field.key"
-                [nzLabel]="field.title"
-                nz-input
-              ></nz-option>
-            </ng-container>
-          </nz-select>
         </nz-form-control>
       </nz-form-item>
     </div>

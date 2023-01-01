@@ -1,12 +1,13 @@
 <div class="button-container">
-  <button nz-button nzType="primary" (click)="onClick('form')">
-    Create Student
+  <button nz-button nzType="primary" (click)="clickCreateForm()">
+    Create student
   </button>
 </div>
+
 <app-table
   #table
   title="Students List"
-  (clickAction)="onClick('view', $event)"
+  (clickAction)="clickEvent($event)"
   [displayColumns]="displayColumns"
   [fetchProvider]="fetchProvider"
 >
@@ -18,34 +19,50 @@
   [nzBodyStyle]="{ overflow: 'auto' }"
   [nzWidth]="620"
   [nzFooter]="footerTpl"
-  nzTitle="Create Student"
-  (nzOnClose)="drawer.close()"
+  nzTitle="Student"
+  (nzOnClose)="closeDrawer()"
 >
-  <div *ngIf="[formClick]">
+  <div>
     <div *nzDrawerContent>
-      <app-student-form></app-student-form>
-    </div>
-  </div>
-  <div *ngIf="[viewClick]">
-    <div *nzDrawerContent>
-      <app-view-form [rowData]="rowData"></app-view-form>
+      <app-student-form *ngIf="create"></app-student-form>
+      <app-view-form
+        *ngIf="view"
+        [rowData]="rowData"
+        (tabChanged)="tabSwitched($event)"
+      ></app-view-form>
     </div>
   </div>
 </nz-drawer>
 
 <ng-template #footerTpl>
-  <div style="float: right">
-    <button nz-button style="margin-right: 8px" (click)="drawer.close()">
+  <div style="float: right" *ngIf="create">
+    <button nz-button style="margin-right: 8px" (click)="closeDrawer()">
       Cancel
     </button>
     <button
       nz-button
       nzType="primary"
-      (click)="submitForm()"
+      (click)="submitCreateForm()"
       [nzLoading]="loading"
     >
       <span nz-icon nzType="save"></span>
       Submit
+    </button>
+  </div>
+  <div style="float: right" *ngIf="view">
+    <button nz-button style="margin-right: 8px" (click)="closeDrawer()">
+      Cancel
+    </button>
+
+    <button
+      nz-button
+      nzType="primary"
+      (click)="submitUpdateForm()"
+      (filter)="table.refresh()"
+      [nzLoading]="loading"
+    >
+      <span nz-icon nzType="save"></span>
+      Save
     </button>
   </div>
 </ng-template>

@@ -8,7 +8,7 @@ import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {StudentFormModule} from "../student-form/student-form.module";
 import {StudentViewModule} from "../student-view/student-view.module";
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 const routes: Routes = [
   {
@@ -26,7 +26,8 @@ const routes: Routes = [
     NzDrawerModule,   
     NzButtonModule,
     StudentFormModule,
-    StudentViewModule
+    StudentViewModule,
+    MatTabsModule
   ]
 })
 export class StudentsListModule {

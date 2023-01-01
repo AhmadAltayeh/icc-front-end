@@ -4,7 +4,11 @@ import {PaginationQuery, PaginationResult} from "../../models";
 import {Observable} from "rxjs";
 import {AdminModel} from "../../models/admin.model";
 import {FULL_RESPONSE, SNACKBAR_OPTIONS} from "../../interceptors/teardown/http-context";
+<<<<<<< HEAD
 import { CourseModel } from '../../models/course.model';
+=======
+import { StudentModel } from '../../models/student.model';
+>>>>>>> 6abd477b130258145b1dae9ef11a6f9a7636503d
 
 @Injectable({
   providedIn: 'root'
@@ -86,12 +90,34 @@ export class AdminService {
     //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
     return this.httpClient.get<any>(`admin/students/${id}`, {context})
   }
-  searchStudents(query: PaginationQuery): Observable<PaginationResult<any>> {
+  createStudent(createStudent: StudentModel.Student) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+    return this.httpClient.post(`admin/students`, createStudent, {context})
+  }
+    searchStudents(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
     return this.httpClient.get<PaginationResult<any>>(`admin/students/search?${query.asString()}`, {context})
   }
+    updateStudent(id: number, updateStudent:StudentModel.Student) {
+      const context = new HttpContext()
+      context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+      return this.httpClient.put(`admin/students/${id}`, updateStudent, {context})
+    }
 
+    updateStudentPassword(changePassword: StudentModel.ResetPassword) {
+      const context = new HttpContext()
+      context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+      return this.httpClient.patch(`admin/students/reset-password`, changePassword, {context})
+    }
+    deleteOneStudent(id:number):Observable<any>{
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
+    return this.httpClient.delete<any>(`admin/students/${id}`, {context})
+    
+  }
 
   //*               *******************Admin dashboard Course******************                 *
   createCourse(createcourse: CourseModel.Course) {

@@ -7,6 +7,8 @@ import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {ReactiveFormsModule} from "@angular/forms";
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import {ReactiveFormsModule} from "@angular/forms";
     NzSelectModule,
     NzDatePickerModule,
     NzDrawerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NzTabsModule,
+    NzButtonModule
   ]
 })
 export class StudentViewModule {
