@@ -85,7 +85,9 @@ export class CoursesListComponent {
   submitCreateForm() {
     let form:FormGroup;
      form = this._courseFormComponent.form
-    if (form.valid) {
+   form.value.year=form.value.year+"-1-1"
+   form.value.duration=0;
+     if (form.valid) {
       this.loading = true
       form.disable()
       this._adminService.createCourse(form.value).subscribe({
@@ -93,14 +95,17 @@ export class CoursesListComponent {
           this.loading = false
           this.drawer.close()
           this.create=false;
+          console.log("created")
         },
         error: () => {
+          console.log("Eeror")
           form.enable()
           this.loading = false
         }
       })
     } 
     else {
+      console.log("vlid")
       this.validateForm(form);
     }
   }
