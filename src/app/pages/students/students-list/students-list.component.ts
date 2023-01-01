@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {AdminService} from "../../../core/serivices/admin/admin.service";
-import {Column, FetchProvider} from "../../../partials/table/table.component";
-import {PaginationQuery} from "../../../core/models";
-import {SearchFilterComponent} from "../../../partials/search-filter/search-filter.component";
-import {StudentFormComponent} from "../student-form/student-form.component";
-import {FormGroup} from "@angular/forms";
-import {NzDrawerRef} from "ng-zorro-antd/drawer";
-import {StudentViewComponent} from '../student-view/student-view.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AdminService } from "../../../core/serivices/admin/admin.service";
+import { Column, FetchProvider } from "../../../partials/table/table.component";
+import { PaginationQuery } from "../../../core/models";
+import { SearchFilterComponent } from "../../../partials/search-filter/search-filter.component";
+import { StudentFormComponent } from "../student-form/student-form.component";
+import { FormGroup } from "@angular/forms";
+import { NzDrawerRef } from "ng-zorro-antd/drawer";
+import { StudentViewComponent } from '../student-view/student-view.component';
 
 @Component({
   selector: 'app-students-list',
@@ -14,12 +14,15 @@ import {StudentViewComponent} from '../student-view/student-view.component';
   styleUrls: ['./students-list.component.scss']
 })
 export class StudentsListComponent {
-  @ViewChild(SearchFilterComponent, {static: true}) private _searchFilterComponent!: SearchFilterComponent
-  @ViewChild(StudentFormComponent) public _adminFormComponent!: StudentFormComponent
-  @ViewChild(StudentViewComponent) public _adminViewComponent!: StudentViewComponent
+  @ViewChild(SearchFilterComponent, { static: true }) private _searchFilterComponent!: SearchFilterComponent
+  @ViewChild(StudentFormComponent) public _studentFormComponent!: StudentFormComponent
+  @ViewChild(StudentViewComponent) public _studentViewComponent!: StudentViewComponent
   @ViewChild('drawer') public drawer!: NzDrawerRef
   loading = false
   rowData: any
+  create = false
+  view = false
+  tabSelected: number = 0;
 
   constructor(public _adminService: AdminService) {
   }
@@ -56,10 +59,6 @@ export class StudentsListComponent {
       title: 'Email',
     }),
     new Column({
-      key: 'phoneNumber',
-      title: 'Phone Number',
-    }),
-    new Column({
       key: 'isActive',
       title: 'Is Active',
     })
@@ -75,43 +74,100 @@ export class StudentsListComponent {
     }
   }
 
-  submitForm() {
-    const form = this._adminFormComponent.form
+  submitCreateForm() {
+    let form: FormGroup;
+    form = this._studentFormComponent.form;
     if (form.valid) {
+      console.log(form.value);
+      
       this.loading = true
       form.disable()
-      this._adminService.createAdmin(form.value).subscribe({
+      this._adminService.createStudent(form.value).subscribe({
         next: () => {
           this.loading = false
           this.drawer.close()
+          this.create = false
         },
         error: () => {
           form.enable()
           this.loading = false
         }
       })
-    } 
+    }
     else {
       this.validateForm(form);
     }
   }
-  public clickEvent(data: any){    
+
+  submitUpdateForm() {
+    let form: FormGroup;
+    if (this.tabSelected == 0) {
+      form = this._studentViewComponent.detailsForm;
+      if (form.valid) {
+        this.loading = true
+        form.disable()
+        this._adminService.updateStudent(this.rowData.id, form.value).subscribe({
+          next: () => {
+            this.loading = false
+            this.drawer.close()
+            this.create = false
+          },
+          error: () => {
+            form.enable()
+            this.loading = false
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
+    } else if (this.tabSelected == 1) {
+      console.log(this.tabSelected);
+      
+      form = this._studentViewComponent.passwordForm;
+      if (form.valid) {
+        this.loading = true
+        form.disable()
+        let obj = {
+          id:this.rowData.id,
+          ...form.value
+        }
+        this._adminService.updateStudentPassword(obj).subscribe({
+          next: () => {
+            this.loading = false
+            this.drawer.close()
+            this.create = false
+          },
+          error: () => {
+            form.enable()
+            this.loading = false
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
+    }
+  }
+
+  public clickEvent(data: any) {
+    this.view = true;
     this.rowData = data;
     this.drawer.open();
-}
-  formClick=false
-  viewClick=false
-  public onClick(name: string, data?:any){
-    if(name == "form"){
-      this.formClick=true;
-      this.drawer.open();
-    }
-    else{
-      this.rowData = data;
-      this.viewClick=true
-      this.drawer.open();
-    }
-
   }
-  
+
+  public clickCreateForm() {
+    this.create = true;
+    this.drawer.open();
+  }
+
+  closeDrawer() {
+    this.create = false
+    this.view = false
+    this.drawer.close()
+  }
+
+  tabSwitched(index: number) {
+    this.tabSelected = index;    
+  }
 }
