@@ -104,13 +104,13 @@ export class CoursesListComponent {
           
         },
         error: () => {
+          console.log("Eeror")
           form.enable()
           this.loading = false
         }
       })
     } 
     else {
-      console.log("in else validate")
       this.validateForm(form);
     }
   }

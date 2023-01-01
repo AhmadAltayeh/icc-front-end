@@ -9,6 +9,7 @@ import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {ReactiveFormsModule} from "@angular/forms";
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { TableModule } from 'src/app/partials/table/table.module';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     StudentViewComponent
   ],
   imports: [
-    CommonModule,
+    CommonModule,TableModule,
     NzFormModule,
     NzInputModule,
     NzSelectModule,

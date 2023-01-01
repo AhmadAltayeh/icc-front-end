@@ -9,6 +9,7 @@ import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {ReactiveFormsModule} from "@angular/forms";
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [CourseViewComponent],
@@ -24,8 +25,8 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
     NzDrawerModule,
     ReactiveFormsModule,
     NzTabsModule,
-    NzTimePickerModule
-    
+    NzTimePickerModule,
+    FormsModule
   ]
 })
 export class CourseViewModule {

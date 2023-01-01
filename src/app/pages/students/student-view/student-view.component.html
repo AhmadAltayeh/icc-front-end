@@ -133,7 +133,37 @@
       </div>
     </form>
   </nz-tab>
-  <nz-tab nzTitle="Courses"> </nz-tab>
+  <nz-tab nzTitle="Courses">
+    <nz-input-group nzSize="large" [nzAddOnAfter]="suffixButton">
+      <input
+        #id
+        name="searchBar"
+        type="text"
+        nz-input
+        placeholder="input Course id your want to remove"
+        (input)="getCourseId($event)"
+      />
+      <ng-template #suffixButton>
+        <button
+          nz-button
+          nzType="primary"
+          nzDanger
+          nzSize="large"
+          (click)="DeleteCourseFromStudent()"
+        >
+          Remove
+        </button>
+      </ng-template>
+    </nz-input-group>
+
+    <app-table
+      #table
+      title="Student Enrolled Courses List"
+      [displayColumns]="displayStudentCoursesColumns"
+      [fetchProvider]="fetchProvider"
+    >
+    </app-table>
+  </nz-tab>
   <nz-tab nzTitle="Password">
     <form [formGroup]="passwordForm" nz-form>
       <div nz-row [nzGutter]="8">

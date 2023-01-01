@@ -8,7 +8,7 @@ import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {ReactiveFormsModule} from "@angular/forms";
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 @NgModule({
   declarations: [CourseFormComponent],
@@ -23,7 +23,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     NzDatePickerModule,
     NzDrawerModule,
     ReactiveFormsModule,
-    NzDropDownModule
+    NzDropDownModule,NzTabsModule
   ]
 })
 export class CourseFormModule {

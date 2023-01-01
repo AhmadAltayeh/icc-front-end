@@ -25,7 +25,12 @@
     <button nz-button style="margin-right: 8px" (click)="closeDrawer()">
       Cancel
     </button>
-    <button nz-button nzType="primary" (click)="submitCreateForm()" [nzLoading]="loading">
+    <button
+      nz-button
+      nzType="primary"
+      (click)="submitCreateForm()"
+      [nzLoading]="loading"
+    >
       <span nz-icon nzType="save"></span>
       Submit
     </button>
@@ -35,10 +40,15 @@
       Cancel
     </button>
 
-    <button nz-button nzType="primary" (click)="submitUpdateForm()" (filter)="table.refresh()" [nzLoading]="loading">
+    <button
+      nz-button
+      nzType="primary"
+      (click)="submitUpdateForm()"
+      (filter)="table.refresh()"
+      [nzLoading]="loading"
+    >
       <span nz-icon nzType="save"></span>
       Save
     </button>
-
   </div>
 </ng-template>
