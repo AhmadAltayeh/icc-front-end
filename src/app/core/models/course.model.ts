@@ -19,4 +19,8 @@ export namespace CourseModel {
     teamsLink	:string;
     lastRegDay:string;
   }
+  export interface StudentCourse {
+    studentId:number;
+    courseId:number;
+  }
 }

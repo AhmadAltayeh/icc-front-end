@@ -87,6 +87,12 @@ export class AdminService {
     //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
     return this.httpClient.get<any>(`admin/students/${id}`, {context})
   }
+    getAllStudentCourses(id:number){
+      const context = new HttpContext()
+      
+      context.set(FULL_RESPONSE, true)
+      return this.httpClient.get<PaginationResult<any>>(`admin/students/courses/${id}`, {context})
+    }
   createStudent(createStudent: StudentModel.Student) {
     const context = new HttpContext()
     context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
@@ -117,6 +123,7 @@ export class AdminService {
   }
 
   //*               *******************Admin dashboard Course******************                 *
+
   createCourse(createcourse: CourseModel.Course) {
     const context = new HttpContext()
     context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
@@ -127,6 +134,17 @@ export class AdminService {
     context.set(FULL_RESPONSE, true)
     return this.httpClient.get<PaginationResult<any>>(`admin/courses?${query.asString()}`, {context})
   }
+  removeCourseFromStudent(studentCourse:CourseModel.StudentCourse) {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.patch(`admin/courses/student?`, studentCourse,{context})
+  }
+  // removeCourseFromStudent(studentCourse:CourseModel.StudentCourse):Observable<any>{
+  //   const context = new HttpContext()
+  //   context.set(FULL_RESPONSE, true)
+  //   return this.httpClient.delete<any>(`admin/courses/student`, studentCourse, {context})
+
+  // }
   getOneCourse(id: number): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)

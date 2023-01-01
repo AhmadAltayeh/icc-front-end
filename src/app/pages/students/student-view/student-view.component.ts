@@ -4,6 +4,8 @@ import { NzDrawerRef } from 'ng-zorro-antd/drawer';
 import {AdminService} from 'src/app/core/serivices';
 import { Column } from 'src/app/partials/table/table.component';
 import { TableComponent } from 'src/app/partials/table/table.component';
+import { PaginationQuery, } from 'src/app/core/models';
+import { FetchProvider } from 'src/app/partials/table/table.component';
 @Component({
   selector: 'app-view-form',
   templateUrl: './student-view.component.html',
@@ -14,6 +16,7 @@ export class StudentViewComponent implements OnInit {
   @Input() rowData: any = '';
   roleName: string = '';
   @Output() tabChanged = new EventEmitter<number>;
+  courseId:any
 detailsForm: FormGroup;
 passwordForm: FormGroup;
   constructor(private _fb: FormBuilder,public _adminService: AdminService) {
@@ -37,9 +40,28 @@ passwordForm: FormGroup;
 
     
   }
+  fetchProvider: FetchProvider<any> = (query: PaginationQuery) => {
+    
+    return this._adminService.getAllStudentCourses(this.rowData.id);
+  }
 
   displayColumns : Column[] = [];
-
+  displayStudentCoursesColumns = [
+    new Column({
+      key: 'id',
+      title: 'ID',
+    }),
+    new Column({
+      key: 'name',
+      title: 'Course Name',
+    }),
+    new Column({
+      key: 'maxParticipants',
+      title: 'Max Participants',
+    }),
+    
+    
+  ];
   public fillStudentDetails(id:number){
     this._adminService.getOneStudent(this.rowData.id).subscribe((json)=>{
       console.log(json);
@@ -53,7 +75,18 @@ passwordForm: FormGroup;
       })
     });
   }
+  getCourseId(event:any){
+    this.courseId=event.target.value;
 
+
+  }
+  DeleteCourseFromStudent(){
+    console.log(this.courseId);
+    
+    this._adminService.removeCourseFromStudent({studentId:this.rowData.id,courseId:this.courseId}).subscribe()
+    
+
+  }
   tabChange(args: any[]): void {
     this.tabChanged.emit(args[0].index);
   }
