@@ -39,6 +39,7 @@ export abstract class AuthService {
         tap((response) => {
           this._tokenManager.setTokens(response.token.split(' ')[1]);
           this._state.next(this.authenticated);
+          
           return of(response);
         }));
   }

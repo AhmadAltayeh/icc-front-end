@@ -13,19 +13,19 @@ const routes: Routes = [
         loadChildren: () => import('../pages/admins/admins.module').then(m => m.AdminsModule),
       },
       {
-        path: 'instructors',
+        path: 'admins/instructors',
         loadChildren: () => import('../pages/instructors/instructors.module').then(m => m.InstructorsModule),
       },
       {
-        path: 'courses',
+        path: 'admins/courses',
         loadChildren: () => import('../pages/courses/courses.module').then(m => m.CoursesModule),
       },
       {
-        path: 'students',
+        path: 'admins/students',
         loadChildren: () => import('../pages/students/students.module').then(m => m.StudentsModule),
       },
       {
-        path: 'profile',
+        path: 'admins/profile',
         loadChildren: () => import('../pages/profile/profile.module').then(m => m.ProfileModule),
       }
     ]

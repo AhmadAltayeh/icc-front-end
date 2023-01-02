@@ -10,11 +10,13 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   form!: UntypedFormGroup;
-
+  res:any
   submitForm(): void {
     if (this.form.valid) {
-      this._authService.login(this.form.value).subscribe({next: () => {
-          this._router.navigate(['admins'])
+      this._authService.login(this.form.value).subscribe({next: (res) => {
+          console.log(res);
+          let x=res.roleGroup.toLowerCase()
+          this._router.navigate([x])
         }})
     } else {
       Object.values(this.form.controls).forEach(control => {

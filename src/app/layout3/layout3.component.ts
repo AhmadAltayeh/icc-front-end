@@ -2,18 +2,16 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService,AdminService} from "../core/serivices";
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  selector: 'app-layout3',
+  templateUrl: './layout3.component.html',
+  styleUrls: ['./layout3.component.scss']
 })
 
-export class LayoutComponent implements OnInit {
+export class Layout3Component implements OnInit {
   
   menuItems = [
-    {path: 'admins', name: 'Admins'},
-    {path: 'admins/instructors', name: 'Instructors'},
-    {path: 'admins/students', name: 'Students'},
-    {path: 'admins/courses', name:'Courses'}
+    {path: 'my-courses', name:'Courses'},
+    {path: 'courses', name:'All Courses'}
   ]
   isCollapsed = false;
   dropDownItems=[
