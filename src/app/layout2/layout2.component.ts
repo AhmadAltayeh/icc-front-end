@@ -10,11 +10,7 @@ import {AuthService,AdminService} from "../core/serivices";
 export class Layout2Component implements OnInit {
   
   menuItems = [
-    {path: 'instructors', name:'My Courses'},
-    {path:'a', name: "Hamzeh"},
-    {path:'a', name: "Hamzeh"},
-    {path:'a', name: "Hamzeh"},
-    {path:'a', name: "Hamzeh"}
+    {path: 'instructors', name:'My Courses'}
   ]
   isCollapsed = false;
   dropDownItems=[
