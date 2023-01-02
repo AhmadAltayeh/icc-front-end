@@ -5,7 +5,7 @@ import {NzLayoutModule} from "ng-zorro-antd/layout";
 import {NzMenuModule} from "ng-zorro-antd/menu";
 import {RouterLinkWithHref, RouterOutlet} from "@angular/router";
 import {NzIconModule} from "ng-zorro-antd/icon";
-import {LayoutRoutingModule} from "./layout3-routing.module";
+import {LayoutRoutingModule3} from "./layout3-routing.module";
 import {NzBreadCrumbModule} from "ng-zorro-antd/breadcrumb";
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzButtonModule} from "ng-zorro-antd/button";
@@ -25,7 +25,7 @@ import {MatIconModule} from '@angular/material/icon';
     RouterLinkWithHref,
     NzIconModule,
     RouterOutlet,
-    LayoutRoutingModule,
+    LayoutRoutingModule3,
     NzBreadCrumbModule,
     NzDividerModule,
     NzButtonModule,

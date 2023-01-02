@@ -13,7 +13,38 @@ export class StudentService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getStudentCourses(){
-    
+    getAllStudentCourses(query: PaginationQuery):Observable<PaginationResult<any>>{
+      const context = new HttpContext()
+      
+      context.set(FULL_RESPONSE, true)
+      return this.httpClient.get<PaginationResult<any>>(`student/students/my-courses?${query.asString()}`, {context})
+    }
+    searchCourses(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`student/courses/search?${query.asString()}`, { context })
   }
+    getOneCourse(id: number): Observable<any> {
+      const context = new HttpContext()
+      context.set(FULL_RESPONSE, true)
+      //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
+      return this.httpClient.get<any>(`student/students/courses/${id}`, { context })
+    }
+    getStudentProfile() {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<any>(`student/students/profile`, {context})
+    }
+    updateStudent(studentData:StudentModel.Student) {
+      const context = new HttpContext()
+      context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+      return this.httpClient.put(`student/students/profile`,studentData,{context})
+    }
+    updateStudentPassword(changePassword: StudentModel.ResetPassword) {
+      const context = new HttpContext()
+      context.set(SNACKBAR_OPTIONS, {successMessage: 'Success'})
+      return this.httpClient.patch(`student/students/password`, changePassword, {context})
+    }
+    
+
 }

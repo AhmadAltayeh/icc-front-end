@@ -17,7 +17,7 @@ export class LayoutComponent implements OnInit {
   ]
   isCollapsed = false;
   dropDownItems=[
-    {path:'profile',name:'Profile'}
+    {path:'admins/profile',name:'Profile'}
   ]
   constructor(private _authService: AuthService,private _adminService: AdminService) {
   }
