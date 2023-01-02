@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService,AdminService} from "../core/serivices";
 
 @Component({
-  selector: 'app-layout',
+  selector: 'app-layout2',
   templateUrl: './layout2.component.html',
   styleUrls: ['./layout2.component.scss']
 })
@@ -10,7 +10,11 @@ import {AuthService,AdminService} from "../core/serivices";
 export class Layout2Component implements OnInit {
   
   menuItems = [
-    {path: 'my-courses', name:'Courses'}
+    {path: 'instructors', name:'My Courses'},
+    {path:'a', name: "Hamzeh"},
+    {path:'a', name: "Hamzeh"},
+    {path:'a', name: "Hamzeh"},
+    {path:'a', name: "Hamzeh"}
   ]
   isCollapsed = false;
   dropDownItems=[

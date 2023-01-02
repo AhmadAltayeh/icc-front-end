@@ -1,0 +1,211 @@
+<nz-tabset (nzSelectChange)="tabChange([$event])">
+  <nz-tab nzTitle="Details">
+    <form class="course-view" [formGroup]="detailsForm" nz-form>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+          <div>
+            <span style="margin-right: 60px">Course Name</span>
+            <span style="margin-right: 80px">Category</span>
+            <span>Lecture Time</span>
+          </div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="courseNameErrorTpl" style="margin-right: 20px">
+              <input nzSize="large" formControlName="name" nz-input style="text-align: center" readonly />
+              <ng-template #courseNameErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+
+            <nz-form-control nzHasFeedback [nzErrorTip]="categoryErrorTpl" style="margin-right: 20px">
+              <input nzSize="large" formControlName="category" nz-input style="text-align: center" readonly />
+              <ng-template #categoryErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+            <nz-form-control nzHasFeedback [nzErrorTip]="lectureTimeErrorTpl">
+              <input nzSize="large" formControlName="lectureTime" nz-input style="text-align: center" readonly />
+              <ng-template #lectureTimeErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+
+          </nz-form-item>
+
+        </div>
+      </div>
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+          <div>
+            <span>Description</span>
+          </div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="addressErrorTpl">
+              <textarea nzSize="large" formControlName="description" nz-input [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                readonly></textarea>
+              <ng-template #addressErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+          <div>
+            <span style="margin-right: 120px">Start Date</span>
+            <span style="margin-right: 120px">End Date</span>
+            <span>Last Registraion Day</span>
+          </div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="startDateErrorTpl" style="margin-right: 20px">
+              <input nzSize="large" formControlName="startDate" nz-input style="text-align: center" readonly />
+              <ng-template #startDateErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+
+            <nz-form-control nzHasFeedback [nzErrorTip]="endDateErrorTpl" style="margin-right: 20px">
+              <input nzSize="large" formControlName="endDate" nz-input style="text-align: center" readonly />
+              <ng-template #endDateErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+
+            <nz-form-control nzHasFeedback [nzErrorTip]="lastRegDayErrorTpl">
+              <input nzSize="large" formControlName="lastRegDay" nz-input style="text-align: center" readonly />
+
+              <ng-template #lastRegDayErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+          <div>
+            <span style="margin-right: 180px">Days of Week</span>
+            <span>Max Participants</span>
+          </div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="daysOfWeekErrorTpl">
+              <nz-select formControlName="daysOfWeek" [(ngModel)]="DAYS" nzMode="multiple" [nzDisabled]="true">
+                <ng-container *ngFor="let DAY of ALLDAYS">
+                  <nz-option [nzLabel]="DAY" [nzValue]="DAY"></nz-option>
+                </ng-container>
+              </nz-select>
+
+              <ng-template #daysOfWeekErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+            <nz-form-control nzHasFeedback [nzErrorTip]="maxParticipantsErrorTpl" style="margin-right: 20px">
+              <input nzSize="large" formControlName="maxParticipants" nz-input type="number" style="text-align: center"
+                readonly />
+              <ng-template #maxParticipantsErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+          <div>
+            <span style="margin-right: 120px">Classroom</span>
+            <span style="margin-right: 120px">Semester</span>
+            <span>Year</span>
+          </div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="classroomErrorTpl" style="margin-right: 20px">
+              <input nzSize="large" formControlName="classroom" nz-input style="text-align: center" readonly />
+              <ng-template #classroomErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+
+            <nz-form-control nzHasFeedback [nzErrorTip]="semesterErrorTpl" style="margin-right: 20px">
+              <nz-select formControlName="semester" [nzDisabled]="true">
+                <ng-container *ngFor="let s of sem">
+                  <nz-option [nzValue]="s" [nzLabel]="s" nz-input readonly></nz-option>
+                </ng-container>
+              </nz-select>
+              <ng-template #semesterErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+
+            <nz-form-control nzHasFeedback [nzErrorTip]="yearErrorTpl">
+              <input nzSize="large" formControlName="year" nz-input style="text-align: center" readonly />
+
+              <ng-template #yearErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+          <div>
+            <span style="margin-right: 95px">PreRecorded</span>
+            <span style="margin-right: 130px">Online</span>
+          </div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="isPreRecordedErrorTpl" style="margin-right: 20px">
+              <nz-select formControlName="isPreRecorded" [nzDisabled]="true">
+                <ng-container *ngFor="let b of bo">
+                  <nz-option [nzValue]="b" [nzLabel]="b.toString()" nz-input readonly></nz-option>
+                </ng-container>
+              </nz-select>
+
+              <ng-template #isPreRecordedErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+
+            <nz-form-control nzHasFeedback [nzErrorTip]="isOnlineErrorTpl" style="margin-right: 20px">
+              <nz-select formControlName="isOnline" [nzDisabled]="true">
+
+                <ng-container *ngFor="let b of bo">
+                  <nz-option [nzValue]="b" [nzLabel]="b.toString()" nz-input readonly></nz-option>
+                </ng-container>
+              </nz-select>
+
+              <ng-template #isOnlineErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+          <div>
+            <span>Teams Link</span>
+          </div>
+          <nz-form-item>
+            <nz-form-control nzHasFeedback [nzErrorTip]="teamsLinkErrorTpl">
+              <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
+                <input nzSize="large" formControlName="teamsLink" type="text" nz-input readonly />
+                <ng-template #teamsLinkErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+    </form>
+  </nz-tab>
+
+  <nz-tab nzTitle="Students">
+    <app-table #table title="Students" [displayColumns]="displayStudents" [fetchProvider]="fetchProviderST">
+    </app-table>
+  </nz-tab>
+</nz-tabset>
