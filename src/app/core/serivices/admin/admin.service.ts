@@ -119,7 +119,6 @@ export class AdminService {
     context.set(FULL_RESPONSE, true)
     console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
     return this.httpClient.delete<any>(`admin/students/${id}`, {context})
-    
   }
 
   //*               *******************Admin dashboard Course******************                 *

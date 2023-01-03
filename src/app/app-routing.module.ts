@@ -1,9 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {AppGuard} from "./core/guards";
-import {NotFoundComponent} from "./pages/not-found/not-found.component";
-import { Layout2Component } from './layout2/layout2.component'; 
-import { Layout3Component } from './layout3/layout3.component'; 
 const routes: Routes = [
   {
     path: 'auth',

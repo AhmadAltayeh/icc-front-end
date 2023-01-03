@@ -12,6 +12,11 @@ import { StudentModel } from '../../models/student.model';
 export class StudentService {
   constructor(private httpClient: HttpClient) {
   }
+  getAllCourses(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext()
+    context.set(FULL_RESPONSE, true)
+    return this.httpClient.get<PaginationResult<any>>(`admin/student/students/courses?${query.asString()}`, { context })
+  }
 
     getAllStudentCourses(query: PaginationQuery):Observable<PaginationResult<any>>{
       const context = new HttpContext()

@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AdminService} from "../../../core/serivices/admin/admin.service";
+import { StudentService } from 'src/app/core/serivices';
 import {Column, FetchProvider} from "../../../partials/table/table.component";
 import {PaginationQuery} from "../../../core/models";
 import {SearchFilterComponent} from "../../../partials/search-filter/search-filter.component";
@@ -24,16 +25,16 @@ export class CoursesListComponent {
   view = false
   tabSelected: number = 0;
 
-  constructor(public _adminService: AdminService) {
+  constructor(public _studentService: StudentService) {
   }
 
   fetchProvider: FetchProvider<any> = (query: PaginationQuery) => {
-    const search = this._searchFilterComponent.getFilters()
-    if (search) {
-      query.addParams('keyword', search)
-      return this._adminService.searchCourses(query);
-    }
-    return this._adminService.getCourses(query);
+    // const search = this._searchFilterComponent.getFilters()
+    // if (search) {
+    //   query.addParams('keyword', search)
+    //   return this._studentService.searchCourses(query);
+    // }
+    return this._studentService.getAllStudentCourses(query);
   }
 
   displayColumns = [
@@ -82,67 +83,7 @@ export class CoursesListComponent {
     }
   }
 
-  submitCreateForm() {
-    let form:FormGroup;
-     form = this._courseFormComponent.form
-     form.value.year=form.value.year+"-01-01";
-    form.value.duration=1;
-     console.log(form.value)
-
-
-    if (form.valid) {
-      this.loading = true
-      form.disable()
-      console.log(form.value)
-      form.value.year=form.value.year+"-01-01";
-      form.value.duration=1;
-      this._adminService.createCourse(form.value).subscribe({
-        next: () => {
-          this.loading = false
-          this.drawer.close()
-          this.create=false;
-          
-        },
-        error: () => {
-          console.log("Eeror")
-          form.enable()
-          this.loading = false
-        }
-      })
-    } 
-    else {
-      this.validateForm(form);
-    }
-  }
-  submitUpdateForm() {
-    let form: FormGroup;
-    if (this.tabSelected == 0) {
-      form = this._courseViewComponent.detailsForm;
-      form.value.duration=0;
-      if (form.valid) {
-        this.loading = true
-        form.disable()
-        this._adminService.updateCourse(this.rowData.id, form.value).subscribe({
-          next: () => {
-            this.loading = false  
-            this.drawer.close()
-            this.create = false
-          },
-          error: () => {
-            console.log(form.value)
-            form.enable()
-            this.loading = false
-          }
-        })
-      }
-      else {
-        this.validateForm(form);
-      }
-    } 
-      
-      
-  }
-
+  
   
   public clickEvent(data: any) {
     this.view = true;

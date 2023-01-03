@@ -1,0 +1,14 @@
+<app-table #table title="My Course List" (clickAction)="clickEvent($event)" [displayColumns]="displayColumns"
+  [fetchProvider]="fetchProvider">
+  <app-search-filter (filter)="table.refresh()"></app-search-filter>
+</app-table>
+
+<nz-drawer #drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzWidth]="620" nzTitle="Course"
+  (nzOnClose)="closeDrawer()">
+
+  <div>
+    <div *nzDrawerContent>
+      <app-view-form [rowData]="rowData" (tabChanged)="tabSwitched($event)"></app-view-form>
+    </div>
+  </div>
+</nz-drawer>
