@@ -12,6 +12,8 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from "../../../partials/table/table.module";
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzTableModule } from 'ng-zorro-antd/table';
+
 @NgModule({
     declarations: [CourseViewComponent],
     exports: [
@@ -29,7 +31,8 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
         NzTimePickerModule,
         FormsModule,
         TableModule,
-        NzButtonModule
+        NzButtonModule,
+        NzTableModule 
     ]
 })
 export class CourseViewModule {

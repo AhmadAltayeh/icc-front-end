@@ -9,22 +9,24 @@ import {NzDrawerModule} from "ng-zorro-antd/drawer";
 import {ReactiveFormsModule} from "@angular/forms";
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { TableModule } from "../../../partials/table/table.module";
 
 @NgModule({
-  declarations: [CourseFormComponent],
-  exports: [
-    CourseFormComponent
-  ],
-  imports: [
-    CommonModule,
-    NzFormModule,
-    NzInputModule,
-    NzSelectModule,
-    NzDatePickerModule,
-    NzDrawerModule,
-    ReactiveFormsModule,
-    NzDropDownModule,NzTabsModule
-  ]
+    declarations: [CourseFormComponent],
+    exports: [
+        CourseFormComponent
+    ],
+    imports: [
+        CommonModule,
+        NzFormModule,
+        NzInputModule,
+        NzSelectModule,
+        NzDatePickerModule,
+        NzDrawerModule,
+        ReactiveFormsModule,
+        NzDropDownModule, NzTabsModule,
+        TableModule
+    ]
 })
 export class CourseFormModule {
 }
