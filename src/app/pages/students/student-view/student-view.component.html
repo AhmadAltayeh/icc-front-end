@@ -1,4 +1,4 @@
-<nz-tabset (nzSelectChange)="tabChange([$event])">
+<nz-tabset [(nzSelectedIndex)]="tabSelected">
   <nz-tab nzTitle="Details">
     <form class="student-form" [formGroup]="detailsForm" nz-form>
       <div nz-row [nzGutter]="8">
@@ -235,6 +235,25 @@
                   >
                 </ng-template>
               </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="8">
+          <div></div>
+          <nz-form-item>
+            <nz-form-control>
+              <div class="button-container">
+                <button
+                  nzType="primary"
+                  nz-button
+                  nzDanger
+                  (click)="resetStudentPassword()"
+                >
+                  Change Password
+                </button>
+              </div>
             </nz-form-control>
           </nz-form-item>
         </div>

@@ -25,11 +25,7 @@
   <div>
     <div *nzDrawerContent>
       <app-student-form *ngIf="create"></app-student-form>
-      <app-view-form
-        *ngIf="view"
-        [rowData]="rowData"
-        (tabChanged)="tabSwitched($event)"
-      ></app-view-form>
+      <app-view-form *ngIf="view" [rowData]="rowData"></app-view-form>
     </div>
   </div>
 </nz-drawer>

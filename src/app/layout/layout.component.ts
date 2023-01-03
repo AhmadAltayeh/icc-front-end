@@ -10,7 +10,7 @@ import {AuthService,AdminService} from "../core/serivices";
 export class LayoutComponent implements OnInit {
   
   menuItems = [
-    {path: 'admins', name: 'Admins'},
+    {path: 'admins/admins', name: 'Admins'},
     {path: 'admins/instructors', name: 'Instructors'},
     {path: 'admins/students', name: 'Students'},
     {path: 'admins/courses', name:'Courses'}

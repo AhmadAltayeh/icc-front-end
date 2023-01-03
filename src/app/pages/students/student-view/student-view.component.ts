@@ -15,7 +15,7 @@ export class StudentViewComponent implements OnInit {
   @ViewChild('drawer') public drawer!: NzDrawerRef
   @Input() rowData: any = '';
   roleName: string = '';
-  @Output() tabChanged = new EventEmitter<number>;
+  tabSelected:number=0
   courseId:any
 detailsForm: FormGroup;
 passwordForm: FormGroup;
@@ -75,21 +75,28 @@ passwordForm: FormGroup;
       })
     });
   }
+  validateForm(form: FormGroup): void {
+    for (const key in form.controls) {
+      if (form.controls.hasOwnProperty(key)) {
+        form.controls[key].markAsTouched();
+        form.controls[key].markAsDirty();
+        form.controls[key].updateValueAndValidity();
+      }
+    }
+  }
   getCourseId(event:any){
     this.courseId=event.target.value;
-
-
   }
   DeleteCourseFromStudent(){
     console.log(this.courseId);
-    
-    this._adminService.removeCourseFromStudent({studentId:this.rowData.id,courseId:this.courseId}).subscribe()
-    
-
+    this._adminService.removeCourseFromStudent({studentId:this.rowData.id,courseId:this.courseId}).subscribe({error(err) {
+        console.log(err);
+        
+    },})
   }
-  tabChange(args: any[]): void {
-    this.tabChanged.emit(args[0].index);
-  }
+  // tabChange(args: any[]): void {
+  //   this.tabChanged.emit(args[0].index);
+  // }
   t: TableComponent = new TableComponent;
   Delete(){
     this._adminService.deleteOneStudent(this.rowData.id).subscribe((json)=>{
@@ -97,5 +104,59 @@ passwordForm: FormGroup;
     })
   window.location.reload();
     
+  }
+  resetStudentPassword(){
+    let form: FormGroup;
+    form = this.passwordForm;
+      if (form.valid) {
+        form.disable()
+        let obj = {
+          id:this.rowData.id,
+          ...form.value
+        }
+        this._adminService.updateStudentPassword(obj).subscribe({
+          error: () => {
+            form.enable()
+          }
+        })
+      }
+  }
+  submitUpdateForm() {
+    console.log(this.tabSelected);
+    
+    let form: FormGroup;
+    if (this.tabSelected == 0) {
+      form = this.detailsForm;
+      if (form.valid) {
+        form.disable()
+        this._adminService.updateStudent(this.rowData.id, form.value).subscribe({
+          error: () => {
+            form.enable()
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
+    } else if (this.tabSelected == 2) {
+      
+      form = this.passwordForm;
+      if (form.valid) {
+        form.disable()
+        let obj = {
+          id:this.rowData.id,
+          ...form.value
+        }
+        this._adminService.updateStudentPassword(obj).subscribe({
+          
+          error: () => {
+            form.enable()
+          }
+        })
+      }
+      else {
+        this.validateForm(form);
+      }
+    }
   }
 }

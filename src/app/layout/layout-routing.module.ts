@@ -7,9 +7,9 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      {path: '', pathMatch: 'full', redirectTo: 'admins'},
+      {path: 'admins', pathMatch: 'full', redirectTo: 'admins/admins'},
       {
-        path: 'admins',
+        path: 'admins/admins',
         loadChildren: () => import('../pages/admins/admins.module').then(m => m.AdminsModule),
       },
       {
