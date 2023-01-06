@@ -3,6 +3,10 @@ import {Routes, RouterModule} from '@angular/router';
 import {AppGuard} from "./core/guards";
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: () => import('./pages/welcome/welcome.module').then((m) => m.WelcomeModule)
+  },
+  {
     path: 'register',
     loadChildren: () => import('./pages/signin/signin.module').then((m) => m.SigninModule)
   },

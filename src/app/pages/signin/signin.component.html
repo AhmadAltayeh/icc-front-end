@@ -27,10 +27,14 @@
     <div class="container" style="margin-bottom: 100px">
       <div class="row d-flex justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
-          <div class=""></div>
           <div class="card">
             <div class="card-body p-5">
-              <form nz-form class="login-form" class="mb-3 mt-md-4">
+              <form
+                nz-form
+                [formGroup]="ff"
+                class="login-form"
+                class="mb-3 mt-md-4"
+              >
                 <h2
                   style="text-align: center; padding-bottom: 25px"
                   class="fw-bold mb-2 text-uppercase"
@@ -56,7 +60,7 @@
                     class="form-control"
                     formControlName="newPassword"
                     id="newPassword"
-                    placeholder="***"
+                    placeholder="*"
                   />
                 </div>
                 <div class="mb-3">
@@ -68,7 +72,7 @@
                     class="form-control"
                     formControlName="confirmPassword"
                     id="confirmPassword"
-                    placeholder="***"
+                    placeholder="*"
                   />
                 </div>
                 <div class="mb-3">
@@ -117,7 +121,11 @@
                   >
                 </p>
                 <div class="d-grid">
-                  <button class="btn btn-outline-dark" type="submit">
+                  <button
+                    class="btn btn-outline-dark"
+                    type="submit"
+                    (click)="submitForm()"
+                  >
                     Sign Up
                   </button>
                 </div>

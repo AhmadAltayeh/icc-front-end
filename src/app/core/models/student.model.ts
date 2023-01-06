@@ -18,4 +18,14 @@ export namespace StudentModel {
     newPassword: string;
     confirmPassword: string;
   }
+  export interface reg{
+    firstName:string;
+    lastName:string;
+    email:string;
+    facebookUrl:string;
+    dateOfBirth:string;
+    phoneNumber:string;
+    newPassword:string;
+    confirmPassword:string;
+  }
 }

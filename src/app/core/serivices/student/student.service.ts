@@ -24,6 +24,11 @@ export class StudentService {
       context.set(FULL_RESPONSE, true)
       return this.httpClient.get<PaginationResult<any>>(`student/students/my-courses?${query.asString()}`, {context})
     }
+    registerStudent(reg:StudentModel.reg){
+      const context = new HttpContext()
+      context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
+      return this.httpClient.post("student/students/signup",reg,{context})
+    }
     searchCourses(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)

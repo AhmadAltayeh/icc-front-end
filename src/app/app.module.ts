@@ -18,7 +18,7 @@ import {ENVIRONMENT} from "./core/tokens";
 import {TeardownInterceptor, UrlInterceptor} from "./core/interceptors";
 import {NzMessageServiceModule} from "ng-zorro-antd/message";
 import {SetupInterceptor} from "./core/interceptors/setup/setup.interceptor";
-
+import { SigninModule } from './pages/signin/signin.module';
 registerLocaleData(ar);
 
 @NgModule({
@@ -34,7 +34,7 @@ registerLocaleData(ar);
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
-    NzMessageServiceModule,
+    NzMessageServiceModule,SigninModule
   ],
   providers: [
     {provide: NZ_I18N, useValue: ar_EG},
