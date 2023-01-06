@@ -3,11 +3,15 @@ import {Routes, RouterModule} from '@angular/router';
 import {AppGuard} from "./core/guards";
 const routes: Routes = [
   {
+    path: 'register',
+    loadChildren: () => import('./pages/signin/signin.module').then((m) => m.SigninModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule)
   },
   {
-    path: '',
+    path: 'admins',
     canActivate: [AppGuard],
     canActivateChild: [AppGuard],
     loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule)

@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
+  templateUrl: './login.component2.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
@@ -37,5 +37,7 @@ export class LoginComponent implements OnInit {
       password: [null, [Validators.required]],
     });
   }
-
+  onClick(){
+    this._router.navigate(['/register']);
+  }
 }

@@ -1,0 +1,135 @@
+<div
+  class="img js-fullheight"
+  style="
+    background-image: url('https://i.ibb.co/jgMy0dv/bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+  "
+>
+  <h4 style="text-align: center">
+    <img
+      src="https://i.ibb.co/fnjsDVy/0-3-removebg-preview.png"
+      style="
+        max-width: 100%;
+        height: 200px;
+        text-align: center;
+        margin-right: 20px;
+      "
+      alt=""
+    />
+  </h4>
+  <div
+    class="ftco-section d-flex justify-content-center align-items-center"
+    style="margin-top: 50px"
+  >
+    <div class="container" style="margin-bottom: 100px">
+      <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <div class=""></div>
+          <div class="card">
+            <div class="card-body p-5">
+              <form nz-form class="login-form" class="mb-3 mt-md-4">
+                <h2
+                  style="text-align: center; padding-bottom: 25px"
+                  class="fw-bold mb-2 text-uppercase"
+                >
+                  المركز الثقافي الاسلامي
+                </h2>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email"
+                    id="email"
+                    placeholder="name@example.com"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="newPassword" class="form-label"
+                    >New Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="newPassword"
+                    id="newPassword"
+                    placeholder="***"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="confirmPassword" class="form-label"
+                    >Confirm Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="confirmPassword"
+                    id="confirmPassword"
+                    placeholder="***"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="firstName"
+                    id="firstName"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="lastName" class="form-label">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="lastName"
+                    id="lastName"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="facebookUrl" class="form-label"
+                    >FaceBook Url</label
+                  >
+                  <input
+                    type="url"
+                    class="form-control"
+                    formControlName="facebookUrl"
+                    id="facebookUrl"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="dateOfBirth" class="form-label"
+                    >Date Of Birth</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control"
+                    formControlName="dateOfBirth"
+                    id="dateOfBirth"
+                  />
+                </div>
+                <p class="small">
+                  <a class="text-primary" href="forget-password.html"
+                    >Forgot password?</a
+                  >
+                </p>
+                <div class="d-grid">
+                  <button class="btn btn-outline-dark" type="submit">
+                    Sign Up
+                  </button>
+                </div>
+              </form>
+              <div>
+                <p class="mb-0 text-center">Have an account?</p>
+                <button (click)="onClick()">Login</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -34,7 +34,7 @@ registerLocaleData(ar);
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
-    NzMessageServiceModule
+    NzMessageServiceModule,
   ],
   providers: [
     {provide: NZ_I18N, useValue: ar_EG},
