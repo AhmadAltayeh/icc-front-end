@@ -8,12 +8,16 @@ import {AuthService,AdminService} from "../core/serivices";
 })
 
 export class LayoutComponent implements OnInit {
-  
+
   menuItems = [
     {path: 'admins/admins', name: 'Admins'},
     {path: 'admins/instructors', name: 'Instructors'},
     {path: 'admins/students', name: 'Students'},
     {path: 'admins/courses', name:'Courses'}
+  ]
+
+  dashboardmenuItems = [
+    {path: 'stats', name:'Statistics'}
   ]
   isCollapsed = false;
   dropDownItems=[
@@ -23,6 +27,9 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._adminService.getAdminProfile().subscribe(data=>{
+      this.data=data.data
+    });    
   }
 
   logout() {
@@ -34,9 +41,7 @@ export class LayoutComponent implements OnInit {
   }
   data:any
   onClick(){
-    
     this._adminService.getAdminProfile().subscribe(data=>{
-      
       this.data=data.data
     });
 }

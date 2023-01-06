@@ -1,64 +1,54 @@
 <nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-  >
+  <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed"
+    [nzTrigger]="null">
     <div class="sidebar-logo">
       <a href="/" target="_blank">
-        <img
-          src="https://i.ibb.co/fnjsDVy/0-3-removebg-preview.png"
-          alt="logo"
-        />
+        <img src="https://i.ibb.co/fnjsDVy/0-3-removebg-preview.png" alt="logo" height="100" width="100"/>
         <h1>Islamic Culture Center</h1>
       </a>
     </div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-    >
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed" style="background-color: transparent;">
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
-          <li *ngFor="let item of menuItems" nz-menu-item nzMatchRouter>
-            <a [routerLink]="item.path">{{ item.name }}</a>
+          <li *ngFor="let item of dashboardmenuItems" nz-menu-item nzMatchRouter>
+            <div [routerLink]="item.path">{{ item.name }}</div>
           </li>
         </ul>
       </li>
+
+      <li nz-submenu nzOpen nzTitle="Users" nzIcon="user">
+        <ul>
+          <li *ngFor="let item of menuItems" nz-menu-item nzMatchRouter>
+            <div [routerLink]="item.path">{{ item.name }}</div>
+          </li>
+        </ul>
+      </li>
+
     </ul>
   </nz-sider>
   <nz-layout>
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <span
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></span>
+          <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
         </span>
-        <nz-button-group class="button-group">
-          <mat-button
-            nz-dropdown
-            [nzDropdownMenu]="menu2"
-            nzPlacement="bottomRight"
-          >
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Example home icon"
-              fontIcon="account_circle"
-            ></mat-icon>
-          </mat-button>
-        </nz-button-group>
+        <div>
+          <nz-button-group class="button-group">
+            <button [routerLink]="[dropDownItems[0].path]" style="border-radius: 50%; margin-right:7px; background-color: grey; border-color: grey;"
+              nz-dropdown nzPlacement="bottomRight" nz-button nzType="primary" nzSize='default' nzShape='circle'>
+              <span nz-icon nzType="user"></span>
+            </button>
+            <div style="font-family: unset; margin-right: 30px; cursor: pointer;" [routerLink]="[dropDownItems[0].path]">{{data.firstName}} {{data.lastName}}</div>
+            <button (click)="logout()" style="background-color: transparent; color: black; border-color: transparent; box-shadow: none;"
+              nzPlacement="bottomRight" nz-button nzSize='small' nzShape='circle'>
+              <span nz-icon nzType="logout"></span>
+            </button>
+          </nz-button-group>
+        </div>
         <nz-dropdown-menu #menu2="nzDropdownMenu">
           <ul nz-menu>
             <li nz-menu-item>
-              <mat-button [routerLink]="[dropDownItems[0].path]"
-                >{{ dropDownItems[0].name }}
+              <mat-button [routerLink]="[dropDownItems[0].path]">{{ dropDownItems[0].name }}
               </mat-button>
             </li>
             <li nz-menu-item nzMatchRouter (click)="logout()">logout</li>
@@ -68,8 +58,6 @@
     </nz-header>
     <nz-content>
       <div class="inner-content">
-        <a class="breadcrub" (click)="reload()">Home</a>
-        <nz-divider></nz-divider>
         <router-outlet></router-outlet>
       </div>
     </nz-content>
