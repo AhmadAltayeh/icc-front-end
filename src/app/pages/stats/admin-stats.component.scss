@@ -1,4 +1,5 @@
 nz-card {
+    font-family: unset;
     width: 33.333%;
     margin-top: 16px;
     margin-right: 25px;
@@ -8,6 +9,7 @@ nz-card {
 }
 
 .card-wrapper{
+    font-family: unset;
     width: 47.7%;
     margin-top: 16px;
     margin-right: 25px;
@@ -15,14 +17,16 @@ nz-card {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 15px;
-    height:450px;
+    height:490px;
     overflow-y: scroll;
     .card-title{
+        font-family: unset;
         font-size: small;
         line-height: 20px;
         margin-bottom: 20px;
     }
     .card-info{
+        font-family: unset;
         display: flex;
         justify-content: flex-start;
     }
@@ -30,6 +34,7 @@ nz-card {
 }
 
 .card-progress-wrapper{
+    font-family: unset;
     width: 22.8%;
     height: 50%;
     margin-top: 16px;
@@ -53,11 +58,13 @@ nz-card {
 }
 
 .cards-container{
+    font-family: unset;
     display: flex;
     justify-content: space-between;
 }
 
 .admin-avatar {
+    font-family: unset;
     background: rgb(110, 235, 235);
     border-radius: 50%;
     height: 70px;
@@ -70,6 +77,7 @@ nz-card {
 }
 
 .instructor-avatar {
+    font-family: unset;
     background: peachpuff;
     border-radius: 50%;
     height: 70px;
@@ -82,6 +90,7 @@ nz-card {
 }
 
 .student-avatar {
+    font-family: unset;
     background: rgb(2, 234, 129);
     border-radius: 50%;
     height: 70px;
@@ -94,6 +103,7 @@ nz-card {
 }
 
 .course-avatar {
+    font-family: unset;
     background: rgb(255, 88, 88);
     border-radius: 50%;
     height: 70px;
@@ -108,17 +118,20 @@ nz-card {
 ::ng-deep{
 
     .ant-card-meta-avatar {
+        font-family: unset;
         float: left;
         padding-right: 0px;
     }
     
     .ant-card-meta-title {
+        font-family: unset;
         line-height: 60px;
         color: black;
         font-size: 30px;
     }
     
     .ant-card-body > div {
+        font-family: unset;
         font-size: 20px;
         font-size: 15px;
         text-align: left;
@@ -126,16 +139,19 @@ nz-card {
     
     }
     .ant-card-body{
+        font-family: unset;
         display: flex;
         align-items: center;
         padding: 15px;
         .card-info-number{
+            font-family: unset;
             font-size: 30px;
             line-height: 30px;
         }
         .card-info-title{
+            font-family: unset;
             color: lightgray;
-            font-weight: bold;
+            font-weight: 400;
 
         }
     }

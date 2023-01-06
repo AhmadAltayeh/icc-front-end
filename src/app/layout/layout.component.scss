@@ -13,6 +13,7 @@
   z-index: 10;
   min-height: 100vh;
   box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
+  background-image: url(https://i.ibb.co/Kb2fcqs/output-onlineimagetools-3.png);
 }
 
 .header-trigger {
@@ -23,8 +24,12 @@
   transition: all .3s, padding 0s;
 }
 
+.ant-menu-dark .ant-menu-inline .ant-menu-sub {
+  background: transparent;
+}
+
 .trigger:hover {
-  color: #1890ff;
+  color: rgb(0, 0, 41);
 }
 
 .sidebar-logo {
@@ -33,13 +38,13 @@
   padding-left: 24px;
   overflow: hidden;
   line-height: 64px;
-  background: #001529;
+  background: transparent;
   transition: all .3s;
 }
 
 .sidebar-logo img {
   display: inline-block;
-  height: 32px;
+  height: 40px;
   width: 32px;
   vertical-align: middle;
 }
@@ -71,7 +76,10 @@ nz-header {
 .button-group {
   position: absolute;
   right: 20px;
-  top: 20px
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 nz-content {

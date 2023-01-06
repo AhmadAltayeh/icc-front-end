@@ -1,3 +1,7 @@
+<div style="display: flex; justify-content: end; margin-right: 25px;"> 
+    <nz-date-picker style="border-radius: 10px;" nzFormat="dd-MMM-yyy" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+</div>
+
 <div class="cards-container">
     <nz-card [nzLoading]="loading">
         <nz-card-meta class="admin-avatar" style="margin-top: 5px;" [nzAvatar]="adminIcon"></nz-card-meta>
@@ -64,7 +68,7 @@
     <div class="card-progress-wrapper">
         <p style="text-align: center;">Student Registered in Courses</p>
         <circle-progress [percent]="data.studentWithCoursesCount/data.studentsCount * 100" [animationDuration]="300"
-            style="display: flex; justify-content: center; margin-top: 40px;"></circle-progress>
+            style="display: flex; justify-content: center;"></circle-progress>
     </div>
 </div>
 

@@ -75,10 +75,10 @@ export class AdminService {
     return this.httpClient.delete<any>(`admin/admins/${id}`, { context })
   }
 
-  getAdminStats(): Observable<any> {
+  getAdminStats(query: any): Observable<any> {
     const context = new HttpContext()
-    context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<any>(`admin/stats`, { context })
+    context.set(FULL_RESPONSE, true);
+    return this.httpClient.get<any>(`admin/stats?date=${query}`, { context })
   }
 
   //*               *******************Admin dashboard student******************                 *
