@@ -1,0 +1,88 @@
+<div class="cards-container">
+    <nz-card [nzLoading]="loading">
+        <nz-card-meta class="admin-avatar" style="margin-top: 5px;" [nzAvatar]="adminIcon"></nz-card-meta>
+        <div class="card-info">
+            <div class="card-info-number">{{adminCount}}</div>
+            <div class="card-info-title">Admins</div>
+        </div>
+    </nz-card>
+    <nz-card [nzLoading]="loading">
+        <nz-card-meta class="instructor-avatar" style="margin-top: 5px;" [nzAvatar]="instructorIcon"></nz-card-meta>
+        <div class="card-info">
+            <div class="card-info-number">{{instructorCount}}</div>
+            <div class="card-info-title">Instructors</div>
+        </div>
+    </nz-card>
+    <nz-card [nzLoading]="loading">
+        <nz-card-meta class="student-avatar" style="margin-top: 5px;" [nzAvatar]="studentIcon"></nz-card-meta>
+        <div class="card-info">
+            <div class="card-info-number">{{studentCount}}</div>
+            <div class="card-info-title">Students</div>
+        </div>
+    </nz-card>
+    <nz-card [nzLoading]="loading">
+        <nz-card-meta class="course-avatar" style="margin-top: 5px;" [nzAvatar]="courseIcon"></nz-card-meta>
+        <div class="card-info">
+            <div class="card-info-number">{{courseCount}}</div>
+            <div class="card-info-title">Courses</div>
+        </div>
+    </nz-card>
+</div>
+
+<div style="display: flex;">
+    <div class="card-wrapper">
+        <h4 class="card-title">Latest Reviews</h4>
+        <ng-container *ngFor="let review of data.topReviews">
+            <div class="card-info">
+                <div>
+                    <img alt="example"
+                        src="https://i.ibb.co/swsbWht/student-icon-vector-isolated-white-background-student-sign-student-icon-vector-isolated-white-backgr.png"
+                        width=40 height="40"
+                        style="background-color: lightgrey; border-radius: 50%; margin-right: 10px;" />
+                </div>
+                <div style="width: 100%;">
+                    <div style="display:flex; justify-content:space-between;">
+                        <p style="margin-bottom: 0; font-weight: bold;">
+                            {{review.student.firstName}}{{review.student.lastName}}</p>
+                        <p style="font-weight:light;">{{review.instructor.firstName}} {{review.instructor.lastName}}
+                            - {{review.course.name}}</p>
+                    </div>
+                    <nz-rate [ngModel]="review.rating" nzAllowHalf nzDisabled style="margin-right:20px;"></nz-rate>
+                    <span style="color: gray; font-size: small;">{{review.date}}</span>
+                    <p>{{review.comment}}</p>
+                </div>
+            </div>
+            <hr>
+        </ng-container>
+    </div>
+    <div class="card-progress-wrapper">
+        <p style="text-align: center;">Instructors With Courses</p>
+        <circle-progress [percent]="data.instructorsWithCoursesCount/data.instructorsCount * 100"
+            [animationDuration]="300"
+            style="display: flex; justify-content: center; margin-top: 40px;"></circle-progress>
+    </div>
+    <div class="card-progress-wrapper">
+        <p style="text-align: center;">Student Registered in Courses</p>
+        <circle-progress [percent]="data.studentWithCoursesCount/data.studentsCount * 100" [animationDuration]="300"
+            style="display: flex; justify-content: center; margin-top: 40px;"></circle-progress>
+    </div>
+</div>
+
+<ng-template #adminIcon>
+    <img alt="example"
+        src="https://i.ibb.co/X37PqM5/png-transparent-computer-icons-icon-design-business-administration-admin-icon-hand-monochrome-silhou.png"
+        width=40 height="40" />
+</ng-template>
+<ng-template #instructorIcon>
+    <img alt="example" src="https://static.thenounproject.com/png/64958-200.png" width="50" height="50" />
+</ng-template>
+<ng-template #studentIcon>
+    <img alt="example"
+        src="https://i.ibb.co/swsbWht/student-icon-vector-isolated-white-background-student-sign-student-icon-vector-isolated-white-backgr.png"
+        width=50 height="50" />
+</ng-template>
+<ng-template #courseIcon>
+    <img alt="example"
+        src="https://i.ibb.co/BjrZGbp/325-3251170-courses-icon-black-and-white-png-download-study-removebg-preview.png"
+        width=30 height="30" />
+</ng-template>

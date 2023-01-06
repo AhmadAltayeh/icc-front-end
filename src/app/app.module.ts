@@ -19,6 +19,7 @@ import {TeardownInterceptor, UrlInterceptor} from "./core/interceptors";
 import {NzMessageServiceModule} from "ng-zorro-antd/message";
 import {SetupInterceptor} from "./core/interceptors/setup/setup.interceptor";
 
+
 registerLocaleData(ar);
 
 @NgModule({

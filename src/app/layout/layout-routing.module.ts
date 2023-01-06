@@ -7,7 +7,11 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      {path: 'admins', pathMatch: 'full', redirectTo: 'admins/admins'},
+      {path: '', pathMatch: 'full', redirectTo: 'stats'},
+      {
+        path: 'stats',
+        loadChildren: () => import('../pages/stats/admin-stats.module').then(m => m.AdminStatsModule),
+      },
       {
         path: 'admins/admins',
         loadChildren: () => import('../pages/admins/admins.module').then(m => m.AdminsModule),
