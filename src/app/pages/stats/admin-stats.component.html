@@ -36,7 +36,7 @@
 <div style="display: flex;">
     <div class="card-wrapper">
         <h4 class="card-title">Latest Reviews</h4>
-        <ng-container *ngFor="let review of data.topReviews">
+        <ng-container *ngFor="let review of data?.topReviews">
             <div class="card-info">
                 <div>
                     <img alt="example"
@@ -47,13 +47,13 @@
                 <div style="width: 100%;">
                     <div style="display:flex; justify-content:space-between;">
                         <p style="margin-bottom: 0; font-weight: bold;">
-                            {{review.student.firstName}}{{review.student.lastName}}</p>
-                        <p style="font-weight:light;">{{review.instructor.firstName}} {{review.instructor.lastName}}
-                            - {{review.course.name}}</p>
+                            {{review?.student?.firstName}}{{review?.student?.lastName}}</p>
+                        <p style="font-weight:light;">{{review?.instructor?.firstName}} {{review?.instructor?.lastName}}
+                            - {{review?.course?.name}}</p>
                     </div>
                     <nz-rate [ngModel]="review.rating" nzAllowHalf nzDisabled style="margin-right:20px;"></nz-rate>
-                    <span style="color: gray; font-size: small;">{{review.date}}</span>
-                    <p>{{review.comment}}</p>
+                    <span style="color: gray; font-size: small;">{{review?.date}}</span>
+                    <p>{{review?.comment}}</p>
                 </div>
             </div>
             <hr>
@@ -61,13 +61,13 @@
     </div>
     <div class="card-progress-wrapper">
         <p style="text-align: center;">Instructors With Courses</p>
-        <circle-progress [percent]="data.instructorsWithCoursesCount/data.instructorsCount * 100"
+        <circle-progress [percent]="data?.instructorsWithCoursesCount/data?.instructorsCount * 100"
             [animationDuration]="300"
             style="display: flex; justify-content: center; margin-top: 40px;"></circle-progress>
     </div>
     <div class="card-progress-wrapper">
         <p style="text-align: center;">Student Registered in Courses</p>
-        <circle-progress [percent]="data.studentWithCoursesCount/data.studentsCount * 100" [animationDuration]="300"
+        <circle-progress [percent]="data?.studentWithCoursesCount/data?.studentsCount * 100" [animationDuration]="300"
             style="display: flex; justify-content: center;"></circle-progress>
     </div>
 </div>

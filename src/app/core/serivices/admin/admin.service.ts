@@ -51,6 +51,12 @@ export class AdminService {
     return this.httpClient.put(`admin/admins/${id}`, updateAdmin, { context })
   }
 
+  updateOwnProfile(updateAdmin: AdminModel.Admin) {
+    const context = new HttpContext()
+    context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
+    return this.httpClient.put(`admin/admins/profile`, updateAdmin, { context })
+  }
+
   updateAdminPassword(changePassword: AdminModel.changePassword) {
     const context = new HttpContext()
     context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' })
