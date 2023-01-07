@@ -1,17 +1,21 @@
-<nz-tabset [(nzSelectedIndex)]="tabSelected">
-  <nz-tab nzTitle="Details">
+<section class="py-3 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">بياناتك الشخصيه</h1>
+    </div>
+  </div>
+</section>
+
+<nz-tabset nzTabPosition="right" [(nzSelectedIndex)]="tabSelected">
+  <nz-tab nzTitle="بياناتك">
     <form class="profile-form" [formGroup]="form" nz-form>
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span style="margin-right: 500px">First Name</span>
+          <div class="text-end">
+            <span>اسمك</span>
           </div>
           <nz-form-item>
-            <nz-form-control
-              nzHasFeedback
-              [nzErrorTip]="firstNameErrorTpl"
-              style="margin-right: 20px"
-            >
+            <nz-form-control nzHasFeedback [nzErrorTip]="firstNameErrorTpl">
               <input
                 nzSize="large"
                 formControlName="firstName"
@@ -29,15 +33,11 @@
       </div>
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span style="margin-right: 500px">Last Name</span>
+          <div class="text-end">
+            <span>اسم العائله</span>
           </div>
           <nz-form-item>
-            <nz-form-control
-              style="margin-right: 20px"
-              nzHasFeedback
-              [nzErrorTip]="lastNameErrorTpl"
-            >
+            <nz-form-control nzHasFeedback [nzErrorTip]="lastNameErrorTpl">
               <input
                 nzSize="large"
                 formControlName="lastName"
@@ -56,8 +56,8 @@
 
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span>Email</span>
+          <div class="text-end">
+            <span>البريد الالكتروني</span>
           </div>
           <nz-form-item>
             <nz-form-control nzHasFeedback [nzErrorTip]="emailNameErrorTpl">
@@ -81,14 +81,13 @@
       </div>
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span style="margin-right: 195px">Phone Number</span>
+          <div class="text-end">
+            <span>رقم الهاتف</span>
           </div>
           <nz-form-item>
             <nz-form-control
               nzHasFeedback
               [nzErrorTip]="phoneNumberNameErrorTpl"
-              style="margin-right: 10px"
             >
               <input
                 nzSize="large"
@@ -107,8 +106,8 @@
       </div>
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span>Facebook URL</span>
+          <div class="text-end">
+            <span>رابط حساب الفيسبوك</span>
           </div>
           <nz-form-item>
             <nz-form-control
@@ -135,15 +134,11 @@
 
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span style="margin-right: 195px">Date Of Birth</span>
+          <div class="text-end">
+            <span>تاريخ الولادة</span>
           </div>
           <nz-form-item>
-            <nz-form-control
-              nzHasFeedback
-              [nzErrorTip]="dateOfBirthErrorTpl"
-              style="margin-right: 10px"
-            >
+            <nz-form-control nzHasFeedback [nzErrorTip]="dateOfBirthErrorTpl">
               <input
                 nzSize="large"
                 formControlName="dateOfBirth"
@@ -162,23 +157,23 @@
       <nz-form-item style="text-align: center">
         <nz-form-control>
           <button
-            nz-button
+            class="btn btn-success"
             style="width: 25%; margin-bottom: 16px"
             (click)="submitUpdateForm()"
           >
-            Submit
+            حدث البيانات
           </button>
         </nz-form-control>
       </nz-form-item>
     </form>
   </nz-tab>
 
-  <nz-tab nzTitle="Change Password">
+  <nz-tab nzTitle="كلمة السر">
     <form [formGroup]="passwordForm" nz-form>
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="12">
-          <div>
-            <span>Old Password</span>
+          <div class="text-end">
+            <span>كلمة السر القديمة</span>
           </div>
           <nz-form-item>
             <nz-form-control
@@ -190,7 +185,8 @@
                   nzSize="large"
                   formControlName="oldPassword"
                   type="password"
-                  placeholder="Enter Old Passowrd"
+                  placeholder="اكتب كلمة السر القديمة"
+                  style="text-align: center"
                   nz-input
                 />
                 <ng-template #oldPasswordNameErrorTpl let-control>
@@ -213,8 +209,8 @@
       </div>
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="12">
-          <div>
-            <span>New Password</span>
+          <div class="text-end">
+            <span>كلمة السر الجديدة</span>
           </div>
           <nz-form-item>
             <nz-form-control
@@ -226,7 +222,8 @@
                   nzSize="large"
                   formControlName="newPassword"
                   type="password"
-                  placeholder="Enter Passowrd"
+                  placeholder="اكتب كلمة السر الجديدة"
+                  style="text-align: center"
                   nz-input
                 />
                 <ng-template #newPasswordNameErrorTpl let-control>
@@ -250,8 +247,8 @@
 
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="12">
-          <div>
-            <span>Confirm Password</span>
+          <div class="text-end">
+            <span>كرر كلمة السر</span>
           </div>
           <nz-form-item>
             <nz-form-control
@@ -263,7 +260,8 @@
                   nzSize="large"
                   formControlName="confirmPassword"
                   type="password"
-                  placeholder="Confirm Passowrd"
+                  style="text-align: center"
+                  placeholder="كرر كلمة السر الجديدة"
                   nz-input
                 />
                 <ng-template #confirmPasswordNameErrorTpl let-control>
@@ -284,14 +282,10 @@
           </nz-form-item>
         </div>
       </div>
-      <nz-form-item style="text-align: center">
+      <nz-form-item>
         <nz-form-control>
-          <button
-            nz-button
-            style="width: 25%; margin-bottom: 16px"
-            (click)="submitUpdateForm()"
-          >
-            Submit
+          <button class="btn btn-success" (click)="submitUpdateForm()">
+            غير كلمة السر
           </button>
         </nz-form-control>
       </nz-form-item>

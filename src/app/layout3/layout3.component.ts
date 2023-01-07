@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService,AdminService} from "../core/serivices";
+import {AuthService,StudentService} from "../core/serivices";
 
 @Component({
   selector: 'app-layout3',
@@ -17,10 +17,15 @@ export class Layout3Component implements OnInit {
   dropDownItems=[
     {path:'profile',name:'Profile'}
   ]
-  constructor(private _authService: AuthService,private _adminService: AdminService) {
+  constructor(private _authService: AuthService,private _studentService: StudentService) {
   }
-
+  data?:any
   ngOnInit(): void {
+    this._studentService.getStudentProfile().subscribe(json=>{
+      this.data=json.data
+      console.log(this.data);
+
+    })
   }
 
   logout() {
@@ -30,13 +35,7 @@ export class Layout3Component implements OnInit {
   reload(){
     window.location.reload();
   }
-  data:any
-  onClick(){
-    
-    this._adminService.getAdminProfile().subscribe(data=>{
-      
-      this.data=data.data
-    });
-}
+  
+  
 
 }

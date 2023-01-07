@@ -1,77 +1,103 @@
-<nz-layout class="app-layout3">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-  >
-    <div class="sidebar-logo">
-      <a href="/" target="_blank">
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+<div
+  style="
+    background-image: url(https://i.ibb.co/PwgLyD8/vecteezy-aesthetic-sage-green-background-11589026.jpg);
+    height: 120vh;
+    background-repeat: inherit;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+  "
+>
+  <header>
+    <nav
+      class="navbar navbar-expand-md navbar-dark fixed-top bg-dark opacity-75"
+    >
+      <div class="container-fluid d-flex flex-row-reverse">
         <img
           src="https://i.ibb.co/fnjsDVy/0-3-removebg-preview.png"
-          alt="logo"
+          alt="Bootstrap"
+          width="30"
+          height="35"
         />
-        <h1>Islamic Culture Center</h1>
-      </a>
-    </div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
-    >
-      <li nz-submenu nzOpen nzTitle="Student Dashboard" nzIcon="dashboard">
-        <ul>
-          <li *ngFor="let item of menuItems" nz-menu-item nzMatchRouter>
-            <a [routerLink]="item.path">{{ item.name }}</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-          <span
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></span>
-        </span>
-        <nz-button-group class="button-group">
-          <mat-button
-            nz-dropdown
-            [nzDropdownMenu]="menu2"
-            nzPlacement="bottomRight"
-          >
-            <mat-icon
-              aria-hidden="false"
-              aria-label="Example home icon"
-              fontIcon="account_circle"
-            ></mat-icon>
-          </mat-button>
-        </nz-button-group>
-        <nz-dropdown-menu #menu2="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item>
-              <mat-button [routerLink]="[dropDownItems[0].path]"
-                >{{ dropDownItems[0].name }}
-              </mat-button>
+        <a class="navbar-brand" href="#">المركز الثقافي الاسلامي</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+          aria-controls="navbarCollapse"
+          aria-expanded="false"
+          aria-label="تبديل التنقل"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >{{ data?.firstName }} {{ data?.lastName }}
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" routerLink="/students/my-courses"
+                    >المواد المسجله</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/students/courses"
+                    >المواد المطروحه</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/students/profile"
+                    >بياناتي</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    (click)="logout()"
+                    routerLink="/auth/login"
+                    >تسجيل خروج</a
+                  >
+                </li>
+              </ul>
             </li>
-            <li nz-menu-item nzMatchRouter (click)="logout()">logout</li>
           </ul>
-        </nz-dropdown-menu>
+        </div>
       </div>
-    </nz-header>
+    </nav>
+  </header>
+
+  <div class="container-sm">
     <nz-content>
       <div class="inner-content">
-        <a class="breadcrub" (click)="reload()">Home</a>
         <nz-divider></nz-divider>
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-  </nz-layout>
-</nz-layout>
+  </div>
+</div>
+
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>

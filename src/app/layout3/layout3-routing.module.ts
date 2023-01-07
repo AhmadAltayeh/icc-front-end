@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: Layout3Component,
     children: [
-      {path: 'students', pathMatch: 'full', redirectTo: 'my-courses'},
+      {path: '', pathMatch: 'full', redirectTo: 'my-courses'},
       {
         path: 'my-courses',
         loadChildren: () => import('../pages3/courses/courses.module').then(m => m.CoursesModule),
