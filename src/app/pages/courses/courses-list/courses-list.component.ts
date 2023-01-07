@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {AdminService} from "../../../core/serivices/admin/admin.service";
-import {Column, FetchProvider} from "../../../partials/table/table.component";
-import {PaginationQuery} from "../../../core/models";
-import {SearchFilterComponent} from "../../../partials/search-filter/search-filter.component";
-import {CourseFormComponent} from "../course-form/course-form.component";
-import {FormGroup} from "@angular/forms";
-import {NzDrawerRef} from "ng-zorro-antd/drawer";
-import {CourseViewComponent} from '../course-view/course-view.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AdminService } from "../../../core/serivices/admin/admin.service";
+import { Column, FetchProvider } from "../../../partials/table/table.component";
+import { PaginationQuery } from "../../../core/models";
+import { SearchFilterComponent } from "../../../partials/search-filter/search-filter.component";
+import { CourseFormComponent } from "../course-form/course-form.component";
+import { FormGroup } from "@angular/forms";
+import { NzDrawerRef } from "ng-zorro-antd/drawer";
+import { CourseViewComponent } from '../course-view/course-view.component';
+
 
 @Component({
   selector: 'app-courses-list',
@@ -14,7 +15,7 @@ import {CourseViewComponent} from '../course-view/course-view.component';
   styleUrls: ['./courses-list.component.scss']
 })
 export class CoursesListComponent {
-  @ViewChild(SearchFilterComponent, {static: true}) private _searchFilterComponent!: SearchFilterComponent
+  @ViewChild(SearchFilterComponent, { static: true }) private _searchFilterComponent!: SearchFilterComponent
   @ViewChild(CourseFormComponent) public _courseFormComponent!: CourseFormComponent
   @ViewChild(CourseViewComponent) public _courseViewComponent!: CourseViewComponent
   @ViewChild('drawer') public drawer!: NzDrawerRef
@@ -83,25 +84,25 @@ export class CoursesListComponent {
   }
 
   submitCreateForm() {
-    let form:FormGroup;
-     form = this._courseFormComponent.form
-     form.value.year=form.value.year+"-01-01";
-    form.value.duration=1;
-     console.log(form.value)
+    let form: FormGroup;
+    form = this._courseFormComponent.form
+    form.value.year = form.value.year + "-01-01";
+    form.value.duration = 1;
+    console.log(form.value)
 
 
     if (form.valid) {
       this.loading = true
       form.disable()
       console.log(form.value)
-      form.value.year=form.value.year+"-01-01";
-      form.value.duration=1;
+      form.value.year = form.value.year + "-01-01";
+      form.value.duration = 1;
       this._adminService.createCourse(form.value).subscribe({
         next: () => {
           this.loading = false
           this.drawer.close()
-          this.create=false;
-          
+          this.create = false;
+
         },
         error: () => {
           console.log("Eeror")
@@ -109,7 +110,7 @@ export class CoursesListComponent {
           this.loading = false
         }
       })
-    } 
+    }
     else {
       this.validateForm(form);
     }
@@ -118,13 +119,13 @@ export class CoursesListComponent {
     let form: FormGroup;
     if (this.tabSelected == 0) {
       form = this._courseViewComponent.detailsForm;
-      form.value.duration=0;
+      form.value.duration = 0;
       if (form.valid) {
         this.loading = true
         form.disable()
         this._adminService.updateCourse(this.rowData.id, form.value).subscribe({
           next: () => {
-            this.loading = false  
+            this.loading = false
             this.drawer.close()
             this.create = false
           },
@@ -138,12 +139,12 @@ export class CoursesListComponent {
       else {
         this.validateForm(form);
       }
-    } 
-      
-      
+    }
+
+
   }
 
-  
+
   public clickEvent(data: any) {
     this.view = true;
     this.rowData = data;
@@ -162,6 +163,6 @@ export class CoursesListComponent {
   }
 
   tabSwitched(index: number) {
-    this.tabSelected = index;    
+    this.tabSelected = index;
   }
 }

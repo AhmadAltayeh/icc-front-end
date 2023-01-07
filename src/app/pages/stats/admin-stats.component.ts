@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/core/serivices';
 import { format } from "date-fns";
+import { en_US, NzI18nService} from 'ng-zorro-antd/i18n';
 
 @Component({
   selector: 'app-admin-stats',
@@ -16,10 +17,11 @@ export class AdminStatsComponent implements OnInit {
   courseCount: number = 0;
   date = null;
   myDate = new Date();
-  constructor(public _adminService: AdminService) {
+  constructor(private i18n: NzI18nService, public _adminService: AdminService) {
   }
 
   ngOnInit(): void {
+    this.i18n.setLocale(en_US);
     let date = format(this.myDate, 'yyyy-MM-dd')
     this._adminService.getAdminStats(date).subscribe(json => {
       this.data = json.data;
