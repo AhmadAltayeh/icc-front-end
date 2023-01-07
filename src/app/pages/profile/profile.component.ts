@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { AdminService } from 'src/app/core/serivices';
 import { Column } from 'src/app/partials/table/table.component';
 import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,7 +18,7 @@ export class ProfileComponent implements OnInit {
   form: FormGroup
   passwordForm: FormGroup
 
-  constructor(private _fb: FormBuilder, private _adminService: AdminService, private router: Router) {
+  constructor(private message: NzMessageService, private _fb: FormBuilder, private _adminService: AdminService, private router: Router) {
 
     this.form = this._fb.group({
       firstName: ['', [Validators.nullValidator]],
@@ -88,11 +89,13 @@ export class ProfileComponent implements OnInit {
       if (form.valid) {
         form.disable()
         this._adminService.updateOwnProfile(form.value).subscribe({
+          next: (res) => {
+            window.location.reload();
+          },
           error: () => {
             form.enable()
           }
         })
-        form.enable()
       }
       else {
         this.validateForm(form);
@@ -107,6 +110,9 @@ export class ProfileComponent implements OnInit {
           ...form.value
         }
         this._adminService.updateAdminPassword(obj).subscribe({
+          next(res) {
+            window.location.reload();
+          },
           error: () => {
             form.enable()
           }
