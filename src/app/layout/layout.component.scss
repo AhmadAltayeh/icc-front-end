@@ -102,3 +102,16 @@ nz-content {
     color: #FFFFFF;
   }
 }
+::ng-deep .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+  background: transparent;
+}
+
+::ng-deep .ant-menu-dark.ant-menu-dark:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #08252e;
+}
+
+::ng-deep .anticon svg {
+  display: inline-block;
+  justify-content: center;
+  display: flex;
+}

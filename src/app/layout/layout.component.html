@@ -38,7 +38,7 @@
               nz-dropdown nzPlacement="bottomRight" nz-button nzType="primary" nzSize='default' nzShape='circle'>
               <span nz-icon nzType="user"></span>
             </button>
-            <div style="font-family: unset; margin-right: 30px; cursor: pointer;" [routerLink]="[dropDownItems[0].path]">{{data.firstName}} {{data.lastName}}</div>
+            <div style="font-family: unset; margin-right: 30px; cursor: pointer;" [routerLink]="[dropDownItems[0].path]">{{data?.firstName}} {{data?.lastName}}</div>
             <button (click)="logout()" style="background-color: transparent; color: black; border-color: transparent; box-shadow: none;"
               nzPlacement="bottomRight" nz-button nzSize='small' nzShape='circle'>
               <span nz-icon nzType="logout"></span>

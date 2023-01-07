@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AnimationModel } from '@syncfusion/ej2-angular-progressbar';
 import { AdminService } from 'src/app/core/serivices';
-import { format, formatISO } from "date-fns";
-import { da } from 'date-fns/locale';
+import { format } from "date-fns";
 
 @Component({
   selector: 'app-admin-stats',
@@ -30,28 +28,28 @@ export class AdminStatsComponent implements OnInit {
 
   admincountstop: any = setInterval(() => {
     this.adminCount++;
-    if (this.adminCount == this.data.adminsCount) {
+    if (this.adminCount == this.data?.adminsCount) {
       clearInterval(this.admincountstop);
     }
   }, 30)
 
   instructorcountstop: any = setInterval(() => {
     this.instructorCount++;
-    if (this.instructorCount == this.data.instructorsCount) {
+    if (this.instructorCount == this.data?.instructorsCount) {
       clearInterval(this.instructorcountstop);
     }
   }, 200)
 
   studentcountstop: any = setInterval(() => {
     this.studentCount++;
-    if (this.studentCount == this.data.studentsCount) {
+    if (this.studentCount == this.data?.studentsCount) {
       clearInterval(this.studentcountstop);
     }
   }, 200)
 
   coursecountstop: any = setInterval(() => {
     this.courseCount++;
-    if (this.courseCount == this.data.coursesCount) {
+    if (this.courseCount == this.data?.coursesCount) {
       clearInterval(this.coursecountstop);
     }
   }, 200)
