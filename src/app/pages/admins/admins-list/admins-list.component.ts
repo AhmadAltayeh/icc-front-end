@@ -130,7 +130,7 @@ export class AdminsListComponent {
           id:this.rowData.id,
           ...form.value
         }
-        this._adminService.updateAdminPassword(obj).subscribe({
+        this._adminService.resetAdminPassword(obj).subscribe({
           next: () => {
             this.loading = false
             this.drawer.close()

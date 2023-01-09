@@ -1,41 +1,22 @@
 <nz-tabset (nzSelectChange)="tabChange([$event])">
   <nz-tab nzTitle="Details">
     <form class="admin-form" [formGroup]="detailsForm" nz-form>
+
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span style="margin-right: 228px">First Name</span>
-            <span>Last Name</span>
-          </div>
           <nz-form-item>
-            <nz-form-control
-              nzHasFeedback
-              [nzErrorTip]="firstNameErrorTpl"
-              style="margin-right: 20px"
-            >
-              <input
-                nzSize="large"
-                formControlName="firstName"
-                nz-input
-                style="text-align: center"
-              />
+            <nz-form-control nzHasFeedback [nzErrorTip]="firstNameErrorTpl" style="margin-right: 20px;">
+              <span>First Name</span>
+              <input nzSize="large" formControlName="firstName" nz-input placeholder="please enter first name" />
               <ng-template #firstNameErrorTpl let-control>
-                <ng-container *ngIf="control.hasError('required')"
-                  >This field is required</ng-container
-                >
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
               </ng-template>
             </nz-form-control>
             <nz-form-control nzHasFeedback [nzErrorTip]="lastNameErrorTpl">
-              <input
-                nzSize="large"
-                formControlName="lastName"
-                nz-input
-                style="text-align: center"
-              />
+              <span>Last Name</span>
+              <input nzSize="large" formControlName="lastName" nz-input placeholder="please enter last name" />
               <ng-template #lastNameErrorTpl let-control>
-                <ng-container *ngIf="control.hasError('required')"
-                  >This field is required</ng-container
-                >
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
               </ng-template>
             </nz-form-control>
           </nz-form-item>
@@ -44,66 +25,20 @@
 
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span>Email</span>
-          </div>
           <nz-form-item>
-            <nz-form-control nzHasFeedback [nzErrorTip]="emailNameErrorTpl">
-              <input
-                nzSize="large"
-                formControlName="email"
-                nz-input
-                style="text-align: center"
-              />
+            <nz-form-control nzHasFeedback [nzErrorTip]="emailNameErrorTpl" style="margin-right: 20px;">
+              <span>Email</span>
+              <input nzSize="large" formControlName="email" nz-input placeholder="please enter Email" />
               <ng-template #emailNameErrorTpl let-control>
-                <ng-container *ngIf="control.hasError('required')"
-                  >This field is required</ng-container
-                >
-                <ng-container *ngIf="control.hasError('email')"
-                  >Please Enter a valid email</ng-container
-                >
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+                <ng-container *ngIf="control.hasError('email')">Please Enter a valid email</ng-container>
               </ng-template>
             </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div>
-
-      <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="24">
-          <div>
-            <span style="margin-right: 195px">Phone Number</span>
-            <span>IBAN</span>
-          </div>
-          <nz-form-item>
-            <nz-form-control
-              nzHasFeedback
-              [nzErrorTip]="phoneNumberNameErrorTpl"
-              style="margin-right: 10px"
-            >
-              <input
-                nzSize="large"
-                formControlName="phoneNumber"
-                nz-input
-                style="text-align: center"
-              />
+            <nz-form-control nzHasFeedback [nzErrorTip]="phoneNumberNameErrorTpl">
+              <span>Phone Number</span>
+              <input nzSize="large" formControlName="phoneNumber" nz-input placeholder="please enter Phone Number" />
               <ng-template #phoneNumberNameErrorTpl let-control>
-                <ng-container *ngIf="control.hasError('required')"
-                  >This field is required</ng-container
-                >
-              </ng-template>
-            </nz-form-control>
-            <nz-form-control nzHasFeedback [nzErrorTip]="ibanNameErrorTpl">
-              <input
-                nzSize="large"
-                formControlName="iban"
-                nz-input
-                type="number"
-                style="text-align: center"
-              />
-              <ng-template #ibanNameErrorTpl let-control>
-                <ng-container *ngIf="control.hasError('required')"
-                  >This field is required</ng-container
-                >
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
               </ng-template>
             </nz-form-control>
           </nz-form-item>
@@ -112,27 +47,22 @@
 
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span>Facebook URL</span>
-          </div>
           <nz-form-item>
-            <nz-form-control
-              nzHasFeedback
-              [nzErrorTip]="facebookUrlNameErrorTpl"
-            >
-              <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
-                <input
-                  nzSize="large"
-                  formControlName="facebookUrl"
-                  type="text"
-                  nz-input
-                />
-                <ng-template #facebookUrlNameErrorTpl let-control>
-                  <ng-container *ngIf="control.hasError('required')"
-                    >This field is required</ng-container
-                  >
-                </ng-template>
-              </nz-input-group>
+            <nz-form-control nzHasFeedback [nzErrorTip]="ibanNameErrorTpl" style="margin-right: 20px;">
+              <span>IBAN</span>
+              <input nzSize="large" formControlName="iban" nz-input type="number"
+                placeholder="please enter your IBAN" />
+              <ng-template #ibanNameErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
+            </nz-form-control>
+            <nz-form-control nzHasFeedback [nzErrorTip]="facebookUrlNameErrorTpl">
+              <span>Facebook URL</span>
+              <input nzSize="large" formControlName="facebookUrl" type="text" nz-input
+                placeholder="please enter Facebook url" />
+              <ng-template #facebookUrlNameErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+              </ng-template>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -140,21 +70,13 @@
 
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="24">
-          <div>
-            <span>Address Line</span>
-          </div>
           <nz-form-item>
             <nz-form-control nzHasFeedback [nzErrorTip]="addressErrorTpl">
-              <textarea
-                nzSize="large"
-                formControlName="address"
-                nz-input
-                [nzAutosize]="{ minRows: 4, maxRows: 4 }"
-              ></textarea>
+              <span>Address Line</span>
+              <textarea nzSize="large" formControlName="address" nz-input placeholder="please enter address line"
+                [nzAutosize]="{ minRows: 4, maxRows: 4 }"></textarea>
               <ng-template #addressErrorTpl let-control>
-                <ng-container *ngIf="control.hasError('required')"
-                  >This field is required</ng-container
-                >
+                <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
               </ng-template>
             </nz-form-control>
           </nz-form-item>
@@ -163,70 +85,41 @@
 
       <div nz-row [nzGutter]="8">
         <div nz-col nzSpan="8">
-          <div>
-            <span>Role</span>
-          </div>
           <nz-form-item>
             <nz-form-control>
-              <nz-select
-                [nzPlaceHolder]="roleName"
-                formControlName="roleId"
-                style="text-align: center"
-              >
+              <nz-select [nzPlaceHolder]="roleName" formControlName="roleId">
                 <ng-container *ngFor="let field of displayColumns">
-                  <nz-option
-                    [nzValue]="field.key"
-                    [nzLabel]="field.title"
-                    nz-input
-                  ></nz-option>
+                  <nz-option [nzValue]="field.key" [nzLabel]="field.title" nz-input></nz-option>
                 </ng-container>
               </nz-select>
-            </nz-form-control>
-            <nz-form-control>
-              <div class="button-container" style="margin-left: 350px">
-                <button nzType="primary" nz-button nzDanger (click)="Delete()">
-                  Delete Admin
-                </button>
-              </div>
             </nz-form-control>
           </nz-form-item>
         </div>
       </div>
+
     </form>
   </nz-tab>
 
   <nz-tab nzTitle="Password">
     <form [formGroup]="passwordForm" nz-form>
+
       <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="12">
-          <div>
-            <span>New Password</span>
-          </div>
+        <div nz-col nzSpan="24">
           <nz-form-item>
-            <nz-form-control
-              nzHasFeedback
-              [nzErrorTip]="newPasswordNameErrorTpl"
-            >
-              <nz-input-group>
-                <input
-                  nzSize="large"
-                  formControlName="newPassword"
-                  type="password"
-                  placeholder="Enter Passowrd"
-                  nz-input
-                />
+            <nz-form-control nzHasFeedback [nzErrorTip]="newPasswordNameErrorTpl">
+              <span>New Password</span>
+              <nz-input-group [nzSuffix]="suffixTemplate" style="border-radius: 8px; height:50px">
+                <input nzSize="large" formControlName="newPassword" [type]="passwordVisible ? 'text' : 'password'"
+                  placeholder="Enter Password" nz-input [(ngModel)]="password" />
                 <ng-template #newPasswordNameErrorTpl let-control>
-                  <ng-container *ngIf="control.hasError('required')"
-                    >This field is required</ng-container
-                  >
-                  <ng-container
-                    *ngIf="
-                      control.hasError('minlength') ||
-                      control.hasError('pattern')
-                    "
-                    >Password Should be minimum 8 characters with 1 capital
-                    letter</ng-container
-                  >
+                  <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+                  <ng-container *ngIf="control.hasError('minlength') || control.hasError('pattern')">Password Should be
+                    minimum 8 characters with 1 capital letter
+                  </ng-container>
+                </ng-template>
+                <ng-template #suffixTemplate>
+                  <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    (click)="passwordVisible = !passwordVisible"></span>
                 </ng-template>
               </nz-input-group>
             </nz-form-control>
@@ -235,35 +128,22 @@
       </div>
 
       <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="12">
-          <div>
-            <span>Confirm Password</span>
-          </div>
+        <div nz-col nzSpan="24">
           <nz-form-item>
-            <nz-form-control
-              nzHasFeedback
-              [nzErrorTip]="confirmPasswordNameErrorTpl"
-            >
-              <nz-input-group>
-                <input
-                  nzSize="large"
-                  formControlName="confirmPassword"
-                  type="password"
-                  placeholder="Confirm Passowrd"
-                  nz-input
-                />
+            <nz-form-control nzHasFeedback [nzErrorTip]="confirmPasswordNameErrorTpl">
+              <span>Confirm Password</span>
+              <nz-input-group [nzSuffix]="suffixTemplate2" style="border-radius: 8px; height:50px">
+                <input nzSize="large" formControlName="confirmPassword" [type]="passwordVisible2 ? 'text' : 'password'"
+                  placeholder="Confirm Password" nz-input [(ngModel)]="confirmPassword" />
                 <ng-template #confirmPasswordNameErrorTpl let-control>
-                  <ng-container *ngIf="control.hasError('required')"
-                    >This field is required</ng-container
-                  >
-                  <ng-container
-                    *ngIf="
-                      control.hasError('minlength') ||
-                      control.hasError('pattern')
-                    "
-                    >Password Should be minimum 8 characters with 1 capital
-                    letter</ng-container
-                  >
+                  <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
+                  <ng-container *ngIf="control.hasError('minlength') || control.hasError('pattern')">Password Should be
+                    minimum 8 characters with 1 capital letter
+                  </ng-container>
+                </ng-template>
+                <ng-template #suffixTemplate2>
+                  <span nz-icon [nzType]="passwordVisible2 ? 'eye-invisible' : 'eye'"
+                    (click)="passwordVisible2 = !passwordVisible2"></span>
                 </ng-template>
               </nz-input-group>
             </nz-form-control>
