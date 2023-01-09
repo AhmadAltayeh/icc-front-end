@@ -1,0 +1,79 @@
+<!-- <ng-template #size let-total="$implicit">
+  <p>Total Items {{ total }}</p>
+</ng-template>
+
+<nz-drawer
+  #drawer
+  [nzBodyStyle]="{ overflow: 'auto' }"
+  [nzWidth]="620"
+  nzTitle="Create Admin"
+  (nzOnClose)="drawer.close()"
+>
+  <div *nzDrawerContent>
+    <app-view-form></app-view-form>
+  </div>
+</nz-drawer>
+
+<ng-template #titleRef>
+  <h4>{{ title }}</h4>
+  <ng-content #filter></ng-content>
+</ng-template>
+
+<ng-container *ngFor="let data of listOfData">
+  <tr (click)="onClick(data)">
+    <ng-container *ngFor="let column of displayColumns">
+      <td
+        [width]="column.width"
+        [ngStyle]="{ width: column.width }"
+        [nzEllipsis]="true"
+      >
+        {{ $any(data)?.[column.key] }}
+      </td>
+    </ng-container>
+  </tr>
+</ng-container> -->
+
+<p class="text-center">Total {{ total }} items</p>
+<div class="album py-5" style="background: inherit">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div *ngFor="let data of allData">
+        <nz-card
+          [nzCover]="coverTemplate"
+          (click)="onClick(data)"
+          [nzActions]="[actionSetting, actionEdit, actionEllipsis]"
+        >
+          <nz-card-meta
+            [nzTitle]="data.name"
+            [nzDescription]="data.description"
+            [nzAvatar]="avatarTemplate"
+          ></nz-card-meta>
+          <p></p>
+          <nz-rate
+            class="text-center"
+            [ngModel]="rate"
+            nzAllowHalf
+            nzDisabled
+          ></nz-rate>
+        </nz-card>
+        <ng-template #avatarTemplate>
+          <nz-avatar
+            nzSrc="https://scontent.famm10-1.fna.fbcdn.net/v/t39.30808-6/240651850_4616977828360121_9079130681642851815_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeGpgB199cvt25mr2h2edbJ7ON94H1tDzhg433gfW0POGKEsgruifgIsN358P1pyQ0H-CDsXxxxs3axNGEiMFqdN&_nc_ohc=9bsHUKWR4F8AX9u-tFY&_nc_ht=scontent.famm10-1.fna&oh=00_AfCCakdMWB8BdCS-tEoBGaczN8F6Rvlstg6A_EV7Yy0Kpw&oe=63C108C1"
+          ></nz-avatar>
+        </ng-template>
+        <ng-template #coverTemplate>
+          <img alt="example" src="https://i.ibb.co/Sv8dhSj/courseimg.jpg" />
+        </ng-template>
+        <ng-template #actionSetting>
+          <span nz-icon nzType="setting"></span>
+        </ng-template>
+        <ng-template #actionEdit>
+          <span nz-icon nzType="edit"></span>
+        </ng-template>
+        <ng-template #actionEllipsis>
+          <span nz-icon nzType="ellipsis"></span>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

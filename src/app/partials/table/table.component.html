@@ -18,45 +18,51 @@
   (nzQueryParams)="onQueryParamsChange($event)"
 >
   <ng-template #size let-total="$implicit">
-    <p>Total Items {{total}}</p>
+    <p>Total Items {{ total }}</p>
   </ng-template>
 
   <nz-drawer
-  #drawer
-  [nzBodyStyle]="{ overflow: 'auto' }"
-  [nzWidth]="620"
-  nzTitle="Create Admin"
-  (nzOnClose)="drawer.close()"
->
-  <div *nzDrawerContent>
-    <app-view-form></app-view-form>
-  </div>
-</nz-drawer>
+    #drawer
+    [nzBodyStyle]="{ overflow: 'auto' }"
+    [nzWidth]="620"
+    nzTitle="Create Admin"
+    (nzOnClose)="drawer.close()"
+  >
+    <div *nzDrawerContent>
+      <app-view-form></app-view-form>
+    </div>
+  </nz-drawer>
 
-  <ng-template #titleRef >
-    <h4>{{title}}</h4>
+  <ng-template #titleRef>
+    <h4>{{ title }}</h4>
     <ng-content #filter></ng-content>
   </ng-template>
   <thead>
-  <tr>
-    <ng-container *ngFor="let column of displayColumns">
-      <th
-        class="text-white {{column.class}}"
-        [ngStyle]="{width: column.width}">
-        {{ column.title }}
-      </th>
-    </ng-container>
-  </tr>
-  </thead>
-  <tbody>
-  <ng-container *ngFor="let data of listOfData">
-    <tr (click)="onClick(data)">
+    <tr>
       <ng-container *ngFor="let column of displayColumns">
-        <td [width]="column.width" [ngStyle]="{width: column.width}"
-            [nzEllipsis]="true">{{ $any(data)?.[column.key] }}
-        </td>
+        <th
+          class="text-center {{ column.class }}"
+          [ngStyle]="{ width: column.width }"
+        >
+          {{ column.title }}
+        </th>
       </ng-container>
     </tr>
-  </ng-container>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let data of listOfData">
+      <tr (click)="onClick(data)">
+        <ng-container *ngFor="let column of displayColumns">
+          <td
+            class="text-center"
+            [width]="column.width"
+            [ngStyle]="{ width: column.width }"
+            [nzEllipsis]="true"
+          >
+            {{ $any(data)?.[column.key] }}
+          </td>
+        </ng-container>
+      </tr>
+    </ng-container>
   </tbody>
 </nz-table>

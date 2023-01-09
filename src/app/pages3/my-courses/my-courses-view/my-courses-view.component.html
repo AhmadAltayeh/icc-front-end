@@ -31,20 +31,7 @@
             class="course-info d-flex justify-content-between align-items-center"
           >
             <p>
-              <nz-select
-                nzShowSearch
-                nzAllowClear
-                nzPlaceHolder="اختار المدرس"
-                (change)="changeFn(selectedValueId)"
-                [(ngModel)]="selectedValueId"
-              >
-                <ng-container *ngFor="let ins of courseData?.instructors">
-                  <nz-option
-                    [nzValue]="ins?.id"
-                    [nzLabel]="ins?.firstName + ' ' + ins?.lastName"
-                  ></nz-option>
-                </ng-container>
-              </nz-select>
+              {{ courseData?.firstName + " " + courseData?.lastName }}
             </p>
             <h5>المدرس</h5>
           </div>

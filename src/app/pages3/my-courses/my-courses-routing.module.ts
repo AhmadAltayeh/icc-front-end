@@ -9,16 +9,16 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () =>
-          import('./courses-list/courses-list.module').then(
-            (m) => m.CoursesListModule
+          import('./my-courses-list/my-courses-list.module').then(
+            (m) => m.MyCoursesListModule
           ),
         //data: {breadcrumb: 'List'}
       },
       {
         path: 'view-course/:id',
         loadChildren: () =>
-          import('./course-view/course-view.module').then(
-            (m) => m.CourseViewModule
+          import('./my-courses-view/my-courses-view.module').then(
+            (m) => m.MyCoursesViewModule
           ),
         //data: {breadcrumb: 'List'}
       },
@@ -30,4 +30,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CoursesRoutingModule {}
+export class MyCoursesRoutingModule {}

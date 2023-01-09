@@ -38,7 +38,9 @@ $islamic-cultural-center-theme: mat.define-light-theme((
   font-size: 40px;
   font-weight: 500;
 }
-
+.ant-table{
+  background: local;
+}
 .ant-table-thead > tr > th {
   background-color: #b4b3b3;
 }

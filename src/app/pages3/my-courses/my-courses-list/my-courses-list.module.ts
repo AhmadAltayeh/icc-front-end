@@ -1,35 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CoursesListComponent } from './courses-list.component';
+import { MyCoursesListComponent } from './my-courses-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TableModule } from '../../../partials/table/table.module';
+import { Card2Module } from 'src/app/partials/card2/card2.module';
 import { SearchFilterModule } from '../../../partials/search-filter/search-filter.module';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { CourseFormModule } from '../course-form/course-form.module';
-import { CourseViewModule } from '../course-view/course-view.module';
+import { MyCoursesFormModule } from '../my-courses-form/my-courses-form.module';
+import { MyCoursesViewModule } from '../my-courses-view/my-courses-view.module';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
-import { CardModule } from 'src/app/partials/card/card.module';
+
 const routes: Routes = [
   {
     path: '',
-    component: CoursesListComponent,
+    component: MyCoursesListComponent,
   },
 ];
 
 @NgModule({
-  declarations: [CoursesListComponent],
+  declarations: [MyCoursesListComponent],
   imports: [
     CommonModule,
-    CardModule,
     RouterModule.forChild(routes),
+    Card2Module,
     TableModule,
     SearchFilterModule,
     NzDrawerModule,
     NzButtonModule,
-    CourseFormModule,
-    CourseViewModule,
+    MyCoursesFormModule,
+    MyCoursesViewModule,
     NzTabsModule,
   ],
 })
-export class CoursesListModule {}
+export class MyCoursesListModule {}

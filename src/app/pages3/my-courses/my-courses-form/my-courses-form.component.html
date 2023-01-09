@@ -1,0 +1,30 @@
+
+ <nz-input-group nzSize="large" [nzAddOnAfter]="stud">   
+<input
+#id
+name="CourseId"
+type="text"
+nz-input
+placeholder="input Course ID you want to add"
+(input)="getCourseId($event)"
+/>
+<ng-template #stud>
+<button
+  nz-button
+  nzType="primary"
+  
+  nzSize="large"
+  (click)="enroll()"
+>
+  Add
+</button>
+</ng-template>
+</nz-input-group>
+
+<app-table
+#table
+title="Students"
+[displayColumns]="displayColumns"
+[fetchProvider]="fetchProvider"
+>
+</app-table>

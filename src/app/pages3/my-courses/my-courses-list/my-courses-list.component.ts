@@ -4,23 +4,23 @@ import { StudentService } from 'src/app/core/serivices';
 import { Column, FetchProvider } from '../../../partials/table/table.component';
 import { PaginationQuery } from '../../../core/models';
 import { SearchFilterComponent } from '../../../partials/search-filter/search-filter.component';
-import { CourseFormComponent } from '../course-form/course-form.component';
+import { MyCoursesFormComponent } from '../my-courses-form/my-courses-form.component';
 import { FormGroup } from '@angular/forms';
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
-import { CourseViewComponent } from '../course-view/course-view.component';
+import { MyCoursesViewComponent } from '../my-courses-view/my-courses-view.component';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-courses-list',
-  templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.scss'],
+  selector: 'app-my-courses-list',
+  templateUrl: './my-courses-list.component.html',
+  styleUrls: ['./my-courses-list.component.scss'],
 })
-export class CoursesListComponent {
+export class MyCoursesListComponent {
   @ViewChild(SearchFilterComponent, { static: true })
   private _searchFilterComponent!: SearchFilterComponent;
-  @ViewChild(CourseFormComponent)
-  public _courseFormComponent!: CourseFormComponent;
-  @ViewChild(CourseViewComponent)
-  public _courseViewComponent!: CourseViewComponent;
+  @ViewChild(MyCoursesFormComponent)
+  public _courseFormComponent!: MyCoursesFormComponent;
+  @ViewChild(MyCoursesViewComponent)
+  public _courseViewComponent!: MyCoursesViewComponent;
   @ViewChild('drawer') public drawer!: NzDrawerRef;
   loading = false;
   rowData: any;
@@ -79,7 +79,7 @@ export class CoursesListComponent {
   public clickEvent(data: any) {
     this.view = true;
     this.rowData = data;
-    this._router.navigate([`students/courses/view-course/${data.id}`]);
+    this._router.navigate([`students/my-courses/view-course/${data.id}`]);
   }
 
   public clickCreateForm() {

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CourseViewComponent } from './course-view.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { MyCoursesViewComponent } from './my-courses-view.component';
 import {
   NzSelectModule,
   NzSelectSearchComponent,
@@ -18,16 +18,15 @@ import { TableModule } from '../../../partials/table/table.module';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { RouterModule, Routes } from '@angular/router';
-import { NzCardModule } from 'ng-zorro-antd/card';
 const routes: Routes = [
   {
     path: 'view-course/:id',
-    component: CourseViewComponent,
+    component: MyCoursesViewComponent,
   },
 ];
 @NgModule({
-  declarations: [CourseViewComponent],
-  exports: [CourseViewComponent],
+  declarations: [MyCoursesViewComponent],
+  exports: [MyCoursesViewComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -43,7 +42,6 @@ const routes: Routes = [
     TableModule,
     NzButtonModule,
     NzTableModule,
-    NzCardModule,
   ],
 })
-export class CourseViewModule {}
+export class MyCoursesViewModule {}

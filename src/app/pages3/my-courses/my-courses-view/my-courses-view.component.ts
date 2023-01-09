@@ -19,10 +19,10 @@ import {
 } from 'src/app/partials/table/table.component';
 @Component({
   selector: 'app-view-form',
-  templateUrl: './course-view.component.html',
-  styleUrls: ['./course-view.component.scss'],
+  templateUrl: './my-courses-view.component.html',
+  styleUrls: ['./my-courses-view.component.scss'],
 })
-export class CourseViewComponent implements OnInit {
+export class MyCoursesViewComponent implements OnInit {
   @ViewChild('drawer') public drawer!: NzDrawerRef;
   @Input() rowData: any = '';
   courseId: any;
