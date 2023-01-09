@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {CoursesListComponent} from './courses-list.component';
-import {RouterModule, Routes} from "@angular/router";
-import {TableModule} from "../../../partials/table/table.module";
-import {SearchFilterModule} from "../../../partials/search-filter/search-filter.module";
-import {NzDrawerModule} from "ng-zorro-antd/drawer";
-import {NzButtonModule} from "ng-zorro-antd/button";
-import {CourseFormModule} from "../course-form/course-form.module";
-import {CourseViewModule} from "../course-view/course-view.module";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CoursesListComponent } from './courses-list.component';
+import { RouterModule, Routes } from "@angular/router";
+import { TableModule } from "../../../partials/table/table.module";
+import { SearchFilterModule } from "../../../partials/search-filter/search-filter.module";
+import { NzDrawerModule } from "ng-zorro-antd/drawer";
+import { NzButtonModule } from "ng-zorro-antd/button";
+import { CourseFormModule } from "../course-form/course-form.module";
+import { CourseViewModule } from "../course-view/course-view.module";
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 
 
@@ -24,7 +24,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     TableModule,
     SearchFilterModule,
-    NzDrawerModule,   
+    NzDrawerModule,
     NzButtonModule,
     CourseFormModule,
     CourseViewModule,

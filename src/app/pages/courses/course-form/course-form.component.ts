@@ -1,8 +1,8 @@
-  import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AdminService } from 'src/app/core/serivices';
-import {Column, FetchProvider} from "../../../partials/table/table.component";
-import { Output,EventEmitter } from '@angular/core';
+import { Column } from "../../../partials/table/table.component";
+import { en_US, NzI18nService} from 'ng-zorro-antd/i18n';
 
 
 @Component({
@@ -11,41 +11,42 @@ import { Output,EventEmitter } from '@angular/core';
   styleUrls: ['./course-form.component.scss']
 })
 export class CourseFormComponent implements OnInit {
-  DAYS = ['SUNDAY', 'MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
-  ALLDAYS:string[] = ['SUNDAY', 'MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'];
-  sem:string[]=['1st','2nd'];
-  bo:boolean[]=[true,false];
+  days = [];
+  allDays = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+  smstr: string[] = ['1st', '2nd'];
+  blean: boolean[] = [true, false];
+  classroms: string[] = ['classroom 01', 'classroom 02']
 
-form: FormGroup
+  form: FormGroup
 
 
-  constructor(private _fb: FormBuilder, public _adminService:AdminService) {
-  this.form = this._fb.group({
-    name: ['', [Validators.nullValidator]],
-    description: ['', [Validators.required]],
-    startDate: ['', [Validators.required]],
-    endDate: ['', [Validators.required]],
-    lectureTime: ['', [Validators.required]],
-    daysOfWeek: ['', [Validators.required]],
-    maxParticipants: ['', [Validators.required]],
-    category: ['', [Validators.required]],
-    isOnline: ['', [Validators.required]],
-    isFree: ['', [Validators.required]],
-    price: ['', [Validators.required]],
-    classroom: ['', [Validators.required]],
-    year: ['', [Validators.required]],
-    semester: ['', [Validators.required]],
-    teamsLink: ['', [Validators.required]],
-    lastRegDay: ['', [Validators.required]],
-    isPreRecorded:['', [Validators.required]],
-    duration:[''],
-  })
+  constructor(private i18n: NzI18nService, private _fb: FormBuilder, public _adminService: AdminService) {
+    this.form = this._fb.group({
+      name: ['', [Validators.nullValidator]],
+      description: ['', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
+      lectureTime: ['', [Validators.required]],
+      daysOfWeek: ['', [Validators.required]],
+      maxParticipants: ['', [Validators.required]],
+      category: ['', [Validators.required]],
+      isOnline: ['', [Validators.required]],
+      isFree: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      classroom: ['', [Validators.required]],
+      year: ['', [Validators.required]],
+      semester: ['', [Validators.required]],
+      teamsLink: ['', [Validators.required]],
+      lastRegDay: ['', [Validators.required]],
+      isPreRecorded: ['', [Validators.required]],
+      duration: [''],
+    })
   }
 
-  displayColumns : Column[] = [];
+  displayColumns: Column[] = [];
 
   ngOnInit(): void {
+    this.i18n.setLocale(en_US);
+  }
 
-}
-  
 }
