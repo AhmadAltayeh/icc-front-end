@@ -46,7 +46,23 @@ export class StudentService {
       context,
     });
   }
-  getCourseReview() {}
+  studentPostReview(review: StudentModel.Review) {
+    const context = new HttpContext();
+    context.set(SNACKBAR_OPTIONS, { successMessage: 'Success' });
+    return this.httpClient.post('student/reviews', review, {
+      context,
+    });
+  }
+
+  getCourseReview(query: PaginationQuery): Observable<PaginationResult<any>> {
+    const context = new HttpContext();
+
+    context.set(FULL_RESPONSE, true);
+    return this.httpClient.get<PaginationResult<any>>(
+      `student/reviews/course?${query.asString()}`,
+      { context }
+    );
+  }
   searchCourses(query: PaginationQuery): Observable<PaginationResult<any>> {
     const context = new HttpContext();
     context.set(FULL_RESPONSE, true);
@@ -60,6 +76,14 @@ export class StudentService {
     context.set(FULL_RESPONSE, true);
     //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
     return this.httpClient.get<any>(`student/students/courses/${id}`, {
+      context,
+    });
+  }
+  getOneCourseInstructor(id: number): Observable<any> {
+    const context = new HttpContext();
+    context.set(FULL_RESPONSE, true);
+    //console.log(this.httpClient.get<any>(`admin/students/${id}`, {context}));
+    return this.httpClient.get<any>(`student/students/my-courses/${id}`, {
       context,
     });
   }

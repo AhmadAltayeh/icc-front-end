@@ -16,6 +16,16 @@ export namespace StudentModel {
     courseId: number;
     instructorId: number;
   }
+  export interface CourseReviews {
+    courseId: number;
+    instructorId: number;
+  }
+  export interface Review {
+    rating: number;
+    comment: string;
+    courseId: number;
+    instructorId: number;
+  }
   export interface changePassword {
     id: number;
     oldPassword: string;

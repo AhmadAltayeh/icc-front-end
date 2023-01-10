@@ -19,6 +19,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { RouterModule, Routes } from '@angular/router';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 const routes: Routes = [
   {
     path: 'view-course/:id',
@@ -35,6 +36,7 @@ const routes: Routes = [
     NzInputModule,
     NzSelectModule,
     NzDatePickerModule,
+    NzRateModule,
     NzDrawerModule,
     ReactiveFormsModule,
     NzTabsModule,

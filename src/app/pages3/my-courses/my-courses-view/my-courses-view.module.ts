@@ -18,6 +18,7 @@ import { TableModule } from '../../../partials/table/table.module';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { RouterModule, Routes } from '@angular/router';
+import { NzRateModule } from 'ng-zorro-antd/rate';
 const routes: Routes = [
   {
     path: 'view-course/:id',
@@ -42,6 +43,7 @@ const routes: Routes = [
     TableModule,
     NzButtonModule,
     NzTableModule,
+    NzRateModule,
   ],
 })
 export class MyCoursesViewModule {}

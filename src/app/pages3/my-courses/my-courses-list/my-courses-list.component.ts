@@ -36,7 +36,7 @@ export class MyCoursesListComponent {
     //   query.addParams('keyword', search)
     //   return this._studentService.searchCourses(query);
     // }
-    return this._studentService.getAllCourses(query);
+    return this._studentService.getAllStudentCourses(query);
   };
 
   displayColumns = [

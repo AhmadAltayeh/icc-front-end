@@ -1,35 +1,44 @@
-import {Component, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../core/serivices";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from '../../../core/serivices';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component2.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   form!: UntypedFormGroup;
-  res:any
+  res: any;
   submitForm(): void {
     if (this.form.valid) {
-      this._authService.login(this.form.value).subscribe({next: (res) => {
+      this._authService.login(this.form.value).subscribe({
+        next: (res) => {
           console.log(res);
-          let x=res.roleGroup.toLowerCase()
-          this._router.navigate([x])
-        }})
+          let x = res.roleGroup.toLowerCase();
+          this._router.navigate([x]);
+        },
+      });
     } else {
-      Object.values(this.form.controls).forEach(control => {
+      Object.values(this.form.controls).forEach((control) => {
         if (control.invalid) {
           this.form.markAsDirty();
-          this.form.updateValueAndValidity({onlySelf: true});
+          this.form.updateValueAndValidity({ onlySelf: true });
         }
       });
     }
   }
 
-  constructor(private fb: UntypedFormBuilder, private _authService: AuthService, private _router: Router) {
-  }
+  constructor(
+    private fb: UntypedFormBuilder,
+    private _authService: AuthService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -37,7 +46,7 @@ export class LoginComponent implements OnInit {
       password: [null, [Validators.required]],
     });
   }
-  onClick(){
+  onClick() {
     this._router.navigate(['/register']);
   }
 }

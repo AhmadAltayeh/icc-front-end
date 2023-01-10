@@ -17,6 +17,7 @@ import {
   FetchProvider,
   TableComponent,
 } from 'src/app/partials/table/table.component';
+import { query } from '@angular/animations';
 @Component({
   selector: 'app-view-form',
   templateUrl: './course-view.component.html',
@@ -29,6 +30,7 @@ export class CourseViewComponent implements OnInit {
   courseData: any;
   selectedValue: any;
   selectedValueId: any;
+
   s: string[] = [];
   constructor(
     private _fb: FormBuilder,
@@ -39,6 +41,16 @@ export class CourseViewComponent implements OnInit {
   ngOnInit(): void {
     this.getCourse();
   }
+  // fetchProvider: FetchProvider<any> = (query: PaginationQuery) => {
+  //   const search = this._searchFilterComponent.getFilters();
+  //   if (search) {
+  //     query.addParams('keyword', search);
+  //     return this._adminService.searchAdmins(query);
+  //   }
+  //   return this._adminService.getAdmins(query);
+  // };
+  a: PaginationQuery = new PaginationQuery(0, 50);
+  instructorReviews: any;
 
   getCourse() {
     this.courseId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
@@ -46,6 +58,19 @@ export class CourseViewComponent implements OnInit {
       this.courseData = json.data;
       console.log(this.courseData);
       this.selectedValueId = this.courseData.instructors[0].id;
+      this.getReviews(this.selectedValueId);
+    });
+  }
+  getReviews(id: any) {
+    // const t = { courseId: this.courseId, instructorId: this.selectedValueId };
+    this.a.addParams('courseId', this.courseId);
+    console.log(id);
+
+    this.a.addParams('instructorId', id);
+
+    this._studentService.getCourseReview(this.a).subscribe((a) => {
+      this.instructorReviews = a;
+      console.log(a);
     });
   }
   changeFn(id: any) {
