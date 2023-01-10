@@ -1,3 +1,21 @@
 .filter-field {
-  width: 70%;
+  width: 30%;
+}
+::ng-deep .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-radius: 5px;
+}
+
+::ng-deep .ant-input-group > .ant-input:first-child, .ant-input-group-addon:first-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+::ng-deep .ant-input-search > .ant-input-group > .ant-input-group-addon:last-child {
+  left: -35px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  z-index: 999;
 }

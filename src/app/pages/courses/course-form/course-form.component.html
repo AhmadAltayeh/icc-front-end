@@ -3,12 +3,14 @@
     <div nz-col nzSpan="24">
       <nz-form-item>
         <nz-form-control nzHasFeedback [nzErrorTip]="courseNameErrorTpl" style="margin-right: 20px">
+          <span>Course Name</span>
           <input nzSize="large" formControlName="name" nz-input placeholder="Please Enter Course Name" />
           <ng-template #courseNameErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
           </ng-template>
         </nz-form-control>
         <nz-form-control nzHasFeedback [nzErrorTip]="categoryErrorTpl">
+          <span>Category</span>
           <input nzSize="large" formControlName="category" nz-input placeholder="Please Enter Category" />
           <ng-template #categoryErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
@@ -22,6 +24,7 @@
     <div nz-col nzSpan="24">
       <nz-form-item>
         <nz-form-control nzHasFeedback [nzErrorTip]="addressErrorTpl">
+          <span>Description</span>
           <textarea nzSize="large" formControlName="description" nz-input [nzAutosize]="{ minRows: 4, maxRows: 4 }"
             placeholder="Please Enter Description"></textarea>
           <ng-template #addressErrorTpl let-control>
@@ -36,6 +39,7 @@
     <div nz-col nzSpan="24">
       <nz-form-item>
         <nz-form-control nzHasFeedback [nzErrorTip]="priceErrorTpl" style="margin-right: 20px">
+          <span>Price</span>
           <nz-input-group nzAddOnAfter="JOD">
             <input nzSize="large" formControlName="price" nz-input type="number" placeholder="Please Enter Price" />
             <ng-template #priceErrorTpl let-control>
@@ -44,6 +48,7 @@
           </nz-input-group>
         </nz-form-control>
         <nz-form-control nzHasFeedback [nzErrorTip]="maxParticipantsErrorTpl">
+          <span>Max Participants</span>
           <input nzSize="large" formControlName="maxParticipants" nz-input type="number"
             placeholder="Please Enter Max Participants" />
           <ng-template #maxParticipantsErrorTpl let-control>
@@ -58,6 +63,7 @@
     <div nz-col nzSpan="24">
       <nz-form-item>
         <nz-form-control nzHasFeedback [nzErrorTip]="semesterErrorTpl" style="margin-right: 20px">
+          <span>Classroom</span>
           <nz-select formControlName="classroom" nzPlaceHolder="Classroom" nzSize="large">
             <ng-container *ngFor="let row of classroms">
               <nz-option [nzValue]="row" [nzLabel]="row" nz-input> </nz-option>
@@ -68,6 +74,7 @@
           </ng-template>
         </nz-form-control>
         <nz-form-control nzHasFeedback [nzErrorTip]="teamsLinkErrorTpl">
+          <span>Teams Link</span>
           <input nzSize="large" formControlName="teamsLink" type="text" nz-input
             placeholder="Please Enter Teams Link" />
           <ng-template #teamsLinkErrorTpl let-control>
@@ -83,6 +90,7 @@
       <nz-form-item>
 
         <nz-form-control nzHasFeedback [nzErrorTip]="isPreRecordedErrorTpl" style="margin-right: 20px">
+          <span>Pre Recorded</span>
           <nz-select formControlName="isPreRecorded" nzPlaceHolder="Pre Recorded">
             <ng-container *ngFor="let b of blean">
               <nz-option [nzValue]="b" [nzLabel]="b.toString()" nz-input></nz-option>
@@ -94,6 +102,7 @@
         </nz-form-control>
 
         <nz-form-control nzHasFeedback [nzErrorTip]="isOnlineErrorTpl" style="margin-right: 20px">
+          <span>Online</span>
           <nz-select formControlName="isOnline" nzPlaceHolder="Online">
             <ng-container *ngFor="let b of blean">
               <nz-option [nzValue]="b" [nzLabel]="b.toString()" nz-input></nz-option>
@@ -105,6 +114,7 @@
         </nz-form-control>
 
         <nz-form-control nzHasFeedback [nzErrorTip]="isFreeErrorTpl">
+          <span>Free</span>
           <nz-select formControlName="isFree" nzPlaceHolder="Free">
             <ng-container *ngFor="let b of blean">
               <nz-option [nzValue]="b" [nzLabel]="b.toString()" nz-input></nz-option>
@@ -122,7 +132,8 @@
     <div nz-col nzSpan="24">
       <nz-form-item>
         <nz-form-control nzHasFeedback [nzErrorTip]="startDateErrorTpl" style="margin-right: 20px">
-          <nz-date-picker formControlName="startDate" nz-input nzSize="large"
+          <span>Start Date</span>
+          <nz-date-picker nzMode="date" formControlName="startDate" nz-input nzSize="large"
             style="border-radius: 8px; width: 177px; height:50px;" nzPlaceHolder="Start Date"></nz-date-picker>
           <ng-template #startDateErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
@@ -130,7 +141,8 @@
         </nz-form-control>
 
         <nz-form-control nzHasFeedback [nzErrorTip]="endDateErrorTpl" style="margin-right: 20px">
-          <nz-date-picker formControlName="endDate" nz-input nzSize="large"
+          <span>End Date</span>
+          <nz-date-picker nzMode="date" formControlName="endDate" nz-input nzSize="large"
             style="border-radius: 8px; width: 177px; height:50px;" nzPlaceHolder="End Date"></nz-date-picker>
           <ng-template #endDateErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
@@ -138,9 +150,10 @@
         </nz-form-control>
 
         <nz-form-control nzHasFeedback [nzErrorTip]="lastRegDayErrorTpl">
+          <span>Last Registration Day</span>
           <nz-date-picker formControlName="lastRegDay" nz-input nzSize="large"
             style="border-radius: 8px; width: 177px; height:50px;" nzPlaceHolder="Last Reg Day"></nz-date-picker>
-          <ng-template #lastRegDayErrorTpl let-control>
+            <ng-template #lastRegDayErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
           </ng-template>
         </nz-form-control>
@@ -151,15 +164,20 @@
   <div nz-row [nzGutter]="8">
     <div nz-col nzSpan="24">
       <nz-form-item>
-        <nz-form-control nzHasFeedback [nzErrorTip]="startDateErrorTpl" style="margin-right: 20px">
-          <nz-time-picker formControlName="lectureTime" nz-input nzSize="large"
-            style="border-radius: 8px; width: 177px; height:50px;" nzPlaceHolder="Lecture Time"></nz-time-picker>
-          <ng-template #startDateErrorTpl let-control>
+        <nz-form-control nzHasFeedback [nzErrorTip]="lectureTimeErrorTpl" style="margin-right: 20px">
+          <span>Lecture Time</span>
+          <nz-select formControlName="lectureTime" nzPlaceHolder="Lecture Time">
+            <ng-container *ngFor="let time of times">
+              <nz-option [nzValue]="time" [nzLabel]="time" nz-input></nz-option>
+            </ng-container>
+          </nz-select>
+          <ng-template #lectureTimeErrorTpl let-control>
             <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
           </ng-template>
         </nz-form-control>
 
         <nz-form-control nzHasFeedback [nzErrorTip]="semesterErrorTpl" style="margin-right: 20px">
+          <span>Semester</span>
           <nz-select formControlName="semester" nzPlaceHolder="Semester">
             <ng-container *ngFor="let s of smstr">
               <nz-option [nzValue]="s" [nzLabel]="s" nz-input></nz-option>
@@ -171,6 +189,7 @@
         </nz-form-control>
 
         <nz-form-control nzHasFeedback [nzErrorTip]="lastRegDayErrorTpl">
+          <span>Year</span>
           <nz-date-picker nzMode="year" formControlName="year" nz-input nzSize="large"
             style="border-radius: 8px; width: 177px; height:50px;" nzPlaceHolder="Year"></nz-date-picker>
           <ng-template #lastRegDayErrorTpl let-control>
@@ -185,7 +204,8 @@
     <div nz-col nzSpan="12">
       <nz-form-item>
         <nz-form-control nzHasFeedback [nzErrorTip]="daysOfWeekErrorTpl">
-          <nz-select [(ngModel)]="days" formControlName="daysOfWeek" nzMode="multiple" nzPlaceHolder="Days Of Week" style="height: 50px;">
+          <span>Days of Week</span>
+          <nz-select [(ngModel)]="days" formControlName="daysOfWeek" nzMode="multiple" nzPlaceHolder="Days Of Week">
               <nz-option *ngFor="let day of allDays" [nzLabel]="day" [nzValue]="day"></nz-option>
           </nz-select>
           <ng-template #daysOfWeekErrorTpl let-control>

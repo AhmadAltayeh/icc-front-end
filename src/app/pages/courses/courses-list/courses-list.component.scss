@@ -7,3 +7,17 @@
   display: flex;
   justify-content: flex-end;
 }
+
+
+.create-button {
+  color: #fff;
+  border-color: #29819a;
+  background: #29819a;
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 0 rgb(0 0 0 / 5%);
+  height:45px
+}
+
+::ng-deep .ant-table-thead > tr > th {
+  background-color: #29819a;
+}

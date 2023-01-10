@@ -1,4 +1,11 @@
 .admin-form {
-  margin: 50px 20px;
+  margin: 10px 10px;
+}
 
+::ng-deep .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }

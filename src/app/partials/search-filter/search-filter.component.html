@@ -1,15 +1,19 @@
+<div style="display: flex; justify-content: end; position: relative;">
 <nz-input-group class="filter-field" nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-  <input  (input)="filter.emit($event)" type="text" [(ngModel)]="search" nz-input placeholder="input search text"/>
+  <input  (input)="filter.emit($event)" type="text" [(ngModel)]="search" nz-input placeholder="Search"/>
 </nz-input-group>
 <ng-template #suffixButton>
-  <button
+  <!-- <button
     nz-button
     nzType="primary"
     nzSize="large"
-    style="height: 50px; padding: auto"
+    style="height: 50px; padding: auto; position: absolute;"
     (click)="filter.emit({search})"
     nzSearch
-  >
-    Search
-  </button>
+    nz-icon="search"
+  > -->
+  <button style="background: transparent; border: none; box-shadow: none; position: absolute; top: 15px;"><span nz-icon nzType="search"></span></button>
+
+  <!-- </button> -->
 </ng-template>
+</div>

@@ -7,6 +7,7 @@ import { CourseFormComponent } from "../course-form/course-form.component";
 import { FormGroup } from "@angular/forms";
 import { NzDrawerRef } from "ng-zorro-antd/drawer";
 import { CourseViewComponent } from '../course-view/course-view.component';
+import { format } from "date-fns";
 
 
 @Component({
@@ -86,16 +87,14 @@ export class CoursesListComponent {
   submitCreateForm() {
     let form: FormGroup;
     form = this._courseFormComponent.form
-    form.value.year = form.value.year + "-01-01";
-    form.value.duration = 1;
-    console.log(form.value)
-
 
     if (form.valid) {
       this.loading = true
       form.disable()
-      console.log(form.value)
-      form.value.year = form.value.year + "-01-01";
+      form.value.startDate = format(form.value.startDate, "yyyy-MM-dd")
+      form.value.endDate = format(form.value.endDate, "yyyy-MM-dd")
+      form.value.lastRegDay = format(form.value.lastRegDay, "yyyy-MM-dd")
+      form.value.year = format(form.value.year, "yyyy-MM-dd")
       form.value.duration = 1;
       this._adminService.createCourse(form.value).subscribe({
         next: () => {
@@ -105,7 +104,7 @@ export class CoursesListComponent {
 
         },
         error: () => {
-          console.log("Eeror")
+          console.log("Error")
           form.enable()
           this.loading = false
         }
@@ -140,8 +139,6 @@ export class CoursesListComponent {
         this.validateForm(form);
       }
     }
-
-
   }
 
 

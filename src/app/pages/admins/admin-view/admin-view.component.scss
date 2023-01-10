@@ -1,4 +1,10 @@
 .admin-view {
-  margin: 50px 20px;
+  margin: 10px 10px;
+}
 
+::ng-deep .ant-input-affix-wrapper > input.ant-input {
+  padding: 0;
+  border: none;
+  outline: none;
+  height: 40px;
 }
