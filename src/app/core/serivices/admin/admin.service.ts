@@ -7,6 +7,8 @@ import { FULL_RESPONSE, SNACKBAR_OPTIONS } from "../../interceptors/teardown/htt
 import { CourseModel } from '../../models/course.model';
 import { StudentModel } from '../../models/student.model';
 import { InstructorModel } from '../../models/instructor.model';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+// import {RequestOptions, Request, RequestMethod} from '@angular/http';
 
 @Injectable({
   providedIn: 'root'
@@ -237,4 +239,15 @@ export class AdminService {
     context.set(FULL_RESPONSE, true)
     return this.httpClient.get<PaginationResult<any>>(`admin/instructors/courses/${id}`, { context })
   }
+
+    //*               ******************* MEDIA ******************                 *
+
+    uploadFile(file: File): Observable<any>{
+      const context = new HttpContext()
+      context.set(FULL_RESPONSE, true)
+      const formData = new FormData();
+      formData.append('file', file);
+
+      return this.httpClient.post<Observable<any>>(`user/media`, formData, { context })
+    }
 }

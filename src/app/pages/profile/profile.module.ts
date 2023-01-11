@@ -12,6 +12,7 @@ import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 const routes: Routes = [
   { path: '', component: ProfileComponent }
@@ -32,7 +33,8 @@ const routes: Routes = [
     NzTabsModule,
     NzButtonModule,
     NzSpinModule,
-    NzMessageModule
+    NzMessageModule,
+    NzUploadModule
   ]
 })
 export class ProfileModule {

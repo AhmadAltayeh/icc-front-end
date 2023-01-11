@@ -34,10 +34,11 @@
         </span>
         <div>
           <nz-button-group class="button-group">
-            <button [routerLink]="[dropDownItems[0].path]" style="border-radius: 50%; margin-right:7px; background-color: grey; border-color: grey;"
+            <button [routerLink]="[dropDownItems[0].path]" style="border-radius: 50%; margin-right:7px; cursor: pointer;"
               nz-dropdown nzPlacement="bottomRight" nz-button nzType="primary" nzSize='default' nzShape='circle'>
-              <span nz-icon nzType="user"></span>
+              <!-- <span nz-icon nzType="user"></span> -->
             </button>
+            <img src={{data?.imageUrl}} width="32px" height="32px" style="border-radius: 50%; margin-right: 7px;" [routerLink]="[dropDownItems[0].path]">
             <div style="font-family: unset; margin-right: 30px; cursor: pointer;" [routerLink]="[dropDownItems[0].path]">{{data?.firstName}} {{data?.lastName}}</div>
             <button (click)="logout()" style="background-color: transparent; color: black; border-color: transparent; box-shadow: none;"
               nzPlacement="bottomRight" nz-button nzSize='small' nzShape='circle'>

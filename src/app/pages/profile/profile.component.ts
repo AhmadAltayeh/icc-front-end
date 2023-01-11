@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -6,6 +6,11 @@ import { AdminService } from 'src/app/core/serivices';
 import { Column } from 'src/app/partials/table/table.component';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) { }
+}
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -15,9 +20,12 @@ export class ProfileComponent implements OnInit {
   tabSelected: number = 0
   roleName: string = '';
   titleAlert: string = 'This field is required';
-  form: FormGroup
-  passwordForm: FormGroup
-
+  form: FormGroup;
+  passwordForm: FormGroup;
+  loading = false;
+  avatarUrl?: string;
+  imageUrl: any;
+  selectedFile: any;
   constructor(private message: NzMessageService, private _fb: FormBuilder, private _adminService: AdminService, private router: Router) {
 
     this.form = this._fb.group({
@@ -28,6 +36,7 @@ export class ProfileComponent implements OnInit {
       facebookUrl: ['', [Validators.required]],
       address: ['', [Validators.required]],
       iban: ['', [Validators.required]],
+      imageUrl: ['', [Validators.nullValidator]],
       roleId: ['', [Validators.required]]
     })
     this.passwordForm = this._fb.group({
@@ -40,11 +49,11 @@ export class ProfileComponent implements OnInit {
   data: any
   ngOnInit(): void {
     this._adminService.getAdminProfile().subscribe(data => {
-
       this.data = data.data
       this.fillAdminDetails()
 
     })
+
     this._adminService.getRoles().subscribe((json) => {
       json.data.forEach((element: any) => {
         this.displayColumns.push(
@@ -58,8 +67,6 @@ export class ProfileComponent implements OnInit {
   }
 
   public fillAdminDetails() {
-    console.log(this.tabSelected);
-
     this.form.setValue({
       firstName: this.data.firstName,
       lastName: this.data.lastName,
@@ -69,6 +76,7 @@ export class ProfileComponent implements OnInit {
       address: this.data.address,
       iban: Number(this.data.iban),
       roleId: this.data.role.title,
+      imageUrl: this.data.imageUrl
     })
     this.roleName = this.data.role.title;
   };
@@ -88,6 +96,8 @@ export class ProfileComponent implements OnInit {
       form = this.form;
       if (form.valid) {
         form.disable()
+        console.log(form.value);
+
         this._adminService.updateOwnProfile(form.value).subscribe({
           next: (res) => {
             window.location.reload();
@@ -125,4 +135,31 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  private onSuccess() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'ok';
+  }
+
+  private onError() {
+    this.selectedFile.pending = false;
+    this.selectedFile.status = 'fail';
+    this.selectedFile.src = '';
+  }
+
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+    
+    reader.addEventListener('load', (event: any) => {
+
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      this._adminService.uploadFile(this.selectedFile.file).subscribe((json) => {                
+        this.form.patchValue({
+          imageUrl: json.data.mediaUrl
+        })
+      })
+    });
+    reader.readAsDataURL(file);
+  }
 }

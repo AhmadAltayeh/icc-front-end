@@ -4,6 +4,18 @@
 <nz-tabset [(nzSelectedIndex)]="tabSelected" nzTabPosition='left'>
   <nz-tab nzTitle="General Information">
     <form class="admin-form" [formGroup]="form" nz-form>
+
+      <nz-form-item>
+        <nz-form-control>
+          <div class="card">
+            <div class="card_img">
+              <img src={{data?.imageUrl}}>
+            </div>
+            <input #imageInput type="file" (change)="processFile(imageInput)">
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
       <div nz-row [nzGutter]="8">
         <div nz-col [nzSpan]="24">
           <nz-form-item>
@@ -118,8 +130,8 @@
           <nz-form-item>
             <nz-form-control nzHasFeedback [nzErrorTip]="oldPasswordNameErrorTpl">
               <nz-input-group>
-                <input style="border-radius: 10px;" nzSize="large" formControlName="oldPassword" type="password" placeholder="Enter Old Passowrd"
-                  nz-input />
+                <input style="border-radius: 10px;" nzSize="large" formControlName="oldPassword" type="password"
+                  placeholder="Enter Old Passowrd" nz-input />
                 <ng-template #oldPasswordNameErrorTpl let-control>
                   <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
                 </ng-template>
