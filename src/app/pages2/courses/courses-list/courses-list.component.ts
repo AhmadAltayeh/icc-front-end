@@ -13,6 +13,7 @@ import { InstructorService } from 'src/app/core/serivices/instructor';
   styleUrls: ['./courses-list.component.scss']
 })
 export class CoursesListComponent {
+  
   @ViewChild(SearchFilterComponent, { static: true }) private _searchFilterComponent!: SearchFilterComponent
   @ViewChild(CourseViewComponent) public _courseViewComponent!: CourseViewComponent
   @ViewChild('drawer') public drawer!: NzDrawerRef
@@ -34,7 +35,7 @@ export class CoursesListComponent {
 
   displayColumns = [
     new Column({
-      key: 'id',
+      key: 'courseId',
       title: 'ID',
       width: '100px',
     }),
@@ -106,9 +107,6 @@ export class CoursesListComponent {
     this.drawer.open();
   }
 
-  public clickCreateForm() {
-    this.drawer.open();
-  }
 
   closeDrawer() {
     this.drawer.close()

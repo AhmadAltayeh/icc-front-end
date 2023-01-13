@@ -26,7 +26,8 @@
             {{ courseData?.description }}
           </p>
         </div>
-        <div class="col-lg-4">
+              <div class="col-lg-4">
+  
           <div
             class="course-info d-flex justify-content-between align-items-center"
           >
@@ -60,6 +61,15 @@
             <p>{{ courseData?.lectureTime }}</p>
             <h5>وقت المحاضرة</h5>
           </div>
+          <ng-container *ngFor="let m of courseData?.materials">
+            <div
+            class="course-info d-flex justify-content-between align-items-center"
+            >
+            
+            {{m.url}}
+            <h6>رابط المقررات الدراسية</h6>  
+          </div>
+          </ng-container>
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { query } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
@@ -23,7 +24,8 @@ export class CourseViewComponent implements OnInit {
   ALLDAYS: string[] = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
   sem: string[] = ['1st', '2nd'];
   bo: boolean[] = [true, false];
-
+   mat:FormGroup 
+   matIn:string="";
   constructor(private _fb: FormBuilder, public _instructorService: InstructorService) {
     this.detailsForm = this._fb.group({
       name: ['', [Validators.nullValidator]],
@@ -45,23 +47,58 @@ export class CourseViewComponent implements OnInit {
       isPreRecorded: ['', [Validators.required]],
     })
 
+    this.mat=this._fb.group({
+       m:''
+    });
   }
 
   ngOnInit(): void {
-    console.log(this.rowData.id);
+    console.log(this.rowData.courseId);
     
-    this.fillCourseDetails(this.rowData.id);
+    this.fillCourseDetails(this.rowData.courseId);
   }
 
   fetchProviderST: FetchProvider<any> = (query: PaginationQuery) => {
-    return this._instructorService.getCourseStudents(this.rowData.id);
+    return this._instructorService.getCourseStudents(this.rowData.courseId);
   }
 
   getStudentId(event: any) {
     this.studentId = event.target.value;
   }
+fetchMaterial:FetchProvider<any>=(query:PaginationQuery)=>{
+  return this._instructorService.getCourseMaterial(this.rowData.courseId)  ;
+}
+addM(v:string){
+  v="http://"+v+".com"
+  this._instructorService.addCourseMaterial({
+    courseId:this.rowData.courseId,
+    url:v,
+  year:"2023-02-02"
+  }).subscribe((json)=>{
+    console.log(json)
+  });
 
-  displayColumns: Column[] = [];
+
+}
+deleteM(d:string){
+  
+  this._instructorService.deleteMaterial(parseInt(d)).subscribe((json)=>{
+    console.log(json)
+  });
+
+
+}
+  displayColumns=[
+    new Column({
+      key:'id',
+      title:"Material ID"
+    }),
+    new Column({
+      key:'url',
+      title:'Material URL'
+    })
+  
+];
 
   displayStudents = [
     new Column({
@@ -69,7 +106,7 @@ export class CourseViewComponent implements OnInit {
       title: 'ID',
     }),
     new Column({
-      key: 'userName',
+      key: 'email',
       title: 'User Name',
     }),
   ];
@@ -97,8 +134,10 @@ export class CourseViewComponent implements OnInit {
       })
     });
   }
-
   tabChange(args: any[]): void {
     this.tabChanged.emit(args[0].index);
+  }
+  public clickEvent(data: any) {
+    this.rowData = data;
   }
 }

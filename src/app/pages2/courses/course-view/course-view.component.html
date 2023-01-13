@@ -208,4 +208,38 @@
     <app-table #table title="Students" [displayColumns]="displayStudents" [fetchProvider]="fetchProviderST">
     </app-table>
   </nz-tab>
+  <nz-tab nzTitle="Material">
+    <form class="m-form"  nz-form [formGroup]="mat">
+
+      <div nz-row [nzGutter]="8">
+        <div nz-col nzSpan="24">
+          <nz-form-item>
+            <span>Enter Material url</span>
+            <nz-input-group nzAddOnBefore="http://" nzAddOnAfter=".com">
+            <input type="url" #m name="m" id="m"nz-input >
+          </nz-input-group>
+            <button nz-button nzType="primary" (click)="addM(m.value)">Submit</button>
+            </nz-form-item>
+            </div>
+            </div>
+            <div nz-row [nzGutter]="8">
+              <div nz-col nzSpan="24">
+                <nz-form-item>
+                  <span>Enter Material ID to Delete</span>
+                  <nz-input-group >
+                  <input type="number" #d name="d" id="d"nz-input >
+                </nz-input-group>
+                  <button nz-button nzType="primary" nzDanger (click)="deleteM(d.value)">Delete</button>
+                  </nz-form-item>
+                  </div>
+                  </div>
+            </form>
+            
+    <app-table #table (clickAction)="clickEvent($event)" [displayColumns]="displayColumns"
+  [fetchProvider]="fetchMaterial">
+  <span>Material List</span>
+  
+</app-table>
+
+  </nz-tab>
 </nz-tabset>
