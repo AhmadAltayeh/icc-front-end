@@ -7,6 +7,7 @@ import { StudentFormComponent } from "../student-form/student-form.component";
 import { FormGroup } from "@angular/forms";
 import { NzDrawerRef } from "ng-zorro-antd/drawer";
 import { StudentViewComponent } from '../student-view/student-view.component';
+import { format } from "date-fns";
 
 @Component({
   selector: 'app-students-list',
@@ -78,7 +79,7 @@ export class StudentsListComponent {
     let form: FormGroup;
     form = this._studentFormComponent.form;
     if (form.valid) {
-      console.log(form.value);
+      form.value.dateOfBirth = format(form.value.dateOfBirth, "yyyy-MM-dd")
       
       this.loading = true
       form.disable()

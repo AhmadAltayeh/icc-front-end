@@ -1,27 +1,17 @@
 <div class="button-container">
-  <button nz-button nzType="primary" (click)="clickCreateForm()">
-    Create student
+  <button class="create-button" nz-button nzType="primary" (click)="clickCreateForm()" style="border-radius: 5px;">
+    Create Student
   </button>
 </div>
 
-<app-table
-  #table
-  title="Students List"
-  (clickAction)="clickEvent($event)"
-  [displayColumns]="displayColumns"
-  [fetchProvider]="fetchProvider"
->
+<app-table #table (clickAction)="clickEvent($event)" [displayColumns]="displayColumns"
+  [fetchProvider]="fetchProvider">
+  <span>Student List</span>
   <app-search-filter (filter)="table.refresh()"></app-search-filter>
 </app-table>
 
-<nz-drawer
-  #drawer
-  [nzBodyStyle]="{ overflow: 'auto' }"
-  [nzWidth]="620"
-  [nzFooter]="footerTpl"
-  nzTitle="Student"
-  (nzOnClose)="closeDrawer()"
->
+<nz-drawer #drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzWidth]="620" [nzFooter]="footerTpl" nzTitle="Student"
+  (nzOnClose)="closeDrawer()">
   <div>
     <div *nzDrawerContent>
       <app-student-form *ngIf="create"></app-student-form>
@@ -35,12 +25,7 @@
     <button nz-button style="margin-right: 8px" (click)="closeDrawer()">
       Cancel
     </button>
-    <button
-      nz-button
-      nzType="primary"
-      (click)="submitCreateForm()"
-      [nzLoading]="loading"
-    >
+    <button nz-button nzType="primary" (click)="submitCreateForm()" [nzLoading]="loading">
       <span nz-icon nzType="save"></span>
       Submit
     </button>
@@ -50,13 +35,7 @@
       Cancel
     </button>
 
-    <button
-      nz-button
-      nzType="primary"
-      (click)="submitUpdateForm()"
-      (filter)="table.refresh()"
-      [nzLoading]="loading"
-    >
+    <button nz-button nzType="primary" (click)="submitUpdateForm()" (filter)="table.refresh()" [nzLoading]="loading">
       <span nz-icon nzType="save"></span>
       Save
     </button>

@@ -1,10 +1,11 @@
 <div class="button-container">
-  <button nz-button nzType="primary" (click)="clickCreateForm()">
+  <button class="create-button" nz-button nzType="primary" (click)="clickCreateForm()" style="border-radius: 5px;">
     Create Instructor
   </button>
 </div>
-<app-table #table title="Instructors List" (clickAction)="clickEvent($event)" [displayColumns]="displayColumns"
+<app-table #table (clickAction)="clickEvent($event)" [displayColumns]="displayColumns"
   [fetchProvider]="fetchProvider">
+  <span>Instructors List</span>
   <app-search-filter (filter)="table.refresh()"></app-search-filter>
 </app-table>
 

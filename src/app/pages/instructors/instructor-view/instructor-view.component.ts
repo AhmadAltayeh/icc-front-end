@@ -7,6 +7,10 @@ import { Observable, Observer } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { PaginationQuery } from 'src/app/core/models';
 
+class ImageSnippet {
+  constructor(public src: string, public file: File) { }
+}
+
 @Component({
   selector: 'app-view-form',
   templateUrl: './instructor-view.component.html',
@@ -20,6 +24,12 @@ export class InstructorViewComponent implements OnInit {
   radioValue: any = '';
   loading = false;
   imageUrl?: string;
+  selectedFile: any;
+  passwordVisible = false;
+  passwordVisible2 = false;
+  password: any;
+  confirmPassword:any;
+  listOfData: any[]= [];
   constructor(private _fb: FormBuilder, public _adminService: AdminService, private msg: NzMessageService) {
     this.detailsForm = this._fb.group({
       firstName: ['', [Validators.required]],
@@ -27,7 +37,7 @@ export class InstructorViewComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required]],
       facebookUrl: ['', [Validators.required]],
-      imageUrl: ['String', [Validators.required]],
+      imageUrl: ['', [Validators.required]],
       isVolunteer: ['', [Validators.required]],
       salary: ['', Validators.nullValidator]
     })
@@ -42,10 +52,6 @@ export class InstructorViewComponent implements OnInit {
   }
 
   displayColumns: Column[] = [];
-
-  fetchProvider: FetchProvider<any> = (query: PaginationQuery) => {
-    return this._adminService.getInstructorCourses(query, this.rowData.id);
-  }
 
   displayCourseColumns = [
     new Column({
@@ -66,20 +72,19 @@ export class InstructorViewComponent implements OnInit {
       title: 'End Date',
     })
   ];
-  courseId:any
-  getCourseId(event:any){
-    this.courseId=event;
-  }
-  removeCourseFromInstructor(){
-    this._adminService.removeCourseFromInstructor({instructorId:this.rowData.id,courseId:this.courseId}).subscribe()
+
+  removeCourseFromInstructor(courseId:any) {
+    this.loading=true;    
+    this._adminService.removeCourseFromInstructor({ instructorId: this.rowData.id, courseId: courseId })
+    .subscribe((json) => {
+      this.loading=false
+      this.fillInstructorDetails(this.rowData.id);
+    })
   }
 
-  public fillInstructorDetails(id: number) {    
+  public fillInstructorDetails(id: number) {
     this._adminService.getOneInstructor(this.rowData.id).subscribe((json) => {
-      this.radioValue = json.data.isVolunteer
-
-      console.log(json.data.isVolunteer);
-
+      this.radioValue = json.data.isVolunteer;
 
       this.detailsForm.patchValue({
         firstName: json.data.firstName,
@@ -91,6 +96,11 @@ export class InstructorViewComponent implements OnInit {
         isVolunteer: json.data.isVolunteer,
         salary: json.data.salary,
       })
+    });
+
+    this._adminService.getInstructorCourses(this.rowData.id).subscribe((json) => {
+      this.listOfData = json.data
+      console.log(this.listOfData);
     });
   }
 
@@ -106,46 +116,22 @@ export class InstructorViewComponent implements OnInit {
 
   }
 
-  beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
-  new Observable((observer: Observer<boolean>) => {
-    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-    if (!isJpgOrPng) {
-      this.msg.error('You can only upload JPG file!');
-      observer.complete();
-      return;
-    }
-    const isLt2M = file.size! / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      this.msg.error('Image must smaller than 2MB!');
-      observer.complete();
-      return;
-    }
-    observer.next(isJpgOrPng && isLt2M);
-    observer.complete();
-  });
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
 
-private getBase64(img: File, callback: (img: string) => void): void {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result!.toString()));
-  reader.readAsDataURL(img);
-}
+    reader.addEventListener('load', (event: any) => {
+      this.detailsForm.disable();
+      this.selectedFile = new ImageSnippet(event.target.result, file);
 
-handleChange(info: { file: NzUploadFile }): void {
-  switch (info.file.status) {
-    case 'uploading':
-      this.loading = true;
-      break;
-    case 'done':
-      // Get this url from response in real world.
-      this.getBase64(info.file!.originFileObj!, (img: string) => {
-        this.loading = false;
-        this.imageUrl = img;
-      });
-      break;
-    case 'error':
-      this.msg.error('Network error');
-      this.loading = false;
-      break;
+      this._adminService.uploadFile(this.selectedFile.file).subscribe((json) => {
+        this.detailsForm.patchValue({
+          imageUrl: json.data.mediaUrl
+        })
+        this.detailsForm.enable();
+      })
+    });
+    reader.readAsDataURL(file);
+
   }
-}
 }

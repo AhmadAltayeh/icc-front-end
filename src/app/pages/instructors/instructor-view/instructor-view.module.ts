@@ -12,6 +12,8 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { TableModule } from 'src/app/partials/table/table.module'; 
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @NgModule({
   declarations: [InstructorViewComponent],
@@ -30,7 +32,9 @@ import { TableModule } from 'src/app/partials/table/table.module';
     NzUploadModule,
     NzRadioModule,
     NzButtonModule,
-    TableModule
+    TableModule,
+    NzIconModule,
+    NzTableModule
   ]
 })
 export class InstructorViewModule {

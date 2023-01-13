@@ -234,10 +234,10 @@ export class AdminService {
     return this.httpClient.delete<any>(`admin/instructors/${id}`, { context })
   }
 
-  getInstructorCourses(query: PaginationQuery, id: number): Observable<PaginationResult<any>> {
+  getInstructorCourses(id: number): Observable<any> {
     const context = new HttpContext()
     context.set(FULL_RESPONSE, true)
-    return this.httpClient.get<PaginationResult<any>>(`admin/instructors/courses/${id}`, { context })
+    return this.httpClient.get<any>(`admin/instructors/courses/${id}`, { context })
   }
 
     //*               ******************* MEDIA ******************                 *
