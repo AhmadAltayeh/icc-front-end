@@ -37,6 +37,10 @@ export class StudentsListComponent {
     return this._adminService.getStudents(query);
   }
 
+  exportStudents(){
+    window.open("https://islamic-cultural-center.herokuapp.com/icc/api/v1/admin/export/students")
+  }
+
   displayColumns = [
     new Column({
       key: 'id',

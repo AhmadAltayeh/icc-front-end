@@ -15,3 +15,15 @@
   height: 50px;
   border-radius: 8px;
 }
+
+.table-header {
+  ::ng-deep .ant-table-thead > tr > th {
+    background-color: transparent;
+    border-radius: 0%;
+  }
+
+  ::ng-deep .ant-table-container {
+    border: 0.5px dimgray solid;
+    overflow: hidden;
+}
+}

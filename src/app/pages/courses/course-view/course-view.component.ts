@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NzDrawerRef } from 'ng-zorro-antd/drawer';
-import { NzSelectSizeType } from 'ng-zorro-antd/select';
+import { en_US, NzI18nService } from 'ng-zorro-antd/i18n';
 import { PaginationQuery } from 'src/app/core/models';
 import { AdminService } from 'src/app/core/serivices';
-import { Column, FetchProvider, TableComponent } from 'src/app/partials/table/table.component';
+import { TableComponent } from 'src/app/partials/table/table.component';
 @Component({
   selector: 'app-view-form',
   templateUrl: './course-view.component.html',
@@ -24,8 +24,15 @@ export class CourseViewComponent implements OnInit {
   classroms: string[] = ['classroom 01', 'classroom 02'];
   smstr: string[] = ['1st', '2nd'];
   blean: boolean[] = [true, false];
+  instructorsData : any[] = [];
+  studentsData : any[] = [];
+  loading: boolean = false;
+  isVisible = false;
+  selectedStudentId: any;
+  courseInstructors : any[] = [];
+  selectedInstructorValue:any
 
-  constructor(private _fb: FormBuilder, public _adminService: AdminService) {
+  constructor(private i18n: NzI18nService, private _fb: FormBuilder, public _adminService: AdminService) {
     this.detailsForm = this._fb.group({
       name: ['', [Validators.nullValidator]],
       description: ['', [Validators.required]],
@@ -46,69 +53,33 @@ export class CourseViewComponent implements OnInit {
       lastRegDay: ['', [Validators.required]],
       isPreRecorded: ['', [Validators.required]],
     })
-
   }
 
   ngOnInit(): void {
+    this.i18n.setLocale(en_US);
     this.fillCourseDetails(this.rowData.id);
-
-
   }
-  fetchProviderIN: FetchProvider<any> = (query: PaginationQuery) => {
 
-    return this._adminService.getInstructors(query);
-  }
-  fetchProviderST: FetchProvider<any> = (query: PaginationQuery) => {
-
-    return this._adminService.getStudents(query);
-  }
   getInstructorId(event: any) {
     this.instructorId = event.target.value;
   }
-  addInstructorToCourse() {
-    this._adminService.addInstructorToCourse({ instructorId: this.instructorId, courseId: this.rowData.id }).subscribe();
+
+  addInstructorToCourse(instructorId : number) {
+    this._adminService.addInstructorToCourse({ instructorId: instructorId, courseId: this.rowData.id }).subscribe(() => {
+      this.drawer.close();
+    });
   }
+
   getStudentId(event: any) {
     this.studentId = event.target.value;
   }
-  addStudentToCourse() {
-    console.log("asd");
 
-    this._adminService.addStudentToCourse({ studentId: this.studentId, courseId: this.rowData.id }).subscribe();
+  addStudentToCourse() {
+    this._adminService.addStudentToCourse({instructorId:this.selectedInstructorValue, studentId: this.selectedStudentId, courseId: this.rowData.id }).subscribe();
   }
 
-  displayColumns: Column[] = [];
-  displayInstructors = [
-    new Column({
-      key: 'id',
-      title: 'ID',
-    }),
-    new Column({
-      key: 'firstName',
-      title: 'Instructor Name',
+  oneTquery = new PaginationQuery(0,100000);
 
-    }),
-    new Column({
-      key: 'lastName',
-      title: '',
-
-    }),
-
-
-
-  ];
-  displayStudents = [
-    new Column({
-      key: 'id',
-      title: 'ID',
-    }),
-    new Column({
-      key: 'userName',
-      title: 'User Name',
-
-    }),
-
-  ];
 
   public fillCourseDetails(id: number) {
     this._adminService.getOneCourse(this.rowData.id).subscribe((json) => {
@@ -126,15 +97,22 @@ export class CourseViewComponent implements OnInit {
         isFree: json.data.isFree,
         price: Number(json.data.price),
         classroom: json.data.classroom,
-        year: json.data.year + "-01-01",
+        year: json.data.year,
         semester: json.data.semester,
         teamsLink: json.data.teamsLink,
         lastRegDay: json.data.lastRegDay,
         isPreRecorded: json.data.isPreRecorded
-
       })
+      this.courseInstructors = json.data.instructors;
+    });
+
+    this._adminService.getInstructors(this.oneTquery).subscribe((json) => {
+      this.instructorsData = json.data
+    });
 
 
+    this._adminService.getStudents(this.oneTquery).subscribe((json1) => {      
+      this.studentsData = json1.data
     });
   }
 
@@ -142,11 +120,30 @@ export class CourseViewComponent implements OnInit {
     this.tabChanged.emit(args[0].index);
   }
   t: TableComponent = new TableComponent;
+
   Delete() {
     this._adminService.deleteOneCourse(this.rowData.id).subscribe((json) => {
-      console.log(json)
     })
     window.location.reload();
+  }
 
+  showModal(id: number): void {
+    this.isVisible = true;
+    this.selectedStudentId = id;
+  }
+
+  handleOk(instructorId : any): void {
+    if(this.selectedInstructorValue){
+      console.log(this.selectedInstructorValue);
+      this.isVisible = false;
+      this.addStudentToCourse()
+    }
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
+  }
+  selectedInstructor(event:any){
+    console.log(event);
   }
 }

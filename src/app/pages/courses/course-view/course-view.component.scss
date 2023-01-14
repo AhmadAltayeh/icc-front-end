@@ -29,7 +29,7 @@
   display: inline-flex;
 }
 
-::ng-deep .ant-input-group > .ant-input-affix-wrapper:not(:last-child) .ant-input {
+::ng-deep .ant-input-group>.ant-input-affix-wrapper:not(:last-child) .ant-input {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   height: 48px;
@@ -52,11 +52,11 @@
   border-radius: 8px;
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
+
 ::ng-deep {
-  nz-select::placeholder
-    {   
-        text-align: center;
-    }
+  nz-select::placeholder {
+    text-align: center;
+  }
 }
 
 ::ng-deep .ant-select-single.ant-select-lg:not(.ant-select-customize-input) .ant-select-selector {
@@ -77,3 +77,35 @@
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   min-height: 50px;
 }
+
+.table-header {
+  ::ng-deep .ant-table-thead>tr>th {
+    background-color: transparent;
+    border-radius: 0%;
+  }
+
+  ::ng-deep .ant-table-container {
+    border: 0.5px dimgray solid;
+    overflow: hidden;
+  }
+}
+
+.student-table-header {
+  ::ng-deep .ant-table-thead>tr>th {
+    background-color: transparent;
+    border-radius: 0%;
+  }
+
+  ::ng-deep .ant-table-container {
+    border: 0.5px dimgray solid;
+    overflow: hidden;
+  }
+}
+.modal-backdrop.fade {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  }
+  .modal-backdrop.fade.in {
+  opacity: 0.5 !important;
+  filter: alpha(opacity=50);
+  }

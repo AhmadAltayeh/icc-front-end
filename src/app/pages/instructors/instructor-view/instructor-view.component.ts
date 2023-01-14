@@ -1,11 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AdminService } from 'src/app/core/serivices';
-import { Column, FetchProvider, TableComponent } from 'src/app/partials/table/table.component';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer } from 'rxjs';
+import { Column, TableComponent } from 'src/app/partials/table/table.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { PaginationQuery } from 'src/app/core/models';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) { }
@@ -28,8 +25,8 @@ export class InstructorViewComponent implements OnInit {
   passwordVisible = false;
   passwordVisible2 = false;
   password: any;
-  confirmPassword:any;
-  listOfData: any[]= [];
+  confirmPassword: any;
+  listOfData: any[] = [];
   constructor(private _fb: FormBuilder, public _adminService: AdminService, private msg: NzMessageService) {
     this.detailsForm = this._fb.group({
       firstName: ['', [Validators.required]],
@@ -73,13 +70,13 @@ export class InstructorViewComponent implements OnInit {
     })
   ];
 
-  removeCourseFromInstructor(courseId:any) {
-    this.loading=true;    
+  removeCourseFromInstructor(courseId: any) {
+    this.loading = true;
     this._adminService.removeCourseFromInstructor({ instructorId: this.rowData.id, courseId: courseId })
-    .subscribe((json) => {
-      this.loading=false
-      this.fillInstructorDetails(this.rowData.id);
-    })
+      .subscribe((json) => {
+        this.loading = false
+        this.fillInstructorDetails(this.rowData.id);
+      })
   }
 
   public fillInstructorDetails(id: number) {

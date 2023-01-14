@@ -141,7 +141,7 @@
                 <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
               </ng-template>
             </nz-form-control>
-    
+
             <nz-form-control nzHasFeedback [nzErrorTip]="endDateErrorTpl" style="margin-right: 20px">
               <span>End Date</span>
               <nz-date-picker nzMode="date" formControlName="endDate" nz-input nzSize="large"
@@ -150,12 +150,12 @@
                 <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
               </ng-template>
             </nz-form-control>
-    
+
             <nz-form-control nzHasFeedback [nzErrorTip]="lastRegDayErrorTpl">
               <span>Last Registration Day</span>
               <nz-date-picker formControlName="lastRegDay" nz-input nzSize="large"
                 style="border-radius: 8px; width: 177px; height:50px;" nzPlaceHolder="Last Reg Day"></nz-date-picker>
-                <ng-template #lastRegDayErrorTpl let-control>
+              <ng-template #lastRegDayErrorTpl let-control>
                 <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
               </ng-template>
             </nz-form-control>
@@ -177,7 +177,7 @@
                 <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
               </ng-template>
             </nz-form-control>
-    
+
             <nz-form-control nzHasFeedback [nzErrorTip]="semesterErrorTpl" style="margin-right: 20px">
               <span>Semester</span>
               <nz-select formControlName="semester" nzPlaceHolder="Semester">
@@ -189,7 +189,7 @@
                 <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
               </ng-template>
             </nz-form-control>
-    
+
             <nz-form-control nzHasFeedback [nzErrorTip]="lastRegDayErrorTpl">
               <span>Year</span>
               <nz-date-picker nzMode="year" formControlName="year" nz-input nzSize="large"
@@ -208,7 +208,7 @@
             <nz-form-control nzHasFeedback [nzErrorTip]="daysOfWeekErrorTpl">
               <span>Days of Week</span>
               <nz-select [(ngModel)]="days" formControlName="daysOfWeek" nzMode="multiple" nzPlaceHolder="Days Of Week">
-                  <nz-option *ngFor="let day of allDays" [nzLabel]="day" [nzValue]="day"></nz-option>
+                <nz-option *ngFor="let day of allDays" [nzLabel]="day" [nzValue]="day"></nz-option>
               </nz-select>
               <ng-template #daysOfWeekErrorTpl let-control>
                 <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
@@ -220,36 +220,71 @@
     </form>
   </nz-tab>
 
-
-
   <nz-tab nzTitle="Instructors">
-    <nz-input-group nzSize="large" [nzAddOnAfter]="suffixButton">
-      <input #id name="searchBar" type="text" nz-input placeholder="input Instructor ID you want to add"
-        (input)="getInstructorId($event)" />
-      <ng-template #suffixButton>
-        <button nz-button nzType="primary" nzSize="large" (click)="addInstructorToCourse()">
-          Add
-        </button>
-      </ng-template>
-    </nz-input-group>
+    <nz-table #basicTable [nzData]="instructorsData" class="table-header" [nzShowPagination]="false"
+      [nzLoading]="loading">
 
-    <app-table #table title="Avaliable Instructors" [displayColumns]="displayInstructors"
-      [fetchProvider]="fetchProviderIN">
-    </app-table>
+      <thead>
+        <tr>
+          <th style="text-align: center;">ID</th>
+          <th style="text-align: center;">First Name</th>
+          <th style="text-align: center;">Last Name</th>
+          <th style="text-align: center;">Sub Number</th>
+          <th style="text-align: center;">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td style="text-align: center;">{{ data.id }}</td>
+          <td style="text-align: center;">{{ data.firstName }}</td>
+          <td style="text-align: center;">{{ data.lastName }}</td>
+          <td style="text-align: center;">{{ data.subNumber }}</td>
+          <td style="text-align: center;">
+            <button style="background: transparent; border: none; color: blue;" nz-icon nzType="plus-square"
+              nzTheme="outline" (click)="addInstructorToCourse(data.id)"></button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
   </nz-tab>
 
   <nz-tab nzTitle="Students">
-    <nz-input-group nzSize="large" [nzAddOnAfter]="stud">
-      <input #id name="studentId" type="text" nz-input placeholder="input Student ID you want to add"
-        (input)="getStudentId($event)" />
-      <ng-template #stud>
-        <button nz-button nzType="primary" nzSize="large" (click)="addStudentToCourse()">
-          Add
-        </button>
-      </ng-template>
-    </nz-input-group>
+    <nz-table #basicTable1 [nzData]="studentsData" class="student-table-header" [nzShowPagination]="false"
+      [nzLoading]="loading">
 
-    <app-table #table title="Students" [displayColumns]="displayStudents" [fetchProvider]="fetchProviderST">
-    </app-table>
+      <thead>
+        <tr>
+          <th style="text-align: center;">ID</th>
+          <th style="text-align: center;">First Name</th>
+          <th style="text-align: center;">Email</th>
+          <th style="text-align: center;">Action</th>
+        </tr>
+      </thead>
+
+      <!-- addStudentToCourse(data1.id) -->
+      <tbody>
+        <ng-container *ngFor="let data1 of basicTable1.data">
+          <tr>
+            <td style="text-align: center;">{{ data1.id }}</td>
+            <td style="text-align: center;">{{ data1.lastName }}</td>
+            <td style="text-align: center;">{{ data1.email }}</td>
+            <td style="text-align: center;">
+              <button style="background: transparent; border: none; color: blue;" nz-icon nzType="plus-square"
+                nzTheme="outline" (click)="showModal(data1.id)"></button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </nz-table>
   </nz-tab>
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Please Choose Instructor" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk($event)">
+      <ng-container *nzModalContent>
+        <nz-select style="width: 100%;" nzPlaceHolder="Instructors"  [(ngModel)]="selectedInstructorValue">
+          <ng-container *ngFor="let data of courseInstructors">
+            <nz-option [nzValue]="data.id" [nzLabel]="data.firstName +' ' + data.lastName"></nz-option>
+          </ng-container>
+        </nz-select>
+      </ng-container>
+  </nz-modal>
 </nz-tabset>

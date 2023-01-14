@@ -72,22 +72,22 @@
   <nz-tab nzTitle="Password">
     <form [formGroup]="passwordForm" nz-form>
       <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="12">
-          <div>
-            <span>New Password</span>
-          </div>
+        <div nz-col nzSpan="24">
           <nz-form-item>
             <nz-form-control nzHasFeedback [nzErrorTip]="newPasswordNameErrorTpl">
-              <nz-input-group>
-                <input nzSize="large" formControlName="newPassword" type="password" placeholder="Enter Passowrd"
-                  nz-input />
+              <span>New Password</span>
+              <nz-input-group [nzSuffix]="suffixTemplate" style="border-radius: 8px; height:50px">
+                <input nzSize="large" formControlName="newPassword" [type]="passwordVisible ? 'text' : 'password'"
+                  placeholder="Enter Password" nz-input [(ngModel)]="password" />
                 <ng-template #newPasswordNameErrorTpl let-control>
                   <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
-                  <ng-container *ngIf="
-                      control.hasError('minlength') ||
-                      control.hasError('pattern')
-                    ">Password Should be minimum 8 characters with 1 capital
-                    letter</ng-container>
+                  <ng-container *ngIf="control.hasError('minlength') || control.hasError('pattern')">Password Should be
+                    minimum 8 characters with 1 capital letter
+                  </ng-container>
+                </ng-template>
+                <ng-template #suffixTemplate>
+                  <span nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    (click)="passwordVisible = !passwordVisible"></span>
                 </ng-template>
               </nz-input-group>
             </nz-form-control>
@@ -96,38 +96,24 @@
       </div>
 
       <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="12">
-          <div>
-            <span>Confirm Password</span>
-          </div>
+        <div nz-col nzSpan="24">
           <nz-form-item>
             <nz-form-control nzHasFeedback [nzErrorTip]="confirmPasswordNameErrorTpl">
-              <nz-input-group>
-                <input nzSize="large" formControlName="confirmPassword" type="password" placeholder="Confirm Passowrd"
-                  nz-input />
+              <span>Confirm Password</span>
+              <nz-input-group [nzSuffix]="suffixTemplate2" style="border-radius: 8px; height:50px">
+                <input nzSize="large" formControlName="confirmPassword" [type]="passwordVisible2 ? 'text' : 'password'"
+                  placeholder="Confirm Password" nz-input [(ngModel)]="confirmPassword" />
                 <ng-template #confirmPasswordNameErrorTpl let-control>
                   <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
-                  <ng-container *ngIf="
-                      control.hasError('minlength') ||
-                      control.hasError('pattern')
-                    ">Password Should be minimum 8 characters with 1 capital
-                    letter</ng-container>
+                  <ng-container *ngIf="control.hasError('minlength') || control.hasError('pattern')">Password Should be
+                    minimum 8 characters with 1 capital letter
+                  </ng-container>
+                </ng-template>
+                <ng-template #suffixTemplate2>
+                  <span nz-icon [nzType]="passwordVisible2 ? 'eye-invisible' : 'eye'"
+                    (click)="passwordVisible2 = !passwordVisible2"></span>
                 </ng-template>
               </nz-input-group>
-            </nz-form-control>
-          </nz-form-item>
-        </div>
-      </div>
-      <div nz-row [nzGutter]="8">
-        <div nz-col nzSpan="8">
-          <div></div>
-          <nz-form-item>
-            <nz-form-control>
-              <div class="button-container">
-                <button nzType="primary" nz-button nzDanger (click)="resetStudentPassword()">
-                  Change Password
-                </button>
-              </div>
             </nz-form-control>
           </nz-form-item>
         </div>
@@ -136,19 +122,28 @@
   </nz-tab>
 
   <nz-tab nzTitle="Courses">
-    <nz-input-group nzSize="large" [nzAddOnAfter]="suffixButton">
-      <input #id name="searchBar" type="text" nz-input placeholder="input Course id your want to remove"
-        (input)="getCourseId($event)" />
-      <ng-template #suffixButton>
-        <button nz-button nzType="primary" nzDanger nzSize="large" (click)="DeleteCourseFromStudent()">
-          Remove
-        </button>
-      </ng-template>
-    </nz-input-group>
+    <nz-table #basicTable [nzData]="listOfData" class="table-header" [nzShowPagination]="false" [nzLoading]="loading">
 
-    <app-table #table title="Student Enrolled Courses List" [displayColumns]="displayStudentCoursesColumns"
-      [fetchProvider]="fetchProvider">
-    </app-table>
+      <thead>
+        <tr>
+          <th style="text-align: center;">ID</th>
+          <th style="text-align: center;">Course Name</th>
+          <th style="text-align: center;">Classroom</th>
+          <th style="text-align: center;">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td style="text-align: center;">{{ data.id }}</td>
+          <td style="text-align: center;">{{ data.name }}</td>
+          <td style="text-align: center;">{{ data.classroom }}</td>
+          <td style="text-align: center;">
+            <button style="background: transparent; border: none; color: red;" nz-icon nzType="delete" nzTheme="outline" (click)="DeleteCourseFromStudent(data.id)"></button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
   </nz-tab>
-  
+
 </nz-tabset>

@@ -27,6 +27,10 @@ export class InstructorsListComponent {
   constructor(public _adminService: AdminService) {
   }
 
+  exportInstructors(){
+    window.open("https://islamic-cultural-center.herokuapp.com/icc/api/v1/admin/export/instructor")
+  }
+
   fetchProvider: FetchProvider<any> = (query: PaginationQuery) => {
     const search = this._searchFilterComponent.getFilters()
     if (search) {

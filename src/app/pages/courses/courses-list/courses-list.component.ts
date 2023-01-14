@@ -25,6 +25,7 @@ export class CoursesListComponent {
   create = false
   view = false
   tabSelected: number = 0;
+  disabled = false;
 
   constructor(public _adminService: AdminService) {
   }
@@ -82,6 +83,10 @@ export class CoursesListComponent {
         form.controls[key].updateValueAndValidity();
       }
     }
+  }
+
+  exportCourses(){
+    window.open("https://islamic-cultural-center.herokuapp.com/icc/api/v1/admin/export/courses")
   }
 
   submitCreateForm() {

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AdminService } from 'src/app/core/serivices';
 import { Column } from "../../../partials/table/table.component";
 
-import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
+import { en_US, NzI18nService } from 'ng-zorro-antd/i18n';
 
 @Component({
   selector: 'app-student-form',
@@ -20,7 +20,6 @@ export class StudentFormComponent implements OnInit {
       phoneNumber: ['', [Validators.required]],
       facebookUrl: ['', [Validators.required]],
       dateOfBirth: ['', [Validators.required]],
-
     })
   }
   date = null;
@@ -31,6 +30,5 @@ export class StudentFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.i18n.setLocale(en_US);
-
   }
 }
