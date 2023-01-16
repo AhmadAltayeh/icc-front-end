@@ -100,7 +100,7 @@ export class CoursesListComponent {
       form.value.endDate = format(form.value.endDate, "yyyy-MM-dd")
       form.value.lastRegDay = format(form.value.lastRegDay, "yyyy-MM-dd")
       form.value.year = format(form.value.year, "yyyy-MM-dd")
-      form.value.duration = 1;
+      form.value.duration = 1;      
       this._adminService.createCourse(form.value).subscribe({
         next: () => {
           this.loading = false
@@ -123,14 +123,16 @@ export class CoursesListComponent {
     let form: FormGroup;
     if (this.tabSelected == 0) {
       form = this._courseViewComponent.detailsForm;
-      form.value.startDate = format(form.value.startDate, "yyyy-MM-dd")
-      form.value.endDate = format(form.value.endDate, "yyyy-MM-dd")
-      form.value.lastRegDay = format(form.value.lastRegDay, "yyyy-MM-dd")
-      form.value.year = format(form.value.year, "yyyy-MM-dd")
-      form.value.duration = 1;
-      if (form.valid) {
+      if (form.valid) {        
         this.loading = true
         form.disable()
+        console.log(form.value);
+        // form.value.startDate = format(form.value.startDate, "yyyy-MM-dd")
+        // form.value.endDate = format(form.value.endDate, "yyyy-MM-dd")
+        // form.value.lastRegDay = format(form.value.lastRegDay, "yyyy-MM-dd")
+        form.value.year = form.value.year + "-01-01"
+        form.value.duration = 1;
+
         this._adminService.updateCourse(this.rowData.id, form.value).subscribe({
           next: () => {
             this.loading = false
