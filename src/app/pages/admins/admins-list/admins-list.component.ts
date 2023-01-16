@@ -119,9 +119,7 @@ export class AdminsListComponent {
       else {
         this.validateForm(form);
       }
-    } else if (this.tabSelected == 1) {
-      console.log(this.tabSelected);
-      
+    } else if (this.tabSelected == 1) {      
       form = this._adminViewComponent.passwordForm;
       if (form.valid) {
         this.loading = true

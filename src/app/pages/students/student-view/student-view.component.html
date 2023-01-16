@@ -1,4 +1,4 @@
-<nz-tabset [(nzSelectedIndex)]="tabSelected">
+<nz-tabset (nzSelectChange)="tabChange([$event])">
   <nz-tab nzTitle="Details">
     <form class="student-form" [formGroup]="detailsForm" nz-form>
       <div nz-row [nzGutter]="8">

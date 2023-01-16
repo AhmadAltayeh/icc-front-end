@@ -14,6 +14,7 @@ export class StudentViewComponent implements OnInit {
   @ViewChild('drawer') public drawer!: NzDrawerRef
   @Input() rowData: any = '';
   roleName: string = '';
+  @Output() tabChanged = new EventEmitter<number>;
   tabSelected: number = 0
   courseId: any
   detailsForm: FormGroup;
@@ -114,42 +115,44 @@ export class StudentViewComponent implements OnInit {
       })
     }
   }
-  submitUpdateForm() {
-    console.log(this.tabSelected);
-
-    let form: FormGroup;
-    if (this.tabSelected == 0) {
-      form = this.detailsForm;
-      if (form.valid) {
-        form.disable()
-        this._adminService.updateStudent(this.rowData.id, form.value).subscribe({
-          error: () => {
-            form.enable()
-          }
-        })
-      }
-      else {
-        this.validateForm(form);
-      }
-    } else if (this.tabSelected == 2) {
-
-      form = this.passwordForm;
-      if (form.valid) {
-        form.disable()
-        let obj = {
-          id: this.rowData.id,
-          ...form.value
-        }
-        this._adminService.updateStudentPassword(obj).subscribe({
-
-          error: () => {
-            form.enable()
-          }
-        })
-      }
-      else {
-        this.validateForm(form);
-      }
-    }
+  tabChange(args: any[]): void {
+    this.tabChanged.emit(args[0].index);
   }
+  // submitUpdateForm() {
+  //   console.log(this.tabSelected);
+
+  //   let form: FormGroup;
+  //   if (this.tabSelected == 0) {
+  //     form = this.detailsForm;
+  //     if (form.valid) {
+  //       form.disable()
+  //       this._adminService.updateStudent(this.rowData.id, form.value).subscribe({
+  //         error: () => {
+  //           form.enable()
+  //         }
+  //       })
+  //     }
+  //     else {
+  //       this.validateForm(form);
+  //     }
+  //   } else if (this.tabSelected == 1) {
+  //     form = this.passwordForm;
+  //     if (form.valid) {
+  //       form.disable()
+  //       let obj = {
+  //         id: this.rowData.id,
+  //         ...form.value
+  //       }        
+  //       this._adminService.updateStudentPassword(obj).subscribe({
+
+  //         error: () => {
+  //           form.enable()
+  //         }
+  //       })
+  //     }
+  //     else {
+  //       this.validateForm(form);
+  //     }
+  //   }
+  // }
 }

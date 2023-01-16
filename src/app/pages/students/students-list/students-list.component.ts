@@ -105,6 +105,7 @@ export class StudentsListComponent {
   }
 
   submitUpdateForm() {
+    console.log(this.tabSelected);
     let form: FormGroup;
     if (this.tabSelected == 0) {
       form = this._studentViewComponent.detailsForm;
@@ -127,7 +128,6 @@ export class StudentsListComponent {
         this.validateForm(form);
       }
     } else if (this.tabSelected == 1) {
-      console.log(this.tabSelected);
       
       form = this._studentViewComponent.passwordForm;
       if (form.valid) {
@@ -172,7 +172,7 @@ export class StudentsListComponent {
     this.drawer.close()
   }
 
-  tabSwitched(index: number) {
+  tabSwitched(index: any) {
     this.tabSelected = index;    
   }
 }
