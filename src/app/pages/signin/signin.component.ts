@@ -27,12 +27,12 @@ export class SigninComponent  {
 
 
   submitForm(): void {
+    console.log(this.ff.value);
+    
     if (this.ff.valid) {
-      console.log("hia");
       
       this._studentService.registerStudent(this.ff.value).subscribe({
         next: () => {
-          console.log("hia");
           
         },
         error: (err) => {
@@ -41,7 +41,6 @@ export class SigninComponent  {
       })
     } else {
       Object.values(this.ff.controls).forEach(control => {
-        console.log("hiiiiiiiiiiii");
         
         if (control.invalid) {
           this.ff.markAsDirty();
