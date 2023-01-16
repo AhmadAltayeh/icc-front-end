@@ -47,6 +47,7 @@ export class CardComponent implements OnInit {
   // currentPageDataChange($event: readonly Data[]): void {
   //   this.listOfData = $event;
   // }
+  daysOfweek: Data[] = [];
   total?: number;
   allData: any;
   constructor(private _studentService: StudentService) {}

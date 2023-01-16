@@ -50,6 +50,9 @@
           ></nz-card-meta>
           <p></p>
 
+          <ng-container *ngFor="let day of data?.daysOfWeek"
+            ><div class="text-center">{{ day }}</div>
+          </ng-container>
         </nz-card>
         <ng-template #avatarTemplate>
           <nz-avatar
