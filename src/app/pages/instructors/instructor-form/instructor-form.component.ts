@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Observable, Observer } from 'rxjs';
 import { AdminService } from 'src/app/core/serivices';
 import { Column } from "../../../partials/table/table.component";
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadFile } from 'ng-zorro-antd/upload';
 
+class ImageSnippet {
+  constructor(public src: string, public file: File) { }
+}
 
 @Component({
   selector: 'app-instructor-form',
@@ -17,6 +18,7 @@ export class InstructorFormComponent implements OnInit {
   imageUrl?: string;
   form: FormGroup
   radioValue: any = false;
+  selectedFile: any;
 
   constructor(private _fb: FormBuilder, public _adminService: AdminService, private msg: NzMessageService) {
     this.form = this._fb.group({
@@ -38,46 +40,22 @@ export class InstructorFormComponent implements OnInit {
 
   }
 
-  beforeUpload = (file: NzUploadFile, _fileList: NzUploadFile[]): Observable<boolean> =>
-    new Observable((observer: Observer<boolean>) => {
-      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-      if (!isJpgOrPng) {
-        this.msg.error('You can only upload JPG file!');
-        observer.complete();
-        return;
-      }
-      const isLt2M = file.size! / 1024 / 1024 < 2;
-      if (!isLt2M) {
-        this.msg.error('Image must smaller than 2MB!');
-        observer.complete();
-        return;
-      }
-      observer.next(isJpgOrPng && isLt2M);
-      observer.complete();
-    });
-
-  private getBase64(img: File, callback: (img: string) => void): void {
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
     const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result!.toString()));
-    reader.readAsDataURL(img);
-  }
 
-  handleChange(info: { file: NzUploadFile }): void {
-    switch (info.file.status) {
-      case 'uploading':
-        this.loading = true;
-        break;
-      case 'done':
-        // Get this url from response in real world.
-        this.getBase64(info.file!.originFileObj!, (img: string) => {
-          this.loading = false;
-          this.imageUrl = img;
-        });
-        break;
-      case 'error':
-        this.msg.error('Network error');
-        this.loading = false;
-        break;
-    }
+    reader.addEventListener('load', (event: any) => {
+      this.form.disable();
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+
+      this._adminService.uploadFile(this.selectedFile.file).subscribe((json) => {
+        this.form.patchValue({
+          imageUrl: json.data.mediaUrl
+        })
+        this.form.enable();
+      })
+    });
+    reader.readAsDataURL(file);
+
   }
 }

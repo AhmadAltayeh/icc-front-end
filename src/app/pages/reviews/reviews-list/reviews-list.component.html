@@ -1,0 +1,13 @@
+<app-table #table (clickAction)="clickEvent($event)" [displayColumns]="displayColumns"
+  [fetchProvider]="fetchProvider">
+  <span>Reviews List</span>
+</app-table>
+
+<nz-drawer #drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzWidth]="620" nzTitle="Review Details"
+  (nzOnClose)="closeDrawer()">
+  <div>
+    <div *nzDrawerContent>
+      <app-view-form [rowData]="rowData"></app-view-form>
+    </div>
+  </div>
+</nz-drawer>

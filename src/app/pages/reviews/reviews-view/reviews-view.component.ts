@@ -10,10 +10,10 @@ class ImageSnippet {
 
 @Component({
   selector: 'app-view-form',
-  templateUrl: './instructor-view.component.html',
-  styleUrls: ['./instructor-view.component.scss']
+  templateUrl: './reviews-view.component.html',
+  styleUrls: ['./reviews-view.component.scss']
 })
-export class InstructorViewComponent implements OnInit {
+export class ReviewsViewComponent implements OnInit {
   @Input() rowData: any = '';
   @Output() tabChanged = new EventEmitter<number>;
   detailsForm: FormGroup

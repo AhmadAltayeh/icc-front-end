@@ -3,19 +3,13 @@
   <div nz-row [nzGutter]="8">
     <div nz-col nzSpan="24">
       <nz-form-item>
-        <nz-form-control nzHasFeedback [nzErrorTip]="imageUrlErrorTpl" style="margin-right: 10px;">
-          <nz-upload class="image-form" nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" nzName="image"
-            nzListType="picture-card" [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload"
-            (nzChange)="handleChange($event)">
-            <ng-container *ngIf="!imageUrl">
-              <span class="upload-icon" nz-icon ([nzType])="loading ? 'loading' : 'plus'"></span>
-              <div class="ant-upload-text">Image</div>
-            </ng-container>
-            <img *ngIf="imageUrl" [src]="imageUrl" style="width: 100%" />
-          </nz-upload>
-          <ng-template #imageUrlErrorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">This field is required</ng-container>
-          </ng-template>
+        <nz-form-control>
+          <div class="card">
+            <div class="card_img">
+              <img>
+            </div>
+            <input #imageInput type="file" (change)="processFile(imageInput)">
+          </div>
         </nz-form-control>
       </nz-form-item>
     </div>

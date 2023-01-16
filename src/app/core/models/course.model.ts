@@ -22,6 +22,7 @@ export namespace CourseModel {
   export interface StudentCourse {
     studentId:number;
     courseId:number;
+    instructorId?:number;
   }
   export interface InstructorCourse {
     instructorId:number;

@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
   form: FormGroup;
   passwordForm: FormGroup;
   loading = false;
-  avatarUrl?: string;
+  disabled = false;
   imageUrl: any;
   selectedFile: any;
   constructor(private message: NzMessageService, private _fb: FormBuilder, private _adminService: AdminService, private router: Router) {
@@ -135,31 +135,24 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  private onSuccess() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'ok';
-  }
-
-  private onError() {
-    this.selectedFile.pending = false;
-    this.selectedFile.status = 'fail';
-    this.selectedFile.src = '';
-  }
-
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
     
     reader.addEventListener('load', (event: any) => {
-
+      this.form.disable();
+      this.disabled = true;
       this.selectedFile = new ImageSnippet(event.target.result, file);
 
       this._adminService.uploadFile(this.selectedFile.file).subscribe((json) => {                
         this.form.patchValue({
           imageUrl: json.data.mediaUrl
         })
+        this.form.enable();
+        this.disabled = false;
       })
     });
     reader.readAsDataURL(file);
+
   }
 }

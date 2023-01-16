@@ -7,6 +7,7 @@ import { StudentFormComponent } from "../student-form/student-form.component";
 import { FormGroup } from "@angular/forms";
 import { NzDrawerRef } from "ng-zorro-antd/drawer";
 import { StudentViewComponent } from '../student-view/student-view.component';
+import { format } from "date-fns";
 
 @Component({
   selector: 'app-students-list',
@@ -34,6 +35,10 @@ export class StudentsListComponent {
       return this._adminService.searchStudents(query);
     }
     return this._adminService.getStudents(query);
+  }
+
+  exportStudents(){
+    window.open("https://islamic-cultural-center.herokuapp.com/icc/api/v1/admin/export/students")
   }
 
   displayColumns = [
@@ -78,7 +83,7 @@ export class StudentsListComponent {
     let form: FormGroup;
     form = this._studentFormComponent.form;
     if (form.valid) {
-      console.log(form.value);
+      form.value.dateOfBirth = format(form.value.dateOfBirth, "yyyy-MM-dd")
       
       this.loading = true
       form.disable()
@@ -100,6 +105,7 @@ export class StudentsListComponent {
   }
 
   submitUpdateForm() {
+    console.log(this.tabSelected);
     let form: FormGroup;
     if (this.tabSelected == 0) {
       form = this._studentViewComponent.detailsForm;
@@ -122,7 +128,6 @@ export class StudentsListComponent {
         this.validateForm(form);
       }
     } else if (this.tabSelected == 1) {
-      console.log(this.tabSelected);
       
       form = this._studentViewComponent.passwordForm;
       if (form.valid) {
@@ -167,7 +172,7 @@ export class StudentsListComponent {
     this.drawer.close()
   }
 
-  tabSwitched(index: number) {
+  tabSwitched(index: any) {
     this.tabSelected = index;    
   }
 }

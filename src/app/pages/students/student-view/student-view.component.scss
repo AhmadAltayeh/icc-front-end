@@ -1,4 +1,29 @@
-.admin-view {
-  margin: 50px 20px;
+.student-form {
+  margin: 20px 10px;
 
+}
+
+.pickerC{
+  text-align: center;
+  max-width: fit-content;
+}
+
+ .pickerC {
+  min-width: -webkit-fill-available;
+  width: 256px;
+  margin-right: 10px;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.table-header {
+  ::ng-deep .ant-table-thead > tr > th {
+    background-color: transparent;
+    border-radius: 0%;
+  }
+
+  ::ng-deep .ant-table-container {
+    border: 0.5px dimgray solid;
+    overflow: hidden;
+}
 }

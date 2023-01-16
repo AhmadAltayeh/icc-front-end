@@ -24,6 +24,14 @@
         </ul>
       </li>
 
+      <li nz-submenu nzOpen nzTitle="Courses" nzIcon="book">
+        <ul>
+          <li *ngFor="let item of coursemenuItems" nz-menu-item nzMatchRouter>
+            <div [routerLink]="item.path">{{ item.name }}</div>
+          </li>
+        </ul>
+      </li>
+
     </ul>
   </nz-sider>
   <nz-layout>

@@ -12,13 +12,18 @@ export class LayoutComponent implements OnInit {
   menuItems = [
     {path: 'admins/admins', name: 'Admins'},
     {path: 'admins/instructors', name: 'Instructors'},
-    {path: 'admins/students', name: 'Students'},
-    {path: 'admins/courses', name:'Courses'}
+    {path: 'admins/students', name: 'Students'}
   ]
 
   dashboardmenuItems = [
     {path: 'stats', name:'Statistics'}
   ]
+
+  coursemenuItems = [
+    {path: 'admins/courses', name:'Courses'},
+    {path: 'admins/reviews', name:'Reviews'}
+  ]
+
   isCollapsed = false;
   dropDownItems=[
     {path:'admins/profile',name:'Profile'}

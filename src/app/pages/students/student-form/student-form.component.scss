@@ -6,3 +6,11 @@
   text-align: center;
   max-width: fit-content;
 }
+
+ .pickerC {
+  min-width: -webkit-fill-available;
+  width: 256px;
+  margin-right: 10px;
+  height: 50px;
+  border-radius: 8px;
+}

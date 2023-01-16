@@ -31,10 +31,13 @@ const routes: Routes = [
       {
         path: 'admins/profile',
         loadChildren: () => import('../pages/profile/profile.module').then(m => m.ProfileModule),
+      },
+      {
+        path: 'admins/reviews',
+        loadChildren: () => import('../pages/reviews/reviews.module').then(m => m.ReviewsModule),
       }
     ]
   },
-
 ];
 
 @NgModule({
