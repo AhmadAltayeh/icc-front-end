@@ -108,6 +108,7 @@ export class CourseViewComponent implements OnInit {
 
     this._adminService.getInstructors(this.oneTquery).subscribe((json) => {
       this.instructorsData = json.data
+      console.log(json.data)
     });
 
 

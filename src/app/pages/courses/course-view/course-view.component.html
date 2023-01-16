@@ -221,8 +221,8 @@
   </nz-tab>
 
   <nz-tab nzTitle="Instructors">
-    <nz-table #basicTable [nzData]="instructorsData" class="table-header" [nzShowPagination]="false"
-      [nzLoading]="loading">
+    <nz-table #basicTable [nzData]="instructorsData" class="table-header" [nzShowPagination]="true"
+      [nzLoading]="loading"[nzScroll]="{  y: '240px' }">
 
       <thead>
         <tr>
@@ -250,8 +250,8 @@
   </nz-tab>
 
   <nz-tab nzTitle="Students">
-    <nz-table #basicTable1 [nzData]="studentsData" class="student-table-header" [nzShowPagination]="false"
-      [nzLoading]="loading">
+    <nz-table #basicTable1 [nzData]="studentsData" class="student-table-header" [nzShowPagination]="true"
+      [nzLoading]="loading" [nzScroll]="{  y: '240px' }">
 
       <thead>
         <tr>
