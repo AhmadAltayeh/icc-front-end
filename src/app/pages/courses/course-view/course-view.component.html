@@ -242,7 +242,7 @@
           <td style="text-align: center;">{{ data.subNumber }}</td>
           <td style="text-align: center;">
             <button style="background: transparent; border: none; color: blue;" nz-icon nzType="plus-square"
-              nzTheme="outline" (click)="addInstructorToCourse(data.id)"></button>
+             (click)="addInstructorToCourse(data.id)" nzMode="inline"></button>
           </td>
         </tr>
       </tbody>
@@ -270,8 +270,8 @@
             <td style="text-align: center;">{{ data1.lastName }}</td>
             <td style="text-align: center;">{{ data1.email }}</td>
             <td style="text-align: center;">
-              <button style="background: transparent; border: none; color: blue;" nz-icon nzType="plus-square"
-                nzTheme="outline" (click)="showModal(data1.id)"></button>
+              <button style="background: transparent;  border: none; color: blue;" nz-icon nzType="plus-square"
+                nzTheme="outline" (click)="showModal(data1.id)" nzMode="inline"></button>
             </td>
           </tr>
         </ng-container>

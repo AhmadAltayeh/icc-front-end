@@ -33,21 +33,21 @@ export class AdminStatsComponent implements OnInit {
     if (this.adminCount == this.data?.adminsCount) {
       clearInterval(this.admincountstop);
     }
-  }, 30)
+  }, 200)
 
   instructorcountstop: any = setInterval(() => {
     this.instructorCount++;
     if (this.instructorCount == this.data?.instructorsCount) {
       clearInterval(this.instructorcountstop);
     }
-  }, 200)
+  }, 100)
 
   studentcountstop: any = setInterval(() => {
     this.studentCount++;
     if (this.studentCount == this.data?.studentsCount) {
       clearInterval(this.studentcountstop);
     }
-  }, 200)
+  }, 300)
 
   coursecountstop: any = setInterval(() => {
     this.courseCount++;
