@@ -111,7 +111,7 @@ export class InstructorViewComponent implements OnInit {
         email: json.data.email,
         phoneNumber: json.data.phoneNumber,
         facebookUrl: json.data.facebookUrl,
-        imageUrl: json.data.iamgeUrl,
+        imageUrl: json.data.imageUrl,
         isVolunteer: json.data.isVolunteer,
         salary: json.data.salary,
       });
