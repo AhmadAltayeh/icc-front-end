@@ -21,7 +21,7 @@ export class CourseViewComponent implements OnInit {
   days = [];
   times = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
   allDays: string[] = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
-  classroms: string[] = ['classroom 01', 'classroom 02'];
+  classroms: string[] = ['القاعة الهاشمية', 'قاعة الامام الغزالي', "قاعة الامام البخاري", "قاعة الامام أحمد بن حنبل", "قاعة الامام الشافعي"];
   smstr: string[] = ['1st', '2nd'];
   blean: boolean[] = [true, false];
   instructorsData : any[] = [];
